@@ -1,43 +1,65 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Discover Pakistan</title>
     <!-- google fonts -->
-     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Oswald:wght@200..700&display=swap" rel="stylesheet">
-
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Oswald:wght@200..700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- font awesome -->
+       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
     <!-- stylesheet -->
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
     <!-- Navigation Bar -->
 
-     <nav class="navbar" id="navbar">
-        <div class="logo">Discover<br>Pakistan</div>
-        <ul class="nav-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#destinations">Destinations</a></li>
-            <li><a href="#about">About Pakistan</a></li>
-            <li><a href="#signin">Sign In</a></li>
-        </ul>
+    <nav class="navbar" id="navbar">
+      <div class="logo">Discover<br />Pakistan</div>
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#destinations">Destinations</a></li>
+        <li><a href="#about">About Pakistan</a></li>
+        <li><a href="#signin">Sign In</a></li>
+      </ul>
     </nav>
 
     <!-- Hero Section -->
 
     <section class="hero" id="home">
-        <img src="./images/BGimage.jpg" alt="Pakistan Mountains" class="hero-bg">
-        
-        <div class="hero-content">
-            <h1>Discover the beauty of pakistan</h1>
-            <h2>Your complete guide to pakistan's destinations, culture,<br>and adventures</h2>
-            <div class="cta-buttons">
-                <a href="#destinations" class="btn btn-primary">EXPLORE DESTINATIONS </a>
-                <button class="btn btn-secondary"> Find Places by Mood</button>
-            </div>
+      <img
+        src="./images/BGimage.jpg"
+        alt="Pakistan Mountains"
+        class="hero-bg"
+      />
+
+      <div class="hero-content">
+        <h1>Discover the beauty of pakistan</h1>
+        <h2>
+          Your complete guide to pakistan's destinations, culture,<br />and
+          adventures
+        </h2>
+        <form class="search-form">
+          <input type="text" class="search-bar" placeholder="Search Destinations" />
+          <button type="submit" class="search-btn">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </form>
+       
+        <div class="cta-buttons">
+          <a href="#destinations" class="btn btn-primary"
+            >EXPLORE DESTINATIONS
+          </a>
+          <button class="btn btn-secondary">Find Places by Mood</button>
         </div>
+      </div>
     </section>
-</body>
+
+    <script src="script.js"></script>
+  </body>
 </html>

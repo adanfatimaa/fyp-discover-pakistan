@@ -14,7 +14,7 @@ body {
     align-items: center;
     justify-content: space-between;
     padding: 20px 80px;
-    background: rgba(119, 136, 115, 0.8);
+    background: #9BC264;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     
     
@@ -46,7 +46,7 @@ body {
     left: 0;
     width: 0;
     height: 2px;
-    background: #203825;
+    background: #32543a;
     transition: width 0.3s ease;
     
 }
@@ -55,7 +55,7 @@ body {
 }
 .nav-links a:hover {
     transform: translateY(-2px);
-    color: #203825;
+     color: #26452d;
 }
 
 .nav-links li:last-child a {
@@ -65,7 +65,7 @@ body {
     background: transparent; 
 }
 .nav-links li:last-child a:hover {
-    background: rgba(255, 255, 255, 0.15); 
+    background: #9BC264; 
 }
 
 /* hero section */
@@ -115,6 +115,47 @@ position: relative;
     line-height: 1.4;
     text-transform: capitalize;
 }
+/* search bar */
+.search-form {
+    position: relative; 
+    display: inline-block; 
+    margin-bottom: 40px;
+}
+.search-bar {
+    padding: 12px 60px 12px 20px;
+    font-family: 'lato' ,sans-serif;
+    width: 500px;
+    max-width: 80%;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    border-radius: 30px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: box-shadow 0.3s ease;
+    
+}
+.search-bar:focus{
+    outline: 2px solid #72993c;
+}
+.search-btn {
+    position: absolute;
+    right: 55px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #72993c;
+    border: none;
+    color: white;
+    padding: 8px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 16px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    
+}
+.search-btn:hover {
+    background: #9BC264;
+    color: #26452d;
+}
 /* Buttons */
 .cta-buttons {
     display: flex;
@@ -125,7 +166,7 @@ position: relative;
 
 .btn {
     padding: 18px 40px;
-    font-size: 15px;
+    
     font-style: italic;
     font-weight: bold;
     border: none;
@@ -140,29 +181,31 @@ position: relative;
 }
 
 .btn-primary {
-    background: rgba(139, 146, 115, 0.9);
+    background: #72993c;
     color: white;
-    width: 260px;
+    font-size: 15px;
+    width: 280px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
 .btn-primary:hover {
-    background: rgba(159, 166, 135, 1);
-    color: #203825;
+    background: #9BC264;
+     color: #26452d;
     transform: translateY(-3px);
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
 }
 
 .btn-secondary {
-    background: rgba(139, 146, 115, 0.9);
+    background: #72993c;
     color: white;
-    width: 260px;
+    width: 280px;
+    font-size: 17px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
 .btn-secondary:hover {
-    background: rgba(119, 130, 100, 1);
-    color: #203825;
+    background: #9BC264;
+    color: #26452d;
     transform: translateY(-3px);
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
 }
