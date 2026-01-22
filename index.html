@@ -12,15 +12,27 @@
       rel="stylesheet"
     />
     <!-- font awesome -->
-       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
     <!-- stylesheet -->
     <link rel="stylesheet" href="style.css" />
+    <!-- Viewport Meta Tag -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   </head>
   <body>
     <!-- Navigation Bar -->
 
     <nav class="navbar" id="navbar">
       <div class="logo">Discover<br />Pakistan</div>
+      <!-- hamburger menu for smaller screens -->
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
       <ul class="nav-links">
         <li><a href="#home">Home</a></li>
         <li><a href="#destinations">Destinations</a></li>
@@ -45,12 +57,16 @@
           adventures
         </h2>
         <form class="search-form">
-          <input type="text" class="search-bar" placeholder="Search Destinations" />
+          <input
+            type="text"
+            class="search-bar"
+            placeholder="Search Destinations"
+          />
           <button type="submit" class="search-btn">
             <i class="fa-solid fa-magnifying-glass"></i>
           </button>
         </form>
-       
+
         <div class="cta-buttons">
           <a href="#destinations" class="btn btn-primary"
             >EXPLORE DESTINATIONS

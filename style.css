@@ -9,6 +9,11 @@ body {
 }
 /* navigation bar */
 .navbar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
     height: 90px;
     display: flex;
     align-items: center;
@@ -67,11 +72,26 @@ body {
 .nav-links li:last-child a:hover {
     background: #9BC264; 
 }
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 5px;
+    z-index: 1001;
+}
+.hamburger span {
+    width: 28px;
+    height: 3px;
+    background-color: #f8f9f6;
+    transition: all 0.3s ease;
+    border-radius: 2px;
+}
 
 /* hero section */
 
 .hero {
-position: relative;
+    margin-top: 90px;
+    position: relative;
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -181,7 +201,7 @@ position: relative;
 }
 
 .btn-primary {
-    background: #72993c;
+    background: #629021;
     color: white;
     font-size: 15px;
     width: 280px;
@@ -196,7 +216,7 @@ position: relative;
 }
 
 .btn-secondary {
-    background: #72993c;
+     background: #629021;
     color: white;
     width: 280px;
     font-size: 17px;
@@ -208,4 +228,88 @@ position: relative;
     color: #26452d;
     transform: translateY(-3px);
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+/* Tablet and below (768px and lower) */
+@media (max-width: 768px) {
+    .logo{
+        font-size: 22px;
+    }
+    .hamburger{
+        display: flex;
+    }
+    .nav-links {
+        position: fixed;
+        right: -100%;
+        top: 0;
+        height: 100vh;
+        width: 280px;
+        background-color: #9BC264;
+        flex-direction: column;
+        padding: 100px 30px 30px;
+        box-shadow: -2px 0 10px rgba(0, 0, 0, 0.3);
+        transition: right 0.3s ease;
+        gap: 25px;
+    } 
+   .nav-links.active {
+        right: 0;
+    }
+    .nav-links a {
+        font-size: 18px;
+    }
+    /* Remove the underline animation for mobile menu */
+    .nav-links a::after {
+        display: none;
+    }
+    .nav-links li:last-child a {
+        text-align: center;
+    }
+    .hero h1 {
+        font-size: 42px;
+    }
+    .hero h2 {
+        font-size: 22px;
+    }
+    .search-bar {
+        width: 450px;
+        height: 52px;
+        font-size: 16px;
+    }
+    .btn {
+        font-size: 16px;
+        width: 270px;
+    }
+}
+
+/* Mobile phones (480px and lower) */
+@media (max-width: 480px) {
+    .navbar {
+        padding: 20px 20px;
+    }
+    .logo {
+        font-size: 23px;
+    }
+    .nav-links {
+        width: 250px;
+    }
+    .nav-links a {
+        font-size: 16px;
+    }
+    .hero h1 {
+        font-size: 28px;
+        line-height: 1.2;
+    }
+    .hero h2 {
+        font-size: 16px;
+    }
+    .search-bar {
+        width: 100%;
+        max-width: 320px;
+        height: 45px;
+        font-size: 14px;
+    }
+    .btn {
+        font-size: 14px;
+        width: 100%;
+        max-width: 200px;
+    }
 }
