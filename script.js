@@ -47,3 +47,11 @@ prev.addEventListener('click', function(){
     let items = document.querySelectorAll('.item')
     document.querySelector('.slide').prepend(items[items.length - 1]) 
 })
+
+
+// About Pakistan Section
+  document.querySelector('.about-btn-main').addEventListener('click', () => {
+    document.querySelector('.about-destinations')
+      .scrollIntoView({ behavior: 'smooth' });
+  });
+
