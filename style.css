@@ -19,7 +19,7 @@ body {
     align-items: center;
     justify-content: space-between;
     padding: 20px 80px;
-    background: #91bb56;
+    background: #e0e0e0;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     
     
@@ -27,7 +27,7 @@ body {
 .logo{
     font-size: 28px;
     font-weight: bold;
-    color: #f8f9f6;
+    color:  #91bb56;
     font-family: 'oswald' , sans-serif;
     letter-spacing: 2px;
     line-height: 1.2;
@@ -38,7 +38,7 @@ body {
     list-style: none;
 }
 .nav-links a {
-    color: #f8f9f6;
+    color: #91bb56;
     text-decoration: none;
     font-size: 18px;
     transition: all 0.3s ease;
@@ -100,16 +100,19 @@ body {
     text-align: center;
     color: #f8f9f6;
     overflow: hidden;
+    background-color: #e0e0e0;
+    z-index: 1;
 }
 .hero-bg {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    top: 50px;
+    left: 50px;
+    width: 94%;
+    height: 77%;
     object-fit: cover;
     z-index: -1;
     filter: brightness(0.69);
+    border-radius: 17px;
 }
 .hero-content{
     position: relative;
