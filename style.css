@@ -596,10 +596,18 @@ body {
   margin: 30px 0;
 }
 
-.about-feature-box {
+.about-feature-button {
   background: #f6f8f3;
   padding: 18px;
   border-radius: 12px;
+  text-decoration: none;
+  color: #000;
+}
+.about-feature-button:hover {
+    background: #9BC264;
+     color: #26452d;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
 }
 
 /* ACTIONS */
@@ -616,6 +624,13 @@ body {
   padding: 14px 28px;
   border-radius: 30px;
   cursor: pointer;
+  text-decoration: none;
+}
+.about-btn-main:hover {
+    background: #9BC264;
+     color: #26452d;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
 }
 
 /* DESTINATIONS */
@@ -627,6 +642,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  color:#72993c;
 }
 
 .about-view-link {
