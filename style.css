@@ -32,6 +32,9 @@ body {
     letter-spacing: 2px;
     line-height: 1.2;
 }
+.smallscreen-search{
+    display: none;
+}
 .nav-links {
     display: flex;
     gap: 34px;
@@ -92,7 +95,7 @@ body {
 .hero {
     margin-top: 90px;
     position: relative;
-    height: 100vh;
+    height: 95vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -106,7 +109,7 @@ body {
 .hero-bg {
     position: absolute;
     top: 50px;
-    left: 50px;
+    left: 46px;
     width: 94%;
     height: 77%;
     object-fit: cover;
@@ -115,9 +118,11 @@ body {
     border-radius: 17px;
 }
 .hero-content{
+    width: 80%;
     position: relative;
     z-index: 2;
     padding: 0 20px;
+    box-sizing: border-box;
 }
 .hero h1 {
     font-size: 62px;
@@ -233,13 +238,16 @@ body {
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
 }
 /* Tablet and below (768px and lower) */
-@media (max-width: 768px) {
+@media (max-width: 800px) {
     .logo{
-        font-size: 22px;
+        font-size: 1.9rem;
     }
     .hamburger{
         display: flex;
     }
+    
+    
+   
     .nav-links {
         position: fixed;
         right: -100%;
@@ -258,6 +266,7 @@ body {
     }
     .nav-links a {
         font-size: 18px;
+        color: #f8f9f6;
     }
     /* Remove the underline animation for mobile menu */
     .nav-links a::after {
@@ -266,30 +275,43 @@ body {
     .nav-links li:last-child a {
         text-align: center;
     }
+    .hero{
+        height: 90vh;
+    }
     .hero h1 {
-        font-size: 42px;
+        font-size: 2.9rem;
+        padding: 0px 20px 0px 70px;
     }
     .hero h2 {
-        font-size: 22px;
+        font-size: 1.8rem;
+        padding: 0px 20px 0px 50px;
+        margin: 30px;
+        
+    }
+    .hero-bg{
+        width: 87%;
+        height: 85%;
     }
     .search-bar {
-        width: 450px;
+        width: 400px;
         height: 52px;
-        font-size: 16px;
+        font-size: 1.1rem;
     }
-    .btn {
+     .btn {
         font-size: 16px;
         width: 270px;
-    }
+        
+    } 
+    
 }
 
-/* Mobile phones (480px and lower) */
-@media (max-width: 480px) {
+/* Mobile phones (500px and lower) */
+@media (max-width: 500px) {
     .navbar {
         padding: 20px 20px;
     }
     .logo {
-        font-size: 23px;
+        font-size: 1.2rem;
     }
     .nav-links {
         width: 250px;
@@ -297,23 +319,64 @@ body {
     .nav-links a {
         font-size: 16px;
     }
+    .smallscreen-search .search-bar {
+        width: 93%;
+        padding: 10px 12px;
+        font-size: 14px;
+    }
+     .search-form{
+        display: none;
+    }
+    .smallscreen-search {
+        display: block;
+        width: 100%;
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid rgba(248, 249, 246, 0.3);
+    }
+    input.search-bar::placeholder {
+        font-size: 13px;
+    }
+    .smallscreen-search .search-bar {
+        width: 95%;
+        padding: 12px 15px;
+        font-size: 15px;
+        border-radius: 25px;
+        border: none;
+        outline: none;
+    }
+    
+    .smallscreen-search .search-bar:focus {
+        outline: 2px solid #72993c;
+    } 
+
+    .hero{
+        height: 80vh;
+    }
+    .hero-bg {
+        width: 78%;
+        height: 80%;
+    }
     .hero h1 {
-        font-size: 28px;
-        line-height: 1.2;
+        font-size: 1.9rem;
+        padding: 0px 20px 0px 50px;
     }
     .hero h2 {
-        font-size: 16px;
+        font-size: 0.9rem;
+        padding: 0px 20px 0px 40px;
+        margin: 30px;
+        
     }
-    .search-bar {
-        width: 100%;
-        max-width: 320px;
-        height: 45px;
-        font-size: 14px;
-    }
+     .search-btn {
+    display: none;
+  }
     .btn {
         font-size: 14px;
-        width: 100%;
+        width: 76%;
         max-width: 200px;
+        height: 40px;
+        padding: 0px 20px;
+        
     }
 }
 
@@ -475,8 +538,8 @@ body {
      font-size: 15px;
 }
 
-/* Responsive for destination section */
-@media (max-width: 768px) {
+/* Responsiveness for destination section */
+@media (max-width: 800px) {
     .container{
         width: 90%;
         height: 350px;
@@ -493,16 +556,19 @@ body {
         font-size: 28px;
     }
     .content .des{
-        font-size: 14px;
+        font-size: 12px;
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 500px) {
     .destinations{
         height: 650px;
     }
+    .destinations h2{
+        padding: 0px 20px 0px 30px 
+    }
     .container{
-        height: 350px;
+        height: 450px;
     }
     .sectionHeading{
         padding: 50px 10px 10px 60px;
@@ -526,6 +592,7 @@ body {
 /* About Pakistan Section */
 .about {
   padding: 80px 6%;
+   background: #e0e0e0;
 }
 
 /* HERO */
@@ -610,13 +677,7 @@ body {
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
 }
 
-/* ACTIONS */
-.about-hero-actions {
-  display: flex;
-  gap: 30px;
-  align-items: center;
-}
-
+/* Learn More button*/
 .about-btn-main {
   background: #91bb56;
   color: #fff;
@@ -633,7 +694,7 @@ body {
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
 }
 
-/* DESTINATIONS */
+/* Iconic Destinations */
 .about-destinations {
   margin-top: 100px;
 }
@@ -657,22 +718,189 @@ body {
   gap: 26px;
 }
 
+
 .about-place-card img {
   width: 100%;
   border-radius: 16px;
+  height: 280px;  
+  object-fit: cover;  /* Ensures image fills area */
+
 }
 
-.about-tag {
-  position: absolute;
-  margin: 14px;
-  padding: 4px 10px;
-  font-size: 11px;
-  background: #fff;
-  border-radius: 14px;
+.about-place-card h3 {
+    margin-top: 12px;
+    font-size: 22px;  
 }
 
-.about-tag-culture { color: #b96f3d; }
-.about-tag-nature { color: #4c8a2f; }
-.about-tag-coastal { color: #2a7ea8; }
+/* responsivness */
+/* Tablet and below (800px and lower) */
+@media (max-width: 800px) {
+    .about {
+        padding: 60px 4%;
+    }
 
+    /* HERO */
+    .aboutHero {
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    .about-main-heading {
+        font-size: 38px;
+        margin-bottom: 20px;
+        padding-left: 50px;
+        text-align: left;
+    }
+
+    .about-hero-image {
+        flex: 1;
+        width: 60%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .about-hero-image img {
+        width: 100%;
+        height: 480px;
+    }
+
+    .about-hero-content {
+        flex: 1;
+        text-align: center;
+    }
+
+    .about-hero-title {
+        font-size: 36px;
+    }
+
+    .about-hero-text {
+        font-size: 16px;
+    }
+
+    /* FEATURES */
+    .about-feature-row {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .about-feature-button {
+        padding: 16px;
+        text-align: center;
+    }
+
+    /* Iconic Destinations */
+    .about-destinations {
+        margin-top: 70px;
+    }
+
+    .about-destinations-head {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+
+    .about-card-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    .about-place-card img {
+        height: 250px;
+    }
+
+    .about-place-card h3 {
+        font-size: 20px;
+    }
+}
+
+/* Mobile phones (500px and lower) */
+@media (max-width: 500px) {
+    .about {
+        padding: 40px 4%;
+    }
+
+    /* HERO */
+    .aboutHero {
+        gap: 30px;
+    }
+
+    .about-main-heading {
+        font-size: 26px;
+        margin-bottom: 20px;
+        padding-left: 8px;
+    }
+
+    .about-hero-image img {
+        width: 100%;
+        height: 280px;
+        border-radius: 12px;
+    }
+
+    .about-image-badge {
+        font-size: 11px;
+        padding: 6px 10px;
+        bottom: 12px;
+        left: 12px;
+    }
+
+    .about-hero-label {
+        font-size: 11px;
+    }
+
+    .about-hero-title {
+        font-size: 28px;
+        margin: 10px 0;
+    }
+
+    .about-hero-text {
+        font-size: 14px;
+        line-height: 1.6;
+    }
+
+    /* FEATURES */
+    .about-feature-row {
+        margin: 20px 0;
+        gap: 12px;
+    }
+
+    .about-feature-button {
+        padding: 14px;
+        font-size: 14px;
+    }
+
+    /* Learn More button */
+    .about-btn-main {
+        padding: 10px 24px;
+        font-size: 14px;
+    }
+
+    /* Iconic Destinations */
+    .about-destinations {
+        margin-top: 50px;
+    }
+
+    .about-destinations-head h2 {
+        font-size: 24px;
+    }
+
+    .about-view-link {
+        font-size: 14px;
+    }
+
+    .about-card-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+        margin-top: 20px;
+    }
+
+    .about-place-card img {
+        height: 220px;
+        border-radius: 12px;
+    }
+
+    .about-place-card h3 {
+        font-size: 18px;
+        margin-top: 10px;
+    }
+}
 
