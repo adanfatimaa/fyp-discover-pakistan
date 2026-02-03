@@ -54,4 +54,3 @@ prev.addEventListener('click', function(){
     document.querySelector('.about-destinations')
       .scrollIntoView({ behavior: 'smooth' });
   });
-
