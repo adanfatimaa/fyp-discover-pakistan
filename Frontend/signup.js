@@ -49,6 +49,6 @@ document.getElementById('signupForm').addEventListener('submit', function(e) {
             username: username,
             password: password
         });
-        // Here add code to send data to backend
+        // here add code to send data to backend
     }
 });

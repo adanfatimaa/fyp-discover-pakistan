@@ -37,7 +37,7 @@ body {
 }
 
 .signup-header p {
-    color: #666;
+     color: #706e6e;
     font-size: 14px;
     line-height: 1.5;
 }
@@ -49,7 +49,7 @@ body {
 .form-group label {
     display: block;
     margin-bottom: 8px;
-    color: #333;
+    color: #34495e;
     font-size: 14px;
     font-weight: 500;
 }
@@ -60,12 +60,13 @@ body {
     border: 1px solid #ddd;
     border-radius: 8px;
     font-size: 14px;
-    transition: border-color 0.3s;
+    transition: all 0.3s ease;
+    outline: none;
 }
 
 .form-group input:focus {
-    outline: none;
-    border-color: #7fb069;
+     border-color: #7fb069;
+    box-shadow: 0 0 0 3px rgba(53, 122, 41, 0.1);
 }
 
 .form-group input::placeholder {
@@ -79,17 +80,6 @@ body {
 .password-wrapper input {
     padding-right: 45px;
 }
-
-/* .toggle-password {
-    position: absolute;
-    right: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-    color: #7fb069;
-    font-size: 18px;
-} */
-
 .error-message {
     color: #e74c3c;
     font-size: 12px;
@@ -100,14 +90,14 @@ body {
 .signup-btn {
     width: 100%;
     padding: 14px;
-    background-color: #91bb56;
+    background: linear-gradient(135deg, #91bb56, #516931);
     color: white;
     border: none;
     border-radius: 8px;
     font-size: 16px;
     font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.3s;
+     transition: all 0.3s ease;
     margin-top: 10px;
 }
 
@@ -118,7 +108,7 @@ body {
 .login-link {
     text-align: center;
     margin-top: 20px;
-    color: #666;
+    color: #706f6f;
     font-size: 14px;
 }
 
