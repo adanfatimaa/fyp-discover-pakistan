@@ -504,12 +504,13 @@ body {
   padding: 18px;
   border-radius: 12px;
   text-decoration: none;
-  color: #000;
+  color: white;
 }
 .about-feature-button:hover {
     background: linear-gradient(135deg, #7ba047, #749648);
     transform: translateY(-3px);
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    color: #214029;
 }
 
 /* Learn More button*/
@@ -525,6 +526,7 @@ body {
 .about-btn-main:hover {
     background: linear-gradient(135deg, #7ba047, #749648);
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    color: #214029;
 }
 
 /* Iconic Destinations */
