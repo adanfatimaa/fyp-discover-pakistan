@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mood Based Recommendations</title>
+    <link rel="stylesheet" href=".css">
+</head>
+<body>
+    <div class="container">
+        <!-- Seecting Mood & Preferences -->
+        <section id="preferencesSection" class="section preference"> ....
+            <div class="section-header">
+                <h1>Discover Your Perfect Destinations.</h1>
+                <p>Tell us your vibe, and we'll find the perfect place for you.</p>
+            </div>
+
+            <div class="preferences-form">
+                <!-- Mood Selection -->
+                <div class="form-group">
+                    <label class="form-label">What's your travel vibe?</label>
+                    <div class="mood-grid">
+                        <button class="mood-card" data-mood="adventure">
+                            <span class="mood-icon">🏔️</span>
+                            <span class="mood-label">Adventure</span>
+                        </button>
+                        <button class="mood-card" data-mood="relax">
+                            <span class="mood-icon">🏖️</span>
+                            <span class="mood-label">Relax</span>
+                        </button>
+                        <button class="mood-card" data-mood="romantic">   .....
+                            <span class="mood-icon">💕</span>
+                            <span class="mood-label">Romance</span>
+                        </button>
+                        <button class="mood-card" data-mood="party">
+                            <span class="mood-icon">🎉</span>
+                            <span class="mood-label">Party</span>
+                        </button>
+                        <button class="mood-card" data-mood="historical">   .....
+                            <span class="mood-icon">🏘️</span>
+                            <span class="mood-label">Historical</span>
+                        </button>
+                        <button class="mood-card" data-mood="family">
+                            <span class="mood-icon">👨‍👩‍👧‍👦</span>
+                            <span class="mood-label">Family</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Budget Selection -->
+                <div class="form-group">
+                    <label class="form-label">What's your budget?</label>
+                    <div class="budget-options">
+                        <button class="budget-btn" data-budget="low">
+                            <span class="budget-symbol">$</span>
+                            <span class="budget-text">Budget-Friendly</span>
+                        </button>
+                        <button class="budget-btn" data-budget="medium">
+                            <span class="budget-symbol">$$</span>
+                            <span class="budget-text">Moderate</span>
+                        </button>
+                        <button class="budget-btn" data-budget="high">
+                            <span class="budget-symbol">$$$</span>
+                            <span class="budget-text">Luxury</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Trip Duration -->
+                <div class="form-group">
+                    <label class="form-label">How long is your trip?</label>
+                    <div class="duration-input">
+                        <input type="number" id="tripDuration" min="1" max="30" value="5" placeholder="Days">
+                        <span class="duration-label">days</span>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <button id="findDestinationsBtn" class="primary-btn" disabled>
+                    Find Destinations
+                </button>
+            </div>
+        </section>
+
+        <!-- City Recommendations -->
+        <section id="citiesSection" class="section">
+            <div class="section-header">
+                <h2>Recommended Destinations</h2>
+                <p>Based on your <span id="selectedMoodDisplay"></span> vibe</p>
+            </div>
+
+            <div id="citiesContainer" class="cities-grid">
+                <!-- Cities will be put here dynamically -->
+            </div>
+
+            <button id="backToPreferences" class="secondary-btn">
+                Change Preferences
+            </button>
+        </section>
+
+        <!-- City Details & Activities -->
+        <section id="cityDetailsSection" class="section">
+            <div class="city-header">
+                <button id="backToCities" class="back-btn">← Back to Cities</button>
+                <h2 id="cityName"></h2>
+                <p id="cityDescription"></p>
+            </div>
+
+            <div class="activities-container">
+                <h3>Things to Do</h3>
+                <div id="activitiesGrid" class="activities-grid">
+                    <!-- Activities will be populated here -->
+                </div>
+            </div>
+
+            <div class="itinerary-actions">
+                <button id="generateItineraryBtn" class="primary-btn">
+                    Generate Itinerary
+                </button>
+            </div>
+        </section>
+
+        <!-- Generated Itinerary -->
+        <section id="itinerarySection" class="section">
+            <div class="section-header">
+                <button id="backToCityDetails" class="back-btn">← Back to Activities</button>
+                <h2>Your Personalized Itinerary</h2>
+                <p id="itinerarySubtitle"></p>
+            </div>
+
+            <div id="itineraryContainer" class="itinerary-container">
+                <!-- Itinerary will be populated here -->
+            </div>
+
+            <div class="itinerary-actions">
+                <button id="saveItineraryBtn" class="primary-btn">
+                    Save Itinerary
+                </button>
+                <button id="regenerateItineraryBtn" class="secondary-btn">
+                    Regenerate
+                </button>
+            </div>
+        </section>
+
+        <!-- Loading Spinner -->
+        <div id="loadingSpinner" class="loading-spinner">
+            <div class="spinner"></div>
+            <p>Finding perfect destinations for you...</p>
+        </div>
+    </div>
+
+    <script src=".js"></script>
+</body>
+</html>
