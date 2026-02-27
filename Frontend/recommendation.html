@@ -3,152 +3,168 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mood Based Recommendations</title>
-    <link rel="stylesheet" href=".css">
+    <title>Mood based Recommendations</title>
+    <link rel="stylesheet" href="recommendations.css">
 </head>
 <body>
-    <div class="container">
-        <!-- Seecting Mood & Preferences -->
-        <section id="preferencesSection" class="section preference"> ....
-            <div class="section-header">
-                <h1>Discover Your Perfect Destinations.</h1>
-                <p>Tell us your vibe, and we'll find the perfect place for you.</p>
-            </div>
 
-            <div class="preferences-form">
-                <!-- Mood Selection -->
-                <div class="form-group">
-                    <label class="form-label">What's your travel vibe?</label>
-                    <div class="mood-grid">
-                        <button class="mood-card" data-mood="adventure">
+
+
+        <div class="container">
+        <div class="selection-section">
+            <h1>Get recommendations based on your mood</h1>
+            <p class="subtitle">Select your travel mood and preferences to get personalized recommendations</p>
+
+            <!-- Mood Selection -->
+            <div class="form-group">
+                <h2>Select Your Travel Mood</h2>
+                <div class="mood-options">
+                    <label class="mood-card">
+                        <input type="radio" name="mood" value="adventurous" required>
+                        <div class="mood-content">
                             <span class="mood-icon">🏔️</span>
-                            <span class="mood-label">Adventure</span>
-                        </button>
-                        <button class="mood-card" data-mood="relax">
-                            <span class="mood-icon">🏖️</span>
-                            <span class="mood-label">Relax</span>
-                        </button>
-                        <button class="mood-card" data-mood="romantic">   .....
-                            <span class="mood-icon">💕</span>
-                            <span class="mood-label">Romance</span>
-                        </button>
-                        <button class="mood-card" data-mood="party">
-                            <span class="mood-icon">🎉</span>
-                            <span class="mood-label">Party</span>
-                        </button>
-                        <button class="mood-card" data-mood="historical">   .....
-                            <span class="mood-icon">🏘️</span>
+                            <span class="mood-label">Adventurous</span>
+                        </div>
+                    </label>
+
+                    <label class="mood-card">
+                        <input type="radio" name="mood" value="historical" required>
+                        <div class="mood-content">
+                            <span class="mood-icon">🏛️</span>
                             <span class="mood-label">Historical</span>
-                        </button>
-                        <button class="mood-card" data-mood="family">
-                            <span class="mood-icon">👨‍👩‍👧‍👦</span>
-                            <span class="mood-label">Family</span>
-                        </button>
-                    </div>
+                        </div>
+                    </label>
+
+                    <label class="mood-card">
+                        <input type="radio" name="mood" value="family" required>
+                        <div class="mood-content">
+                            <span class="mood-icon">👨👩👧👦</span>
+                            <span class="mood-label">Family-Friendly</span>
+                        </div>
+                    </label>
+
+                    <label class="mood-card">
+                        <input type="radio" name="mood" value="foodie" required>
+                        <div class="mood-content">
+                            <span class="mood-icon">🍛</span>
+                            <span class="mood-label">Foodie</span>
+                        </div>
+                    </label>
+
+                    <label class="mood-card">
+                        <input type="radio" name="mood" value="nature" required>
+                        <div class="mood-content">
+                            <span class="mood-icon">🌲</span>
+                            <span class="mood-label">Nature & Scenic</span>
+                        </div>
+                    </label>
+
+                    <label class="mood-card">
+                        <input type="radio" name="mood" value="cultural" required>
+                        <div class="mood-content">
+                            <span class="mood-icon">🕌</span>
+                            <span class="mood-label">Cultural</span>
+                        </div>
+                    </label>
                 </div>
-
-                <!-- Budget Selection -->
-                <div class="form-group">
-                    <label class="form-label">What's your budget?</label>
-                    <div class="budget-options">
-                        <button class="budget-btn" data-budget="low">
-                            <span class="budget-symbol">$</span>
-                            <span class="budget-text">Budget-Friendly</span>
-                        </button>
-                        <button class="budget-btn" data-budget="medium">
-                            <span class="budget-symbol">$$</span>
-                            <span class="budget-text">Moderate</span>
-                        </button>
-                        <button class="budget-btn" data-budget="high">
-                            <span class="budget-symbol">$$$</span>
-                            <span class="budget-text">Luxury</span>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Trip Duration -->
-                <div class="form-group">
-                    <label class="form-label">How long is your trip?</label>
-                    <div class="duration-input">
-                        <input type="number" id="tripDuration" min="1" max="30" value="5" placeholder="Days">
-                        <span class="duration-label">days</span>
-                    </div>
-                </div>
-
-                <!-- Submit Button -->
-                <button id="findDestinationsBtn" class="primary-btn" disabled>
-                    Find Destinations
-                </button>
-            </div>
-        </section>
-
-        <!-- City Recommendations -->
-        <section id="citiesSection" class="section">
-            <div class="section-header">
-                <h2>Recommended Destinations</h2>
-                <p>Based on your <span id="selectedMoodDisplay"></span> vibe</p>
             </div>
 
-            <div id="citiesContainer" class="cities-grid">
-                <!-- Cities will be put here dynamically -->
+            <!-- Budget Selection -->
+            <div class="form-group">
+                <h2>Select Your Budget</h2>
+                <div class="budget-options">
+                    <label class="budget-card">
+                        <input type="radio" name="budget" value="budget" required>
+                        <div class="budget-content">
+                            <span class="budget-icon">💰</span>
+                            <span class="budget-label">Budget-Friendly</span>
+                            <span class="budget-range">Under 20,000 PKR</span>
+                        </div>
+                    </label>
+
+                    <label class="budget-card">
+                        <input type="radio" name="budget" value="moderate" required>
+                        <div class="budget-content">
+                            <span class="budget-icon">💵</span>
+                            <span class="budget-label">Moderate</span>
+                            <span class="budget-range">20,000 - 50,000 PKR</span>
+                        </div>
+                    </label>
+
+                    <label class="budget-card">
+                        <input type="radio" name="budget" value="luxury" required>
+                        <div class="budget-content">
+                            <span class="budget-icon">💎</span>
+                            <span class="budget-label">Luxury</span>
+                            <span class="budget-range">Above 50,000 PKR</span>
+                        </div>
+                    </label>
+                </div>
             </div>
 
-            <button id="backToPreferences" class="secondary-btn">
-                Change Preferences
+            <!-- Duration Selection -->
+            <div class="form-group">
+                <h2>Trip Duration (Optional)</h2>
+                <div class="duration-options">
+                    <label class="duration-card">
+                        <input type="radio" name="duration" value="weekend">
+                        <div class="duration-content">
+                            <span class="duration-label">Weekend</span>
+                            <span class="duration-days">2-3 days</span>
+                        </div>
+                    </label>
+
+                    <label class="duration-card">
+                        <input type="radio" name="duration" value="week">
+                        <div class="duration-content">
+                            <span class="duration-label">Week</span>
+                            <span class="duration-days">5-7 days</span>
+                        </div>
+                    </label>
+
+                    <label class="duration-card">
+                        <input type="radio" name="duration" value="extended">
+                        <div class="duration-content">
+                            <span class="duration-label">Extended</span>
+                            <span class="duration-days">10+ days</span>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <button class="btn-get-recommendations" onclick="getRecommendations()">
+                Get Recommendations
             </button>
-        </section>
 
-        <!-- City Details & Activities -->
-        <section id="cityDetailsSection" class="section">
-            <div class="city-header">
-                <button id="backToCities" class="back-btn">← Back to Cities</button>
-                <h2 id="cityName"></h2>
-                <p id="cityDescription"></p>
-            </div>
 
-            <div class="activities-container">
-                <h3>Things to Do</h3>
-                <div id="activitiesGrid" class="activities-grid">
-                    <!-- Activities will be populated here -->
-                </div>
-            </div>
-
-            <div class="itinerary-actions">
-                <button id="generateItineraryBtn" class="primary-btn">
-                    Generate Itinerary
-                </button>
-            </div>
-        </section>
-
-        <!-- Generated Itinerary -->
-        <section id="itinerarySection" class="section">
-            <div class="section-header">
-                <button id="backToCityDetails" class="back-btn">← Back to Activities</button>
-                <h2>Your Personalized Itinerary</h2>
-                <p id="itinerarySubtitle"></p>
-            </div>
-
-            <div id="itineraryContainer" class="itinerary-container">
-                <!-- Itinerary will be populated here -->
-            </div>
-
-            <div class="itinerary-actions">
-                <button id="saveItineraryBtn" class="primary-btn">
-                    Save Itinerary
-                </button>
-                <button id="regenerateItineraryBtn" class="secondary-btn">
-                    Regenerate
-                </button>
-            </div>
-        </section>
-
-        <!-- Loading Spinner -->
-        <div id="loadingSpinner" class="loading-spinner">
-            <div class="spinner"></div>
-            <p>Finding perfect destinations for you...</p>
+            <!-- add saved page's link here later -->
+            <a href=".html" class="link-saved-destinations">
+                View My Saved Destinations →
+            </a>
         </div>
     </div>
 
-    <script src=".js"></script>
+    <!-- Recommendations Modal -->
+    <div id="recommendationsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Your Personalized Recommendations</h2>
+                <span class="close-modal" onclick="closeModal()">&times;</span>
+            </div>
+            <div class="modal-body" id="recommendationsContainer">
+                <!-- Recommendations will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading icon -->
+    <div id="loadingSpinner" class="loading-spinner">
+        <div class="spinner"></div>
+        <p>Finding perfect destinations for you...</p>
+    </div>
+
+    <script src="recommendation.js"></script>
+
+    
 </body>
 </html>
