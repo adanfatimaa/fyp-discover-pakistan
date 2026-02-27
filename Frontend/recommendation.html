@@ -4,9 +4,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mood based Recommendations</title>
+    <!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Oswald:wght@200..700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- font awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+
+
+    
     <link rel="stylesheet" href="recommendations.css">
+    <link rel="stylesheet" href="common.css">
 </head>
 <body>
+
+     <!-- Navigation Bar -->
+
+    <nav class="navbar" id="navbar">
+      <div class="logo">Discover<br />Pakistan</div>
+      <!-- hamburger menu for smaller screens -->
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <ul class="nav-links">
+        <div class="smallscreen-search">
+            <form class="search-form1">
+                <input
+                    type="text"
+                    class="search-bar"
+                    placeholder="Search Destinations"
+                />
+            
+            </form>
+        </div>
+        <li><a href="homepage.html">Home</a></li>
+<li><a href="homepage.html#destinations">Destinations</a></li>
+<li><a href="homepage.html#about">About Pakistan</a></li>
+<li><a href="signup.html">Sign Up</a></li>
+      </ul>
+    </nav>
 
 
 
@@ -15,9 +59,9 @@
             <h1>Get recommendations based on your mood</h1>
             <p class="subtitle">Select your travel mood and preferences to get personalized recommendations</p>
 
-            <!-- Mood Selection -->
+            <!-- Select Mood -->
             <div class="form-group">
-                <h2>Select Your Travel Mood</h2>
+                <h2>What are you in mood for?</h2>
                 <div class="mood-options">
                     <label class="mood-card">
                         <input type="radio" name="mood" value="adventurous" required>
@@ -38,7 +82,7 @@
                     <label class="mood-card">
                         <input type="radio" name="mood" value="family" required>
                         <div class="mood-content">
-                            <span class="mood-icon">👨👩👧👦</span>
+                            <span class="mood-icon">👨‍👩‍👧‍👦</span>
                             <span class="mood-label">Family-Friendly</span>
                         </div>
                     </label>
@@ -55,7 +99,7 @@
                         <input type="radio" name="mood" value="nature" required>
                         <div class="mood-content">
                             <span class="mood-icon">🌲</span>
-                            <span class="mood-label">Nature & Scenic</span>
+                            <span class="mood-label">Nature & Peace</span>
                         </div>
                     </label>
 
@@ -102,7 +146,7 @@
                 </div>
             </div>
 
-            <!-- Duration Selection -->
+            <!-- Duration Select -->
             <div class="form-group">
                 <h2>Trip Duration (Optional)</h2>
                 <div class="duration-options">
@@ -164,6 +208,7 @@
     </div>
 
     <script src="recommendation.js"></script>
+    <script src="common.js"></script>
 
     
 </body>
