@@ -1,0 +1,223 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: "lato", sans-serif;
+  height: 100vh;
+  background: #e0e0e0;
+}
+.main {
+  height: 69%;
+  margin-top: 130px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  overflow: hidden;
+}
+
+.hero-image {
+  position: relative;
+  flex: 2;
+}
+.hero-image img {
+  width: 80%;
+  height: 300px;
+  border-radius: 18px;
+  margin-top: 80px;
+
+  margin-left: 50px;
+}
+.hero-content {
+  flex: 3;
+  text-align: left;
+  margin-left: 80px;
+  line-height: 1.4;
+}
+.hero-title {
+  font-size: 42px;
+  margin-bottom: 10px;
+}
+.hero-title span {
+  color: #91bb56;
+}
+.hero-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #91bb56, #779c48);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+.hero-btn:hover {
+  background: linear-gradient(135deg, #7ba047, #749648);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+  color: #214029;
+}
+
+/* Phrases Section */
+.container {
+  max-width: 900px;
+  margin: 50px auto;
+  background: rgb(236, 236, 236);
+  border-radius: 16px;
+  padding: 40px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* header section */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 30px;
+}
+
+.header h1 {
+  font-size: 28px;
+  font-weight: 800;
+  color: #111;
+}
+
+.header p {
+  font-size: 14px;
+  color: #7e7e7e;
+  margin-top: 4px;
+}
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+/* each phrase card */
+.card {
+  border: 1px solid #e8e8e8;
+  border-radius: 12px;
+  padding: 20px;
+  background: #fafafa;
+  position: relative;
+}
+
+.card:hover {
+  background: #e5f1e2;
+  transition: background 0.2s;
+}
+.category {
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 14px;
+  text-transform: uppercase;
+  color: #999;
+}
+.english-phrase {
+  font-size: 20px;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 6px;
+}
+
+.urdu-phrase {
+  font-size: 18px;
+  font-weight: 600;
+  color: #749648;
+  text-align: right;
+  margin-bottom: 8px;
+}
+.pronunciation {
+  font-size: 15px;
+  color: #797777;
+  font-style: italic;
+  line-height: 1.4;
+}
+.speaker-btn {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: #bbb;
+}
+.speaking {
+  transform: scale(1.2);
+  transition: transform 0.2s ease;
+}
+
+@media (max-width: 800px) {
+  body {
+    height: auto;
+  }
+
+  .main {
+    flex-direction: column;
+    margin-top: 120px;
+    height: auto;
+    padding: 20px;
+  }
+
+  .hero-image {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .hero-image img {
+    width: 70%;
+    height: 220px;
+    margin-top: 20px;
+    margin-left: 0;
+  }
+
+  .hero-content {
+    margin-left: 0;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .hero-title {
+    font-size: 32px;
+  }
+  .cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 500px) {
+  .main {
+    margin-top: 130px;
+    padding: 10px;
+  }
+
+  .hero-image img {
+    width: 90%;
+    height: 180px;
+    border-radius: 12px;
+  }
+
+  .hero-content {
+    padding: 10px;
+  }
+
+  .hero-title {
+    font-size: 26px;
+  }
+
+  .hero-btn {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+
+  .cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .header {
+    flex-direction: column;
+    gap: 12px;
+  }
+}
