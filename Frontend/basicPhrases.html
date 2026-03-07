@@ -13,6 +13,9 @@
         rel="stylesheet" />
     <!-- font awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
     <!-- stylesheet -->
     <link rel="stylesheet" href="basicPhrases.css" />
     <link rel="stylesheet" href="common.css" />
@@ -35,10 +38,10 @@
                     <input type="text" class="search-bar" placeholder="Search Destinations" />
                 </form>
             </div>
-             <li><a href="homepage.html">Home</a></li>
-<li><a href="homepage.html#destinations">Destinations</a></li>
-<li><a href="homepage.html#about">About Pakistan</a></li>
-<li><a href="signup.html">Sign Up</a></li>
+            <li><a href="homepage.html">Home</a></li>
+            <li><a href="homepage.html#destinations">Destinations</a></li>
+            <li><a href="homepage.html#about">About Pakistan</a></li>
+            <li><a href="signup.html">Sign Up</a></li>
         </ul>
     </nav>
     <!-- Hero Section -->
@@ -49,9 +52,10 @@
                 for Travelers
             </h1>
             <p class="hero-text">
-                Don't know how to communicate when in Pakistan? No worries! Learn simple Urdu phrases that will<br> help
-                you communicate with the
-                locals while traveling in Pakistan. From greetings to essential<br>
+                Don't know how to communicate when in Pakistan? No worries! Learn
+                simple Urdu phrases that will<br />
+                help you communicate with the locals while traveling in Pakistan. From
+                greetings to essential<br />
                 expressions, this guide will make your journey smoother.
             </p>
             <a href="#categories" class="hero-btn">Explore Categories</a>
@@ -77,7 +81,9 @@
                     <button class="speaker-btn" id="btn-hello">🔉</button>
                     <div class="english-phrase">Hello</div>
                     <div class="urdu-phrase">Assalam-o-Alaikum ?</div>
-                    <div class="pronunciation">Pronunciation: Ah-sah-lahm-o-ah-lay-kum</div>
+                    <div class="pronunciation">
+                        Pronunciation: Ah-sah-lahm-o-ah-lay-kum
+                    </div>
                 </div>
 
                 <!-- polite -->
@@ -104,7 +110,9 @@
                     <button class="speaker-btn" id="btn-water">🔉</button>
                     <div class="english-phrase">I need Water.</div>
                     <div class="urdu-phrase">Mujhe pani chahye</div>
-                    <div class="pronunciation">Pronunciation: Mu-jhe Pah-nee Cha-hiye?</div>
+                    <div class="pronunciation">
+                        Pronunciation: Mu-jhe Pah-nee Cha-hiye?
+                    </div>
                 </div>
 
                 <!--emergency -->
@@ -113,7 +121,9 @@
                     <button class="speaker-btn" id="btn-help">🔉</button>
                     <div class="english-phrase">Can you help me?</div>
                     <div class="urdu-phrase">Kya aap meri madad kar sakte hain?</div>
-                    <div class="pronunciation">Pronunciation: Ky-a Aap Me-ri Ma-da-d Kar Sak-te Ha-in?</div>
+                    <div class="pronunciation">
+                        Pronunciation: Ky-a Aap Me-ri Ma-da-d Kar Sak-te Ha-in?
+                    </div>
                 </div>
 
                 <!--  basics -->
@@ -133,7 +143,452 @@
         <div class="container">
             <div class="header">
                 <h1>Browse by Categories</h1>
-               
+            </div>
+
+            <div class="category-buttons">
+                <button class="cat-btn" data-target="greeting-section"><span class="material-symbols-outlined">
+                        waving_hand
+                    </span>
+                    Greetings
+                </button>
+                <button class="cat-btn" data-target="food-section"> <span class="material-symbols-outlined">
+                        fork_spoon
+                    </span>
+                    Food
+                </button>
+                <button class="cat-btn" data-target="emergency-section"> <span class="material-symbols-outlined">
+                        emergency
+                    </span>
+                    Emergency
+                </button>
+                <button class="cat-btn" data-target="numbers-section"> <span class="material-symbols-outlined">
+                        numbers
+                    </span> Numbers</button>
+                <button class="cat-btn" data-target="time-section"> <span class="material-symbols-outlined">
+schedule
+</span>
+                    Time 
+                </button>
+            </div>
+
+            <!-- Content Panels ( Hidden at first) -->
+            <div class="panels-container">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <div class="panel" id="greetings">
+
+                    <div class="container">
+                        <div class="header">
+                            <h1>Greetings</h1>
+                        </div>
+
+                        <div class="cards-grid">
+                            <!-- Asslam o Alaikum-->
+                            <div class="card">
+                                <div class="category">Greeting</div>
+                                <button class="speaker-btn" id="btn-assalam">🔉</button>
+                                <div class="english-phrase">Peace be upon you</div>
+                                <div class="urdu-phrase">Assalam-o-Alaikum ?</div>
+                                <div class="pronunciation">
+                                    Pronunciation: Ah-sah-lahm-o-ah-lay-kum
+                                </div>
+                            </div>
+
+                            <!-- Walaikum salam -->
+                            <div class="card">
+                                <div class="category">Greet Back</div>
+                                <button class="speaker-btn" id="btn-walaikum">🔉</button>
+                                <div class="english-phrase">And peace be upon you too</div>
+                                <div class="urdu-phrase">Walaikum salam</div>
+                                <div class="pronunciation">Pronunciation: Wa-lai-kum sa-la-m</div>
+                            </div>
+
+                            <!-- khuda hafiz -->
+                            <div class="card">
+                                <div class="category">Goodbye</div>
+                                <button class="speaker-btn" id="btn-khudahafiz">🔉</button>
+                                <div class="english-phrase">Goodbye</div>
+                                <div class="urdu-phrase">Khuda hafiz</div>
+                                <div class="pronunciation">Pronunciation: Khu-da ha-fi-z</div>
+                            </div>
+
+                            <!-- hi -->
+                            <div class="card">
+                                <div class="category">Greeting</div>
+                                <button class="speaker-btn" id="btn-hi">🔉</button>
+                                <div class="english-phrase">Hi</div>
+                                <div class="urdu-phrase">Salam</div>
+                                <div class="pronunciation">
+                                    Pronunciation: Sa-la-m
+                                </div>
+                            </div>
+
+                            <!-- ap kaise hain -->
+                            <div class="card">
+                                <div class="category">Asking wellbeing</div>
+                                <button class="speaker-btn" id="btn-howareyou">🔉</button>
+                                <div class="english-phrase">How are you?</div>
+                                <div class="urdu-phrase">Aap kaise hain?</div>
+                                <div class="pronunciation">
+                                    Pronunciation: aap kai-say hain?
+                                </div>
+                            </div>
+
+                            <!--  me theek hoon -->
+                            <div class="card">
+                                <div class="category">Responding to wellbeing</div>
+                                <button class="speaker-btn" id="btn-imfine">🔉</button>
+                                <div class="english-phrase">I am fine.</div>
+                                <div class="urdu-phrase">Main theek hoon</div>
+                                <div class="pronunciation">Pronunciation: Ma-in thee-k ho-on</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="panel" id="food">
+                    <div class="container">
+                        <div class="header">
+                            <h1>Food </h1>
+                        </div>
+
+                        <div class="cards-grid">
+                            <!-- kitne ka hai-->
+                            <div class="card">
+                                <div class="category">Price</div>
+                                <button class="speaker-btn" id="btn-howmuch">🔉</button>
+                                <div class="english-phrase">How much is it?</div>
+                                <div class="urdu-phrase">Ye kitne ka hai?</div>
+                                <div class="pronunciation">
+                                    Pronunciation: ye kit-ne ka hai?
+                                </div>
+                            </div>
+
+                            <!-- this is tasty -->
+                            <div class="card">
+                                <div class="category">Food is tasty</div>
+                                <button class="speaker-btn" id="btn-tasty">🔉</button>
+                                <div class="english-phrase">This is tasty</div>
+                                <div class="urdu-phrase">Ye bohat mazedar hai</div>
+                                <div class="pronunciation">Pronunciation: ye bo-hat maz-e-dar hai</div>
+                            </div>
+
+                            <!-- less spices -->
+                            <div class="card">
+                                <div class="category">Less Spice</div>
+                                <button class="speaker-btn" id="btn-lessspicy">🔉</button>
+                                <div class="english-phrase">Less spicy, please</div>
+                                <div class="urdu-phrase">Kam masala, please</div>
+                                <div class="pronunciation">Pronunciation: Kam ma-sa-la, please</div>
+                            </div>
+
+                            <!-- water -->
+                            <div class="card">
+                                <div class="category">Water</div>
+                                <button class="speaker-btn" id="btn-water">🔉</button>
+                                <div class="english-phrase">Water</div>
+                                <div class="urdu-phrase">Paani</div>
+                                <div class="pronunciation">
+                                    Pronunciation: Pa-a-ni
+                                </div>
+                            </div>
+
+                            <!-- tea -->
+                            <div class="card">
+                                <div class="category">Tea</div>
+                                <button class="speaker-btn" id="btn-tea">🔉</button>
+                                <div class="english-phrase">Tea</div>
+                                <div class="urdu-phrase">Chai</div>
+                                <div class="pronunciation">
+                                    Pronunciation: Chai
+                                </div>
+                            </div>
+
+                            <!--  zabardast -->
+                            <div class="card">
+                                <div class="category">Excellent</div>
+                                <button class="speaker-btn" id="btn-zabardast">🔉</button>
+                                <div class="english-phrase">Excellent</div>
+                                <div class="urdu-phrase">Zabardast</div>
+                                <div class="pronunciation">Pronunciation: Za-bar-dast</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+                <div class="panel" id="emergency">
+                    <div class="container">
+                        <div class="header">
+                            <h1>Emergency</h1>
+                        </div>
+
+                        <div class="cards-grid">
+                            <!-- help-->
+                            <div class="card">
+                                <div class="category">Asking for help</div>
+                                <button class="speaker-btn" id="btn-help">🔉</button>
+                                <div class="english-phrase">Can you help me?</div>
+                                <div class="urdu-phrase">Kya aap meri madad kar sakte hain?</div>
+                                <div class="pronunciation">
+                                    Pronunciation: ki-a aap me-ri ma-da-d ka-r sak-te hain?
+                                </div>
+                            </div>
+
+                            <!-- i am lost -->
+                            <div class="card">
+                                <div class="category">I am lost</div>
+                                <button class="speaker-btn" id="btn-lost">🔉</button>
+                                <div class="english-phrase">I am lost</div>
+                                <div class="urdu-phrase">Main rasta bhool gaya hoon</div>
+                                <div class="pronunciation">Pronunciation: main ras-ta bhoo-l ga-ya hoon</div>
+                            </div>
+
+                            <!-- passport lost -->
+                            <div class="card">
+                                <div class="category">Passport Lost</div>
+                                <button class="speaker-btn" id="btn-passportlost">🔉</button>
+                                <div class="english-phrase">My passport is lost</div>
+                                <div class="urdu-phrase">Mera passport gum ho gaya hai</div>
+                                <div class="pronunciation">Pronunciation: Me-ra passport gu-m ho gy-a hai</div>
+                            </div>
+
+                            <!-- stop -->
+                            <div class="card">
+                                <div class="category">Stop</div>
+                                <button class="speaker-btn" id="btn-stop">🔉</button>
+                                <div class="english-phrase">Stop</div>
+                                <div class="urdu-phrase">Ruk jao</div>
+                                <div class="pronunciation">
+                                    Pronunciation: ruu-k jaa-o
+                                </div>
+                            </div>
+
+                            <!-- what happened -->
+                            <div class="card">
+                                <div class="category">What happened?</div>
+                                <button class="speaker-btn" id="btn-whatshappened">🔉</button>
+                                <div class="english-phrase">What happened?</div>
+                                <div class="urdu-phrase">Kya hua?</div>
+                                <div class="pronunciation">
+                                    Pronunciation: ky-a hu-a?
+                                </div>
+                            </div>
+
+                            <!--  its urgent -->
+                            <div class="card">
+                                <div class="category">Its Urgent</div>
+                                <button class="speaker-btn" id="btn-urgent">🔉</button>
+                                <div class="english-phrase">Its urgent</div>
+                                <div class="urdu-phrase">Jaldi hai</div>
+                                <div class="pronunciation">Pronunciation: jal-di hai</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <div class="panel" id="numbers"><div class="container">
+                        <div class="header">
+                            <h1>Numbers</h1>
+                        </div>
+
+                        <div class="cards-grid">
+                            <!-- one-->
+                            <div class="card">
+                                <div class="category">One</div>
+                                <button class="speaker-btn" id="btn-one">🔉</button>
+                                <div class="english-phrase">One</div>
+                                <div class="urdu-phrase">Ek</div>
+                                <div class="pronunciation">
+                                    Pronunciation: ek
+                                </div>
+                            </div>
+
+
+                            <!-- two -->
+                            <div class="card">
+                                <div class="category">Two</div>
+                                <button class="speaker-btn" id="btn-two">🔉</button>
+                                <div class="english-phrase">Two</div>
+                                <div class="urdu-phrase">Do</div>
+                                <div class="pronunciation">
+                                    Pronunciation: dau-o
+                                </div>
+                            </div>
+
+
+                            <!-- ten -->
+                            <div class="card">
+                                <div class="category">Ten</div>
+                                <button class="speaker-btn" id="btn-ten">🔉</button>
+                                <div class="english-phrase">Ten</div>
+                                <div class="urdu-phrase">Dus</div>
+                                <div class="pronunciation">
+                                    Pronunciation: dus
+                                </div>
+                            
+                            </div>
+
+                            <!-- hundred -->
+                            <div class="card">
+                                <div class="category">Hundred</div>
+                                <button class="speaker-btn" id="btn-hundred">🔉</button>
+                                <div class="english-phrase">Hundred</div>
+                                <div class="urdu-phrase">Sao</div>
+                                <div class="pronunciation">
+                                    Pronunciation: sau-o
+                                </div>
+                            </div>
+                               
+
+                            <!-- thousand -->
+                            <div class="card">
+                                <div class="category">Thousand</div>
+                                <button class="speaker-btn" id="btn-thousand">🔉</button>
+                                <div class="english-phrase">Thousand</div>
+                                <div class="urdu-phrase">Hazaar</div>
+                                <div class="pronunciation">
+                                    Pronunciation: haa-zaar
+                                </div>
+                            </div>
+
+                            
+
+                            <!--  price -->
+                            <div class="card">
+                                <div class="category">How much is this?</div>
+                                <button class="speaker-btn" id="btn-price">🔉</button>
+                                <div class="english-phrase">How much is this?</div>
+                                <div class="urdu-phrase">Ye kitne ka hai?</div>
+                                <div class="pronunciation">Pronunciation: ye ki-tne ka hai?</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+                
+                <div class="panel" id="time">
+                    <div class="container">
+                        <div class="header">
+                            <h1>Time tracking</h1>
+                        </div>
+
+                        <div class="cards-grid">
+                            <!-- today-->
+                            <div class="card">
+                                <div class="category">Today</div>
+                                <button class="speaker-btn" id="btn-today">🔉</button>
+                                <div class="english-phrase">Today</div>
+                                <div class="urdu-phrase">Aaj</div>
+                                <div class="pronunciation">
+                                    Pronunciation: aa-j
+                                </div>
+                            </div>
+
+                            <!-- kal -->
+                            <div class="card">
+                                <div class="category">Tomorrow / yesterday</div>
+                                <button class="speaker-btn" id="btn-kal">🔉</button>
+                                <div class="english-phrase">Tomorrow / Yesterday</div>
+                                <div class="urdu-phrase">Kal</div>
+                                <div class="pronunciation">
+                                    Pronunciation: kal
+                                </div>
+                            </div>
+
+                            <!-- morning -->
+                            <div class="card">
+                                <div class="category">morning</div>
+                                <button class="speaker-btn" id="btn-morning">🔉</button>
+                                <div class="english-phrase">Morning</div>
+                                <div class="urdu-phrase">Subha</div>
+                                <div class="pronunciation">Pronunciation: Sub-ha</div>
+                            </div>
+
+                            <!-- raat -->
+                            <div class="card">
+                                <div class="category">Night</div>
+                                <button class="speaker-btn" id="btn-night">🔉</button>
+                                <div class="english-phrase">Night</div>
+                                <div class="urdu-phrase">Raat</div>
+                                <div class="pronunciation">
+                                    Pronunciation: Raa-t
+                                </div>
+                            </div>
+
+                            <!-- time -->
+                            <div class="card">
+                                <div class="category">Time asking</div>
+                                <button class="speaker-btn" id="btn-time">🔉</button>
+                                <div class="english-phrase">What time is it?</div>
+                                <div class="urdu-phrase">Kya waqt hai?</div>
+                                <div class="pronunciation">
+                                    Pronunciation: ki-a waq-t hai?
+                                </div>
+                            </div>
+
+                            <!--  Evening -->
+                            <div class="card">
+                                <div class="category">Evening</div>
+                                <button class="speaker-btn" id="btn-evening">🔉</button>
+                                <div class="english-phrase">Evening</div>
+                                <div class="urdu-phrase">Sham</div>
+                                <div class="pronunciation">Pronunciation: Shaa-m</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        </div>
     </section>
 
     <script src="basicPhrases.js"></script>
