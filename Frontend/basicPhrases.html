@@ -78,7 +78,7 @@
                 <!-- greeting -->
                 <div class="card">
                     <div class="category">Greeting</div>
-                    <button class="speaker-btn" id="btn-hello">🔉</button>
+                    <button class="speaker-btn" id="btn-hello"  data-audio="audios/asslam-o-alaikum.mp3">🔉</button>
                     <div class="english-phrase">Hello</div>
                     <div class="urdu-phrase">Assalam-o-Alaikum ?</div>
                     <div class="pronunciation">
@@ -89,7 +89,7 @@
                 <!-- polite -->
                 <div class="card">
                     <div class="category">Courtesy</div>
-                    <button class="speaker-btn" id="btn-thankyou">🔉</button>
+                    <button class="speaker-btn" id="btn-thankyou" data-audio="audios/thankYOU.m4a">🔉</button>
                     <div class="english-phrase">Thank you</div>
                     <div class="urdu-phrase">Shukriya</div>
                     <div class="pronunciation">Pronunciation: Shook-ree-yah</div>
@@ -98,7 +98,7 @@
                 <!-- shopping -->
                 <div class="card">
                     <div class="category">Shopping</div>
-                    <button class="speaker-btn" id="btn-howmuch">🔉</button>
+                    <button class="speaker-btn" id="btn-howmuch" data-audio="audios/howMuch.m4a">🔉</button>
                     <div class="english-phrase">How much is this?</div>
                     <div class="urdu-phrase">Ye kitnay ka hai?</div>
                     <div class="pronunciation">Pronunciation: Kit-nay kah hay?</div>
@@ -107,7 +107,7 @@
                 <!-- needs -->
                 <div class="card">
                     <div class="category">Needs</div>
-                    <button class="speaker-btn" id="btn-water">🔉</button>
+                    <button class="speaker-btn" id="btn-water" data-audio="audios/water.m4a">🔉</button>
                     <div class="english-phrase">I need Water.</div>
                     <div class="urdu-phrase">Mujhe pani chahye</div>
                     <div class="pronunciation">
@@ -118,7 +118,7 @@
                 <!--emergency -->
                 <div class="card">
                     <div class="category">Emergency</div>
-                    <button class="speaker-btn" id="btn-help">🔉</button>
+                    <button class="speaker-btn" id="btn-help" data-audio="audios/can-u-help.mp3">🔉</button>
                     <div class="english-phrase">Can you help me?</div>
                     <div class="urdu-phrase">Kya aap meri madad kar sakte hain?</div>
                     <div class="pronunciation">
@@ -129,7 +129,7 @@
                 <!--  basics -->
                 <div class="card">
                     <div class="category">Basics</div>
-                    <button class="speaker-btn" id="btn-yesno">🔉</button>
+                    <button class="speaker-btn" id="btn-yesno" data-audio="audios/yesNo.m4a">🔉</button>
                     <div class="english-phrase">Yes / No</div>
                     <div class="urdu-phrase">Haan / Nahi</div>
                     <div class="pronunciation">Pronunciation: Haan / Nuh-heen</div>
@@ -146,58 +146,35 @@
             </div>
 
             <div class="category-buttons">
-                <button class="cat-btn" data-target="greeting-section"><span class="material-symbols-outlined">
+                <button class="cat-btn" data-target="greeting"><span class="material-symbols-outlined">
                         waving_hand
                     </span>
                     Greetings
                 </button>
-                <button class="cat-btn" data-target="food-section"> <span class="material-symbols-outlined">
+                <button class="cat-btn" data-target="food"> <span class="material-symbols-outlined">
                         fork_spoon
                     </span>
                     Food
                 </button>
-                <button class="cat-btn" data-target="emergency-section"> <span class="material-symbols-outlined">
+                <button class="cat-btn" data-target="emergency"> <span class="material-symbols-outlined">
                         emergency
                     </span>
                     Emergency
                 </button>
-                <button class="cat-btn" data-target="numbers-section"> <span class="material-symbols-outlined">
+                <button class="cat-btn" data-target="numbers"> <span class="material-symbols-outlined">
                         numbers
                     </span> Numbers</button>
-                <button class="cat-btn" data-target="time-section"> <span class="material-symbols-outlined">
-schedule
-</span>
-                    Time 
+                <button class="cat-btn" data-target="time"> <span class="material-symbols-outlined">
+                        schedule
+                    </span>
+                    Time
                 </button>
             </div>
 
             <!-- Content Panels ( Hidden at first) -->
             <div class="panels-container">
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                <div class="panel" id="greetings">
+                <div class="panel" id="greeting">
 
                     <div class="container">
                         <div class="header">
@@ -208,7 +185,7 @@ schedule
                             <!-- Asslam o Alaikum-->
                             <div class="card">
                                 <div class="category">Greeting</div>
-                                <button class="speaker-btn" id="btn-assalam">🔉</button>
+                                <button class="speaker-btn" id="btn-assalam" data-audio="audios/asslam-o-alaikum.mp3">🔉</button>
                                 <div class="english-phrase">Peace be upon you</div>
                                 <div class="urdu-phrase">Assalam-o-Alaikum ?</div>
                                 <div class="pronunciation">
@@ -219,7 +196,7 @@ schedule
                             <!-- Walaikum salam -->
                             <div class="card">
                                 <div class="category">Greet Back</div>
-                                <button class="speaker-btn" id="btn-walaikum">🔉</button>
+                                <button class="speaker-btn" id="btn-walaikum" data-audio="audios/waalaaiikum-salam.m4a">🔉</button>
                                 <div class="english-phrase">And peace be upon you too</div>
                                 <div class="urdu-phrase">Walaikum salam</div>
                                 <div class="pronunciation">Pronunciation: Wa-lai-kum sa-la-m</div>
@@ -228,7 +205,7 @@ schedule
                             <!-- khuda hafiz -->
                             <div class="card">
                                 <div class="category">Goodbye</div>
-                                <button class="speaker-btn" id="btn-khudahafiz">🔉</button>
+                                <button class="speaker-btn" id="btn-khudahafiz" data-audio="audios/khuda-haafiz.m4a">🔉</button>
                                 <div class="english-phrase">Goodbye</div>
                                 <div class="urdu-phrase">Khuda hafiz</div>
                                 <div class="pronunciation">Pronunciation: Khu-da ha-fi-z</div>
@@ -237,7 +214,7 @@ schedule
                             <!-- hi -->
                             <div class="card">
                                 <div class="category">Greeting</div>
-                                <button class="speaker-btn" id="btn-hi">🔉</button>
+                                <button class="speaker-btn" id="btn-hi" data-audio="audios/salaam.m4a">🔉</button>
                                 <div class="english-phrase">Hi</div>
                                 <div class="urdu-phrase">Salam</div>
                                 <div class="pronunciation">
@@ -248,7 +225,7 @@ schedule
                             <!-- ap kaise hain -->
                             <div class="card">
                                 <div class="category">Asking wellbeing</div>
-                                <button class="speaker-btn" id="btn-howareyou">🔉</button>
+                                <button class="speaker-btn" id="btn-howareyou" data-audio="audios/aap-kaise-hain.m4a">🔉</button>
                                 <div class="english-phrase">How are you?</div>
                                 <div class="urdu-phrase">Aap kaise hain?</div>
                                 <div class="pronunciation">
@@ -258,8 +235,8 @@ schedule
 
                             <!--  me theek hoon -->
                             <div class="card">
-                                <div class="category">Responding to wellbeing</div>
-                                <button class="speaker-btn" id="btn-imfine">🔉</button>
+                                <div class="category">Responding to <br>wellbeing</div>
+                                <button class="speaker-btn" id="btn-imfine" data-audio="audios/mai-theek.m4a">🔉</button>
                                 <div class="english-phrase">I am fine.</div>
                                 <div class="urdu-phrase">Main theek hoon</div>
                                 <div class="pronunciation">Pronunciation: Ma-in thee-k ho-on</div>
@@ -280,7 +257,7 @@ schedule
                             <!-- kitne ka hai-->
                             <div class="card">
                                 <div class="category">Price</div>
-                                <button class="speaker-btn" id="btn-howmuch">🔉</button>
+                                <button class="speaker-btn" id="btn-howmuch" data-audio="audios/howMuch.m4a">🔉</button>
                                 <div class="english-phrase">How much is it?</div>
                                 <div class="urdu-phrase">Ye kitne ka hai?</div>
                                 <div class="pronunciation">
@@ -291,7 +268,7 @@ schedule
                             <!-- this is tasty -->
                             <div class="card">
                                 <div class="category">Food is tasty</div>
-                                <button class="speaker-btn" id="btn-tasty">🔉</button>
+                                <button class="speaker-btn" id="btn-tasty" data-audio="audios/tasty.mp3">🔉</button>
                                 <div class="english-phrase">This is tasty</div>
                                 <div class="urdu-phrase">Ye bohat mazedar hai</div>
                                 <div class="pronunciation">Pronunciation: ye bo-hat maz-e-dar hai</div>
@@ -300,7 +277,7 @@ schedule
                             <!-- less spices -->
                             <div class="card">
                                 <div class="category">Less Spice</div>
-                                <button class="speaker-btn" id="btn-lessspicy">🔉</button>
+                                <button class="speaker-btn" id="btn-lessspicy" data-audio="audios/kam-masala-please.mp3">🔉</button>
                                 <div class="english-phrase">Less spicy, please</div>
                                 <div class="urdu-phrase">Kam masala, please</div>
                                 <div class="pronunciation">Pronunciation: Kam ma-sa-la, please</div>
@@ -309,7 +286,7 @@ schedule
                             <!-- water -->
                             <div class="card">
                                 <div class="category">Water</div>
-                                <button class="speaker-btn" id="btn-water">🔉</button>
+                                <button class="speaker-btn" id="btn-water" data-audio="audios/water.m4a">🔉</button>
                                 <div class="english-phrase">Water</div>
                                 <div class="urdu-phrase">Paani</div>
                                 <div class="pronunciation">
@@ -320,7 +297,7 @@ schedule
                             <!-- tea -->
                             <div class="card">
                                 <div class="category">Tea</div>
-                                <button class="speaker-btn" id="btn-tea">🔉</button>
+                                <button class="speaker-btn" id="btn-tea" data-audio="audios/chai.mp3">🔉</button>
                                 <div class="english-phrase">Tea</div>
                                 <div class="urdu-phrase">Chai</div>
                                 <div class="pronunciation">
@@ -331,7 +308,7 @@ schedule
                             <!--  zabardast -->
                             <div class="card">
                                 <div class="category">Excellent</div>
-                                <button class="speaker-btn" id="btn-zabardast">🔉</button>
+                                <button class="speaker-btn" id="btn-zabardast" data-audio="audios/Zabardast.mp3">🔉</button>
                                 <div class="english-phrase">Excellent</div>
                                 <div class="urdu-phrase">Zabardast</div>
                                 <div class="pronunciation">Pronunciation: Za-bar-dast</div>
@@ -339,12 +316,6 @@ schedule
                         </div>
                     </div>
                 </div>
-
-
-
-
-
-
 
 
                 <div class="panel" id="emergency">
@@ -357,7 +328,7 @@ schedule
                             <!-- help-->
                             <div class="card">
                                 <div class="category">Asking for help</div>
-                                <button class="speaker-btn" id="btn-help">🔉</button>
+                                <button class="speaker-btn" id="btn-help" data-audio="audios/can-u-help.mp3">🔉</button>
                                 <div class="english-phrase">Can you help me?</div>
                                 <div class="urdu-phrase">Kya aap meri madad kar sakte hain?</div>
                                 <div class="pronunciation">
@@ -368,7 +339,7 @@ schedule
                             <!-- i am lost -->
                             <div class="card">
                                 <div class="category">I am lost</div>
-                                <button class="speaker-btn" id="btn-lost">🔉</button>
+                                <button class="speaker-btn" id="btn-lost" data-audio="audios/im-lost.mp3">🔉</button>
                                 <div class="english-phrase">I am lost</div>
                                 <div class="urdu-phrase">Main rasta bhool gaya hoon</div>
                                 <div class="pronunciation">Pronunciation: main ras-ta bhoo-l ga-ya hoon</div>
@@ -377,7 +348,7 @@ schedule
                             <!-- passport lost -->
                             <div class="card">
                                 <div class="category">Passport Lost</div>
-                                <button class="speaker-btn" id="btn-passportlost">🔉</button>
+                                <button class="speaker-btn" id="btn-passportlost" data-audio="audios/passport-lost.mp3">🔉</button>
                                 <div class="english-phrase">My passport is lost</div>
                                 <div class="urdu-phrase">Mera passport gum ho gaya hai</div>
                                 <div class="pronunciation">Pronunciation: Me-ra passport gu-m ho gy-a hai</div>
@@ -386,7 +357,7 @@ schedule
                             <!-- stop -->
                             <div class="card">
                                 <div class="category">Stop</div>
-                                <button class="speaker-btn" id="btn-stop">🔉</button>
+                                <button class="speaker-btn" id="btn-stop" data-audio="audios/stop.mp3">🔉</button>
                                 <div class="english-phrase">Stop</div>
                                 <div class="urdu-phrase">Ruk jao</div>
                                 <div class="pronunciation">
@@ -397,7 +368,7 @@ schedule
                             <!-- what happened -->
                             <div class="card">
                                 <div class="category">What happened?</div>
-                                <button class="speaker-btn" id="btn-whatshappened">🔉</button>
+                                <button class="speaker-btn" id="btn-whatshappened" data-audio="audios/kia-hua.mpeg">🔉</button>
                                 <div class="english-phrase">What happened?</div>
                                 <div class="urdu-phrase">Kya hua?</div>
                                 <div class="pronunciation">
@@ -408,7 +379,7 @@ schedule
                             <!--  its urgent -->
                             <div class="card">
                                 <div class="category">Its Urgent</div>
-                                <button class="speaker-btn" id="btn-urgent">🔉</button>
+                                <button class="speaker-btn" id="btn-urgent" data-audio="audios/jldi-hai.mpeg">🔉</button>
                                 <div class="english-phrase">Its urgent</div>
                                 <div class="urdu-phrase">Jaldi hai</div>
                                 <div class="pronunciation">Pronunciation: jal-di hai</div>
@@ -417,19 +388,8 @@ schedule
                     </div>
                 </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-                <div class="panel" id="numbers"><div class="container">
+                <div class="panel" id="numbers">
+                    <div class="container">
                         <div class="header">
                             <h1>Numbers</h1>
                         </div>
@@ -438,7 +398,7 @@ schedule
                             <!-- one-->
                             <div class="card">
                                 <div class="category">One</div>
-                                <button class="speaker-btn" id="btn-one">🔉</button>
+                                <button class="speaker-btn" id="btn-one" data-audio="audios/ek.mpeg">🔉</button>
                                 <div class="english-phrase">One</div>
                                 <div class="urdu-phrase">Ek</div>
                                 <div class="pronunciation">
@@ -450,7 +410,7 @@ schedule
                             <!-- two -->
                             <div class="card">
                                 <div class="category">Two</div>
-                                <button class="speaker-btn" id="btn-two">🔉</button>
+                                <button class="speaker-btn" id="btn-two" data-audio="audios/do.mpeg">🔉</button>
                                 <div class="english-phrase">Two</div>
                                 <div class="urdu-phrase">Do</div>
                                 <div class="pronunciation">
@@ -462,31 +422,31 @@ schedule
                             <!-- ten -->
                             <div class="card">
                                 <div class="category">Ten</div>
-                                <button class="speaker-btn" id="btn-ten">🔉</button>
+                                <button class="speaker-btn" id="btn-ten" data-audio="audios/das.mpeg">🔉</button>
                                 <div class="english-phrase">Ten</div>
                                 <div class="urdu-phrase">Dus</div>
                                 <div class="pronunciation">
                                     Pronunciation: dus
                                 </div>
-                            
+
                             </div>
 
                             <!-- hundred -->
                             <div class="card">
                                 <div class="category">Hundred</div>
-                                <button class="speaker-btn" id="btn-hundred">🔉</button>
+                                <button class="speaker-btn" id="btn-hundred" data-audio="audios/so.mpeg">🔉</button>
                                 <div class="english-phrase">Hundred</div>
                                 <div class="urdu-phrase">Sao</div>
                                 <div class="pronunciation">
                                     Pronunciation: sau-o
                                 </div>
                             </div>
-                               
+
 
                             <!-- thousand -->
                             <div class="card">
                                 <div class="category">Thousand</div>
-                                <button class="speaker-btn" id="btn-thousand">🔉</button>
+                                <button class="speaker-btn" id="btn-thousand" data-audio="audios/hazaar.mpeg">🔉</button>
                                 <div class="english-phrase">Thousand</div>
                                 <div class="urdu-phrase">Hazaar</div>
                                 <div class="pronunciation">
@@ -494,12 +454,12 @@ schedule
                                 </div>
                             </div>
 
-                            
+
 
                             <!--  price -->
                             <div class="card">
                                 <div class="category">How much is this?</div>
-                                <button class="speaker-btn" id="btn-price">🔉</button>
+                                <button class="speaker-btn" id="btn-price" data-audio="audios/howMuch.m4a">🔉</button>
                                 <div class="english-phrase">How much is this?</div>
                                 <div class="urdu-phrase">Ye kitne ka hai?</div>
                                 <div class="pronunciation">Pronunciation: ye ki-tne ka hai?</div>
@@ -508,12 +468,6 @@ schedule
                     </div>
                 </div>
 
-
-
-
-
-
-                
                 <div class="panel" id="time">
                     <div class="container">
                         <div class="header">
@@ -524,7 +478,7 @@ schedule
                             <!-- today-->
                             <div class="card">
                                 <div class="category">Today</div>
-                                <button class="speaker-btn" id="btn-today">🔉</button>
+                                <button class="speaker-btn" id="btn-today" data-audio="audios/aaj.mpeg">🔉</button>
                                 <div class="english-phrase">Today</div>
                                 <div class="urdu-phrase">Aaj</div>
                                 <div class="pronunciation">
@@ -535,7 +489,7 @@ schedule
                             <!-- kal -->
                             <div class="card">
                                 <div class="category">Tomorrow / yesterday</div>
-                                <button class="speaker-btn" id="btn-kal">🔉</button>
+                                <button class="speaker-btn" id="btn-kal" data-audio="audios/kal.mpeg">🔉</button>
                                 <div class="english-phrase">Tomorrow / Yesterday</div>
                                 <div class="urdu-phrase">Kal</div>
                                 <div class="pronunciation">
@@ -546,7 +500,7 @@ schedule
                             <!-- morning -->
                             <div class="card">
                                 <div class="category">morning</div>
-                                <button class="speaker-btn" id="btn-morning">🔉</button>
+                                <button class="speaker-btn" id="btn-morning" data-audio="audios/subha.mpeg">🔉</button>
                                 <div class="english-phrase">Morning</div>
                                 <div class="urdu-phrase">Subha</div>
                                 <div class="pronunciation">Pronunciation: Sub-ha</div>
@@ -555,7 +509,7 @@ schedule
                             <!-- raat -->
                             <div class="card">
                                 <div class="category">Night</div>
-                                <button class="speaker-btn" id="btn-night">🔉</button>
+                                <button class="speaker-btn" id="btn-night" data-audio="audios/raat.mpeg">🔉</button>
                                 <div class="english-phrase">Night</div>
                                 <div class="urdu-phrase">Raat</div>
                                 <div class="pronunciation">
@@ -566,7 +520,7 @@ schedule
                             <!-- time -->
                             <div class="card">
                                 <div class="category">Time asking</div>
-                                <button class="speaker-btn" id="btn-time">🔉</button>
+                                <button class="speaker-btn" id="btn-time" data-audio="audios/kiaWaqtHai.mpeg">🔉</button>
                                 <div class="english-phrase">What time is it?</div>
                                 <div class="urdu-phrase">Kya waqt hai?</div>
                                 <div class="pronunciation">
@@ -577,7 +531,7 @@ schedule
                             <!--  Evening -->
                             <div class="card">
                                 <div class="category">Evening</div>
-                                <button class="speaker-btn" id="btn-evening">🔉</button>
+                                <button class="speaker-btn" id="btn-evening" data-audio="audios/shaam.mpeg">🔉</button>
                                 <div class="english-phrase">Evening</div>
                                 <div class="urdu-phrase">Sham</div>
                                 <div class="pronunciation">Pronunciation: Shaa-m</div>

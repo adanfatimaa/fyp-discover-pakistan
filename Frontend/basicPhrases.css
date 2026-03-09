@@ -180,9 +180,25 @@ background: #d6e2d3;;
 .categories{
   padding-bottom: 50px;
 }
-.panels-container{
+#greetings{
   display: none;
 }
+#food{
+  display: none;
+}
+#emergency{
+  display: none;
+}
+#numbers{
+  display: none;
+}
+#time{
+  display: none;
+}
+.speaking{
+transform: scale(1.2);
+}
+
 
 @media (max-width: 800px) {
   body {
@@ -221,6 +237,18 @@ background: #d6e2d3;;
   .cards-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+   .category-buttons {
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 40px;
+  }
+
+  .cat-btn {
+    width: 6.5rem;
+    font-size: 1.5vw;
+    padding: 8px 16px;
+  }
 }
 
 @media (max-width: 500px) {
@@ -255,5 +283,18 @@ background: #d6e2d3;;
   .header {
     flex-direction: column;
     gap: 12px;
+  }
+   .category-buttons {
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 30px;
+  }
+
+  .cat-btn {
+    width: 7rem;
+    font-size: 3vw;
+    padding: 8px 12px;
+    border-radius: 10px;
   }
 }
