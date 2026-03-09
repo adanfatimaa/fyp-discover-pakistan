@@ -1,3 +1,4 @@
+
 const allButtons = document.querySelectorAll('.speaker-btn');
 
 allButtons.forEach(function(btn) {
@@ -29,6 +30,8 @@ categoryButtons.forEach(function(btn) {
                     panel.style.display = "none";
                 } else {
                     panel.style.display = "block";
+
+                     targetPanel.scrollIntoView({ behavior: "smooth" });
                 }
             } else {
                 panel.style.display = "none";
