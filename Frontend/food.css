@@ -1,0 +1,282 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: "lato", sans-serif;
+  height: 100vh;
+  background: #e0e0e0;
+}
+.main {
+  height: 80%;
+  margin-top: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.hero-image {
+  position: relative;
+  flex: 2;
+}
+.hero-image img {
+  width: 70%;
+  height: 290px;
+  border-radius: 18px;
+  margin-top: 50px;
+  margin-left: 20px;
+}
+.hero-content {
+  flex: 3;
+  text-align: left;
+  margin-left: 80px;
+  line-height: 1.7;
+}
+.hero-text{
+    font-size: 1.25rem;
+}
+.hero-title {
+  font-size: 42px;
+  margin-bottom: 10px;
+}
+.hero-title span {
+  color: #91bb56;
+}
+.history {
+  height: 69%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.history-image {
+  position: relative;
+  flex: 2;
+}
+.history-image img {
+  width: 90%;
+  height: 250px;
+  border-radius: 18px;
+  margin-top: 30px;
+  margin-left: 80px;
+}
+.history-content {
+  flex: 3;
+  text-align: left;
+  margin-left: 80px;
+  line-height: 1.4;
+}
+.history-text{
+    font-size: 1.20rem;
+}
+.history-title {
+  font-size: 42px;
+  margin-bottom: 10px;
+}
+.history-title span {
+  color: #91bb56;
+}
+.category-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 60px;
+   max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cat-btn {
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 12px;
+  width: 18%;
+  font-size: 1.3vw;
+  border: none;
+  background: #fafafa;
+  margin-bottom: 15px;
+}
+
+.cat-btn:hover{
+  background: #d0e3cb;
+  transition: background 0.2s;
+}
+.container {
+  max-width: 900px;
+  margin: 50px auto;
+  background: rgb(236, 236, 236);
+  border-radius: 16px;
+  padding: 40px;
+  box-shadow: 0 4px 20px rgba(9, 9, 9, 0.20);
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 30px;
+}
+
+.header h1 {
+  font-size: 28px;
+  font-weight: 800;
+  color: #111;
+}
+.card{
+  width: 60%;
+   background: rgb(236, 236, 236);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.10);
+  border-radius: 12px;
+  padding: 20px 20px;
+}
+.card:hover{
+  background: #d3e8ce;
+  transition: background 0.2s;
+}
+.card img{
+  width: 50%;
+  height: 60%;
+  /* image should be in center of card */
+  display: block;
+  margin: 0 auto;
+  margin-top: 20px;
+  border-radius: 12px;
+}
+.cards-grid{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  justify-content: center;
+}
+.card-content h4{
+  /* should be in center */
+  text-align: center;
+  margin-top: 20px;
+  font-size: 1.5rem;
+}
+.card-content p{
+  text-align: center;
+  margin-top: 10px;
+  padding-bottom: 30px;
+  font-size: 1.1rem;
+}
+
+  
+
+
+
+
+
+
+
+
+
+
+
+@media (max-width: 800px) {
+  body {
+    height: auto;
+  }
+
+  .main {
+    flex-direction: column;
+    margin-top: 120px;
+    height: auto;
+    padding: 20px;
+  }
+
+  .hero-image {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .hero-image img {
+    width: 70%;
+    height: auto;
+    margin-top: 20px;
+    margin-left: 0;
+  }
+
+  .hero-content {
+    margin-left: 0;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .hero-title {
+    font-size: 32px;
+  }
+   .history {
+    flex-direction: column;
+    margin-top: 120px;
+    height: auto;
+    padding: 20px;
+  }
+  .history-image {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .history-image img {
+    width: 70%;
+    height: auto;
+    margin-top: 20px;
+    margin-left: 0;
+  }
+
+  .history-content {
+    margin-left: 0;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .history-title {
+    font-size: 32px;
+  }
+ 
+}
+
+@media (max-width: 500px) {
+  .main {
+    margin-top: 130px;
+    padding: 10px;
+  }
+
+  .hero-image img {
+    width: 90%;
+    height: 180px;
+    border-radius: 12px;
+  }
+
+  .hero-content {
+    padding: 10px;
+  }
+
+  .hero-title {
+    font-size: 26px;
+  }
+  .history {
+    margin-top: 130px;
+    padding: 10px;
+  }
+
+   .history-image img {
+    width: 90%;
+    height: 180px;
+    border-radius: 12px;
+  }
+
+  .history-content {
+    padding: 10px;
+  }
+
+  .history-title {
+    font-size: 26px;
+  }
+
+  
+}

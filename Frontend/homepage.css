@@ -157,16 +157,16 @@ body {
 @media (max-width: 800px) {
     
     .hero{
-        height: 90vh;
+        height: 100vh;
     }
     .hero h1 {
-        font-size: 2.9rem;
-        padding: 0px 20px 0px 70px;
+        font-size: 2.0rem;
+        padding: 40px 20px 0px 70px;
     }
     .hero h2 {
-        font-size: 1.8rem;
+        font-size: 1.5rem;
         padding: 0px 20px 0px 50px;
-        margin: 30px;
+        margin: 20px;
         
     }
     .hero-bg{
@@ -175,12 +175,12 @@ body {
     }
     .search-bar {
         width: 400px;
-        height: 52px;
+        height: 2.7rem;
         font-size: 1.1rem;
     }
      .btn {
-        font-size: 16px;
-        width: 270px;
+        font-size: 1.0rem;
+        width: 230px;
         
     } 
     
