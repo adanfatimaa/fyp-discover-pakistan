@@ -1,5 +1,8 @@
 
 /* navigation bar */
+html {
+  scroll-behavior: smooth;
+}
 .navbar{
     position: fixed;
     top: 0;
