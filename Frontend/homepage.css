@@ -316,6 +316,12 @@ body {
 }
 
 /* HERO */
+.about-main-heading{
+    color: #81a343;
+    font-family: 'oswald',sans-serif;
+    margin-bottom: 36px;
+
+}
 .aboutHero {
   display: flex;
   gap: 60px;

@@ -12,7 +12,7 @@ quizButton.addEventListener("click", function () {
         quizPanel.style.display = "none";
     } else {
 
-        // open the panel
+        // open  panel
         quizPanel.style.display = "block";
 
 
@@ -21,7 +21,7 @@ quizButton.addEventListener("click", function () {
 
 });
 
-        //  stores users answers
+        //  stores answers
         var answers = {};
 
         var questionTopics = {

@@ -192,7 +192,7 @@ background: #d3e8ce;
 
 
 
-@media (max-width: 800px) {
+@media (max-width: 768px) {
   body {
     height: auto;
   }
@@ -257,7 +257,7 @@ background: #d3e8ce;
  
 }
 
-@media (max-width: 500px) {
+@media (max-width: 480px) {
   .main {
     margin-top: 130px;
     padding: 10px;
