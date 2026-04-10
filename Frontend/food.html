@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Culinary Delights</title>
+    <!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Oswald:wght@200..700&display=swap"
+        rel="stylesheet" />
+    <!-- font awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+    <!-- stylesheet -->
+    <link rel="stylesheet" href="food.css" />
+    <link rel="stylesheet" href="common.css" />
+</head>
+
+<body>
+    <div id="navbar"></div>
+
+
+    <!-- Hero Section -->
+    <section class="main">
+        <div class="hero-content">
+            <h1 class="hero-title">
+                Explore <span> Culinary Delights</span><br />
+                of Pakistan
+            </h1>
+            <p class="hero-text">
+                Pakistani cuisine is rich, flavorful, and full of spices. It includes many delicious dishes made with
+                rice, meat, vegetables, and bread. From the famous biryani and kebabs to the sweet treats like gulab
+                jamun and jalebi, there's something for everyone to enjoy.
+            </p>
+        </div>
+        <div class="hero-image">
+            <img src="./images/pakistaniFood.webp" alt="Pakistani Food" />
+        </div>
+    </section>
+    <!-- history section -->
+    <section class="history" id="history">
+        <div class="history-image">
+            <img src="./images/paki-food.png" alt="Pakistani Food" />
+        </div>
+        <div class="history-content">
+            <h2 class="history-title">A <span>Brief History </span><br> of Pakistani Cuisine</h2>
+            <p class="history-text">
+                Pakistani cuisine has a rich history that goes back thousands of years. It has been influenced by
+                various cultures and civilizations, including the Indus Valley Civilization, Persian Empire, Mughal
+                Empire. The cuisine is known for its bold flavors, aromatic spices, and diverse range of dishes.
+                Pakistani food includes a variety of meat dishes, as well as vegetarian options like lentils and
+                vegetables. The use of spices like cumin, coriander, turmeric, and garam
+                masala is common in Pakistani cooking, giving the dishes their distinctive taste and aroma.
+            </p>
+        </div>
+    </section>
+
+    <section class="categories" id="categories">
+        <div class="container">
+            <div class="header">
+                <h1>Browse by Categories</h1>
+            </div>
+            <div class="category-buttons">
+                <button class="cat-btn" data-target="veg">
+                    Vegetarian
+                </button>
+                <button class="cat-btn" data-target="meat">
+                    Meat
+                </button>
+                <button class="cat-btn" data-target="rice">
+                    Rice
+                </button>
+                <button class="cat-btn" data-target="streetFood">
+                    Street
+                </button>
+                <button class="cat-btn" data-target="drinks">
+                    Drinks
+                </button>
+                <button class="cat-btn" data-target="sweets">
+                    Sweets
+                </button>
+                <button class="cat-btn" data-target="breakfast">
+                    Breakfast
+                </button>
+
+
+            </div>
+            <!-- Content Panels ( Hidden at first) -->
+            <div class="panels-container">
+
+                <!-- vegetarian panel -->
+
+                <div class="panel" id="veg">
+
+                    <div class="container">
+                        <div class="header">
+                            <h1>Vegetarian</h1>
+                        </div>
+
+                        <div class="cards-grid">
+                            <!-- saag-->
+                            <div class="card" id="saag">
+                                <img src="images/saag.jpg" alt="saag">
+                                <div class="card-content">
+                                    <h4><b>Saag</b></h4>
+                                    <p>A flavorful dish made from slow-cooked leafy greens blended with traditional
+                                        spices, a must-try comfort food in winters. </p>
+
+                                </div>
+                            </div>
+                            <!-- pakorra -->
+                            <div class="card" id="pakora">
+                                <img src="images/pakorra.jfif" alt="pakorra">
+                                <div class="card-content">
+                                    <h4><b>Pakorra</b></h4>
+                                    <p>Crispy fritters made with vegetables and chickpea flour, a must-try snack often
+                                        enjoyed with tea on rainy days.</p>
+
+                                </div>
+                            </div>
+                            <!-- veg pulao -->
+                            <div class="card" id="vegPulao">
+                                <img src="images/vegPulao.jfif" alt="veg pulao">
+                                <div class="card-content">
+                                    <h4><b>Vegetable Dum Pulao</b></h4>
+                                    <p>A spicy and flavorful dish made with okra and traditional spices, a popular
+                                        choice in Pakistani cuisine.</p>
+
+                                </div>
+                            </div>
+
+                            <!-- daal -->
+                            <div class="card" id="daal">
+                                <img src="images/daal.jfif" alt="daal">
+                                <div class="card-content">
+                                    <h4><b>Daal</b></h4>
+                                    <p>A traditional lentil dish cooked in a rich, spiced sauce, often enjoyed with rice
+                                        or roti for a simple meal.</p>
+
+                                </div>
+                            </div>
+
+                            <!--  samosa -->
+                            <div class="card" id="samosa">
+                                <img src="images/samosa.jfif" alt="samosa">
+                                <div class="card-content">
+                                    <h4><b>Samosa</b></h4>
+                                    <p>Crispy and delicious pastries filled with spiced potatoes, a popular snack in
+                                        Pakistan.</p>
+
+                                </div>
+                            </div>
+
+                            <!--  fruit chaat -->
+                            <div class="card" id="chaat">
+                                <img src="images/fruitChaat.jfif" alt="fruit chaat">
+                                <div class="card-content">
+                                    <h4><b>Fruit Chaat</b></h4>
+                                    <p>A fresh mix of seasonal fruits tossed with spices, lemon juice. cream. A must-try
+                                        healthy snack, perfect for any time of the day.</p>
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <!-- meat panel -->
+
+                <div class="panel" id="meat">
+
+                    <div class="container">
+                        <div class="header">
+                            <h1>Meat</h1>
+                        </div>
+
+                        <div class="cards-grid">
+                            <!-- nihari-->
+                            <div class="card" id="nihari">
+                                <img src="images/nihari.jfif" alt="nihari">
+                                <div class="card-content">
+                                    <h4><b>Nihari</b></h4>
+                                    <p>Often considered the national dish, this is a slow-cooked, tender beef or mutton
+                                        stew. </p>
+
+                                </div>
+                            </div>
+                            <!-- chapli kebab -->
+                            <div class="card" id="chapliKebab">
+                                <img src="images/chapliKebab.jfif" alt="chapli kebab">
+                                <div class="card-content">
+                                    <h4><b>Chapli Kebab</b></h4>
+                                    <p>Chapli kabab is a Pashtun-style minced kebab made from ground beef, mutton or
+                                        chicken with various spices in the shape of a patty.</p>
+
+                                </div>
+                            </div>
+                            <!-- haleem -->
+                            <div class="card" id="haleem">
+                                <img src="images/haleem.avif" alt="haleem">
+                                <div class="card-content">
+                                    <h4><b>Haleem</b></h4>
+                                    <p>A warm, creamy porridge packed with tender meat, rich spices, and wholesome
+                                        grains, Haleem is the ultimate comfort food you simply have to try when in
+                                        Pakistan!</p>
+
+                                </div>
+                            </div>
+
+                            <!-- Qorma -->
+                            <div class="card" id="qorma">
+                                <img src="images/qorma.jfif" alt="qorma">
+                                <div class="card-content">
+                                    <h4><b>Qorma</b></h4>
+                                    <p>A rich, aromatic curry simmered in creamy spices and yogurt, Qorma is the kind of
+                                        dish that makes every meal feel like a special celebration.</p>
+
+                                </div>
+                            </div>
+
+                            <!--  Seekh Kebab -->
+                            <div class="card" id="seekhKebab">
+                                <img src="images/seekhKebab.jfif" alt="seekh kebab">
+                                <div class="card-content">
+                                    <h4><b>Seekh Kebab</b></h4>
+                                    <p>Juicy, flavorful minced meat grilled to perfection on skewers, Seekh Kebabs are
+                                        smoky, spicy, and absolutely irresistible.</p>
+
+                                </div>
+                            </div>
+
+                            <!--  sajji -->
+                            <div class="card" id="sajji">
+                                <img src="images/sajji.jfif" alt="sajji">
+                                <div class="card-content">
+                                    <h4><b>Sajji</b></h4>
+                                    <p>Whole meat marinated with simple spices and slow-roasted over fire, Sajji is
+                                        smoky, juicy, and a must-try for anyone craving a true taste of Pakistani BBQ!
+                                    </p>
+
+                                </div>
+                            </div>
+
+                            <!--  tikka -->
+                            <div class="card" id="tikka">
+                                <img src="images/tikka.jfif" alt="tikka">
+                                <div class="card-content">
+                                    <h4><b>tikka</b></h4>
+                                    <p>Tender pieces of chicken marinated in spices and grilled to perfection. It’s
+                                        smoky, flavorful, and one of the most loved BBQ dishes in Pakistan.
+                                    </p>
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <!-- rice -->
+
+                <div class="panel" id="rice">
+
+                    <div class="container">
+                        <div class="header">
+                            <h1>Rice</h1>
+                        </div>
+
+                        <div class="cards-grid">
+                            <!-- biryani-->
+                            <div class="card" id="biryani">
+                                <img src="images/biryani.jfif" alt="biryani">
+                                <div class="card-content">
+                                    <h4><b>Biryani</b></h4>
+                                    <p>A fragrant, colorful rice dish layered with tender meat, spices, and herbs,
+                                        everyone loves it, and it’s an absolute must-try when in Pakistan!</p>
+
+                                </div>
+                            </div>
+                            <!-- pulao -->
+                            <div class="card" id="pulao">
+                                <img src="images/pulao.jfif" alt="pulao">
+                                <div class="card-content">
+                                    <h4><b>Pulao</b></h4>
+                                    <p>A milder, one-pot dish where rice is cooked in a rich meat broth (yakhni) with
+                                        spices. It is comforting, aromatic, and a must-try.</p>
+
+                                </div>
+                            </div>
+                            <!-- zarda -->
+                            <div class="card" id="zarda">
+                                <img src="images/zarda.jfif" alt="zarda">
+                                <div class="card-content">
+                                    <h4><b>Zarda</b></h4>
+                                    <p>Sweet, colorful rice infused with saffron, sugar, and nuts. Zarda is a festive
+                                        treat that will win over anyone with a sweet tooth!</p>
+
+                                </div>
+                            </div>
+
+                            <!-- matar pulao -->
+                            <div class="card" id="matarPulao">
+                                <img src="images/matarPulao.jfif" alt="matar pulao">
+                                <div class="card-content">
+                                    <h4><b>Matar Pulao</b></h4>
+                                    <p>Matar Pulao is a fragrant, one-pot South Asian rice dish made with basmati rice,
+                                        green peas, and whole spices, it's light, aromatic, and a must-try comfort food.
+                                    </p>
+
+                                </div>
+                            </div>
+
+                            <!--  fish tahiri -->
+                            <div class="card" id="fishTahiri">
+                                <img src="images/fishTahiri.jfif" alt="fish tahiri">
+                                <div class="card-content">
+                                    <h4><b>Fish Tahiri</b></h4>
+                                    <p>Fragrant rice cooked with tender fish and aromatic spices — a must-try for
+                                        seafood lovers craving authentic Pakistani flavors!</p>
+
+                                </div>
+                            </div>
+
+                            <!--  Khichdi -->
+                            <div class="card" id="khichdi">
+                                <img src="images/khicdi.jfif" alt="khichdi">
+                                <div class="card-content">
+                                    <h4><b>Khichdi</b></h4>
+                                    <p>A simple, wholesome mix of rice and lentils lightly spiced to perfection, light
+                                        and easy on the stomach, often eaten when feeling under the weather.
+                                    </p>
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+
+
+
+
+                <!-- street food -->
+                <div class="panel" id="streetFood">
+
+                    <div class="container">
+                        <div class="header">
+                            <h1>Street Food</h1>
+                        </div>
+
+                        <div class="cards-grid">
+                            <!-- gol gappay-->
+                            <div class="card" id="golGappay">
+                                <img src="images/golGappay.jpg" alt="gol gappay">
+                                <div class="card-content">
+                                    <h4><b>Gol Gappay</b></h4>
+                                    <p>Crispy hollow shells filled with spicy and tangy water, chickpeas, and potatoes.
+                                        A popular street snack in Pakistan that is fun and exciting to eat!</p>
+
+                                </div>
+                            </div>
+
+                            <!-- chapli kebab -->
+                            <div class="card" id="chapliKebab">
+                                <img src="images/chapliKebab.jfif" alt="chapli kebab">
+                                <div class="card-content">
+                                    <h4><b>Chapli Kebab</b></h4>
+                                    <p>Chapli kabab is a Pashtun-style minced kebab made from ground beef, mutton or
+                                        chicken with various spices in the shape of a patty. </p>
+
+                                </div>
+                            </div>
+
+
+                            <!-- Dahi Bhalla -->
+                            <div class="card" id="dahiBhalla">
+                                <img src="images/dahiBhallay.jfif" alt="Dahi Bhalla">
+                                <div class="card-content">
+                                    <h4><b>Dahi Bhalla</b></h4>
+                                    <p>Soft lentil dumplings soaked in creamy yogurt and topped with sweet and tangy
+                                        chutneys. A refreshing and flavorful snack loved all across Pakistan. </p>
+
+                                </div>
+                            </div>
+
+                            <!-- samosa -->
+                            <div class="card" id="samosa">
+                                <img src="images/samosa.jfif" alt="samosa">
+                                <div class="card-content">
+                                    <h4><b>Samosa</b></h4>
+                                    <p>Crispy and delicious pastries filled with spiced potatoes, a popular snack in
+                                        Pakistan.</p>
+
+                                </div>
+                            </div>
+
+                            <!--  Jalebi -->
+                            <div class="card" id="jalebi">
+                                <img src="images/jalebi.jpg" alt="Jalebi">
+                                <div class="card-content">
+                                    <h4><b>Jalebi</b></h4>
+                                    <p>This is a dessert that you’ll start to see everywhere. Orange deep-fried swirls
+                                        of batter soaked in sugar syrup, jalebi is a popular sweet treat enjoyed across
+                                        Pakistan.</p>
+
+                                </div>
+                            </div>
+
+                            <!--  Bhutta -->
+                            <div class="card" id="bhutta">
+                                <img src="images/bhutta.jfif" alt="Bhutta">
+                                <div class="card-content">
+                                    <h4><b>Bhutta</b></h4>
+                                    <p>Roasted or grilled corn on the cob, brushed with spices, lemon juice, and salt,
+                                        is a popular street snack.
+                                    </p>
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                </div>
+                <!-- drinks -->
+                <div class="panel" id="drinks">
+
+                    <div class="container">
+                        <div class="header">
+                            <h1>Drinks</h1>
+                        </div>
+
+                        <div class="cards-grid">
+                            <!-- lassi-->
+                            <div class="card" id="lassi">
+                                <img src="images/lassi.jfif" alt="lassi">
+                                <div class="card-content">
+                                    <h4><b>Lassi</b></h4>
+                                    <p>A cool and creamy yogurt drink served sweet or salty, perfect for beating the
+                                        heat on a hot day.</p>
+
+                                </div>
+                            </div>
+
+                            <!-- gannay ka rus -->
+                            <div class="card" id="gannay">
+                                <img src="images/gannayKaRus.jfif" alt="gannay ka rus">
+                                <div class="card-content">
+                                    <h4><b>Gannay ka ras(sugarcane juice)</b></h4>
+                                    <p>Fresh juice made from crushed sugarcane. It's a naturally sweet and refreshing
+                                        street drink loved across Pakistan.</p>
+
+                                </div>
+                            </div>
+
+
+                            <!-- shikanjabin -->
+                            <div class="card" id="shikanjabin">
+                                <img src="images/shikanjabin.jfif" alt="shikanjabin">
+                                <div class="card-content">
+                                    <h4><b>Shikanjabin</b></h4>
+                                    <p>A refreshing lemon drink mixed with sugar, salt, and spices. A simple but
+                                        delicious way to cool down in warm weather. </p>
+
+                                </div>
+                            </div>
+
+                            <!-- chai -->
+                            <div class="card" id="chai">
+                                <img src="images/chai.jfif" alt="chai">
+                                <div class="card-content">
+                                    <h4><b>Chai</b></h4>
+                                    <p>A warm, comforting milk tea brewed with tea leaves, milk, and sugar. A daily
+                                        favorite in Pakistan that people enjoy at any time of the day.</p>
+
+                                </div>
+                            </div>
+
+                            <!--  doodh soda -->
+                            <div class="card" id="doodhSoda">
+                                <img src="images/doodhSodaa.jpg" alt="doodh soda">
+                                <div class="card-content">
+                                    <h4><b>Doodh Soda</b></h4>
+                                    <p>A unique drink made by mixing cold milk with soda. It is known for being
+                                        nutritious and very cooling, especially in hot weather.</p>
+
+                                </div>
+                            </div>
+
+                            <!--  sattu -->
+                            <div class="card" id="sattu">
+                                <img src="images/sattu.jfif" alt="sattu">
+                                <div class="card-content">
+                                    <h4><b>Sattu</b></h4>
+                                    <p>A refreshing drink made from roasted gram flour mixed with water, sugar or salt —
+                                        a healthy and cooling drink popular in many parts of South Asia.
+                                    </p>
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+
+                <!-- sweets -->
+
+                <div class="panel" id="sweets">
+
+                    <div class="container">
+                        <div class="header">
+                            <h1>Sweets</h1>
+                        </div>
+
+                        <div class="cards-grid">
+                            <!-- gulab jamun-->
+                            <div class="card" id="gulabJamun">
+                                <img src="images/gulabJamunn.jpg" alt="gulab jamun">
+                                <div class="card-content">
+                                    <h4><b>Gulab Jamun</b></h4>
+                                    <p>Warm, soft dumplings made from milk solids and fried until golden, then soaked in
+                                        fragrant sugar syrup. A melt-in-your-mouth dessert loved all across Pakistan.
+                                    </p>
+
+                                </div>
+                            </div>
+                            <!-- gajar ka halwa -->
+                            <div class="card" id="gajarHalwa">
+                                <img src="images/gajjarHalwa.jfif" alt="gajar ka halwa">
+                                <div class="card-content">
+                                    <h4><b>Gajar ka Halwa </b></h4>
+                                    <p>A warm dessert made from slow-cooked carrots, milk, sugar, and nuts. Sweet, rich,
+                                        and especially loved during winter.</p>
+
+                                </div>
+                            </div>
+                            <!-- zarda -->
+                            <div class="card" id="zarda">
+                                <img src="images/zarda.jfif" alt="zarda">
+                                <div class="card-content">
+                                    <h4><b>Zarda</b></h4>
+                                    <p>Sweet, colorful rice infused with saffron, sugar, and nuts. Zarda is a festive
+                                        treat that will win over anyone with a sweet tooth!</p>
+
+                                </div>
+                            </div>
+
+                            <!-- kheer -->
+                            <div class="card" id="kheer">
+                                <img src="images/kheerr.jpg" alt="kheer">
+                                <div class="card-content">
+                                    <h4><b>Kheer</b></h4>
+                                    <p>a dessert, made by slowly simmering rice with milk and sugar. Often flavored with
+                                        cardamom, saffron, nuts (pistachios, almonds, cashews), and dried fruits.</p>
+
+                                </div>
+                            </div>
+
+                            <!--  barfi -->
+                            <div class="card" id="barfi">
+                                <img src="images/barfi.jfif" alt="barfi">
+                                <div class="card-content">
+                                    <h4><b>barfi</b></h4>
+                                    <p>A soft, milky sweet cut into little squares and often topped with nuts. Sweet,
+                                        colorful, and impossible to stop at just one piece!</p>
+
+                                </div>
+                            </div>
+
+                            <!--  naankhatai -->
+                            <div class="card" id="naankhatai">
+                                <img src="images/naankhatai.jfif" alt="naankhatai">
+                                <div class="card-content">
+                                    <h4><b>Naankhatai</b></h4>
+                                    <p>A crumbly traditional cookie made with flour, butter, and sugar. A perfect sweet
+                                        snack to enjoy with tea.
+                                    </p>
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+
+
+                <!-- breakfast -->
+
+                <div class="panel" id="breakfast">
+
+                    <div class="container">
+                        <div class="header">
+                            <h1>Breakfast</h1>
+                        </div>
+
+                        <div class="cards-grid">
+                            <!-- halwa puri-->
+                            <div class="card" id="halwaPuri">
+                                <img src="images/halwaPuri.jfif" alt="halwa puri">
+                                <div class="card-content">
+                                    <h4><b>Halwa Puri</b></h4>
+                                    <p>A famous Pakistani breakfast with crispy puri served with sweet halwa and spicy chickpeas. A delicious and filling way to start the day.</p>
+
+                                </div>
+                            </div>
+                            <!-- Paye -->
+                            <div class="card" id="paye">
+                                <img src="images/paye.jfif" alt="paye">
+                                <div class="card-content">
+                                    <h4><b>Paye</b></h4>
+                                    <p>A rich broth made from goat or beef trotters, often served with naan. A traditional dish enjoyed especially in the morning.</p>
+
+                                </div>
+                            </div>
+                            <!-- naan chanay -->
+                            <div class="card" id="naaChanay">
+                                <img src="images/naanChanay.jfif" alt="naan chanay">
+                                <div class="card-content">
+                                    <h4><b>Naan Chanay</b></h4>
+                                    <p> Naan Chanay is a beloved, traditional Pakistani breakfast. It consists of soft naan bread served alongside a rich, spicy chickpea curry (chana/cholay). Often enjoyed with boiled eggs on the side</p>
+
+                                </div>
+                            </div>
+
+                            <!-- achaar -->
+                            <div class="card" id="achaar">
+                                <img src="images/achaar.jfif" alt="achaar">
+                                <div class="card-content">
+                                    <h4><b>Achaar (pickle)</b></h4>
+                                    <p>Spicy and tangy pickles made from vegetables or fruits, often eaten with parathas, rice, or curries to add a zesty kick to the meal.</p>
+
+                                </div>
+                            </div>
+
+                            <!--  paratha -->
+                            <div class="card" id="paratha">
+                                <img src="images/paratha.jfif" alt="paratha">
+                                <div class="card-content">
+                                    <h4><b>Paratha</b></h4>
+                                    <p>A crispy, buttery flatbread cooked on a hot pan. It can be plain or stuffed with ingredients like potatoes. Often enjoyed with yogurt, pickles, or curries, it’s a comfort food.</p>
+
+                                </div>
+                            </div>
+
+                            <!--  nihari-->
+                           <div class="card" id="nihari">
+                                <img src="images/nihari.jfif" alt="nihari">
+                                <div class="card-content">
+                                    <h4><b>Nihari</b></h4>
+                                    <p>Often considered the national dish, this is a slow-cooked, tender beef or mutton
+                                        stew. </p>
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            </div>
+        </div>
+    </section>
+<script src="common.js"></script>
+<script src="food.js"></script>
+</body>
+
+</html>

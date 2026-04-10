@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mood based Recommendations</title>
+    <!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Oswald:wght@200..700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- font awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+
+
+    
+    <link rel="stylesheet" href="recommendations.css">
+    <link rel="stylesheet" href="common.css">
+</head>
+<body>
+
+    
+
+
+        <div class="container">
+        <div class="selection-section">
+            <h1>Get recommendations based on your mood</h1>
+            <p class="subtitle">Select your travel mood and preferences to get personalized recommendations</p>
+
+            <!-- Select Mood -->
+            <div class="form-group">
+                <h2>What are you in mood for?</h2>
+                <div class="mood-options">
+                    <label class="mood-card">
+                        <input type="radio" name="mood" value="adventurous" required>
+                        <div class="mood-content">
+                            <span class="mood-icon">🏔️</span>
+                            <span class="mood-label">Adventurous</span>
+                        </div>
+                    </label>
+
+                    <label class="mood-card">
+                        <input type="radio" name="mood" value="historical" required>
+                        <div class="mood-content">
+                            <span class="mood-icon">🏛️</span>
+                            <span class="mood-label">Historical</span>
+                        </div>
+                    </label>
+
+                    <label class="mood-card">
+                        <input type="radio" name="mood" value="family" required>
+                        <div class="mood-content">
+                            <span class="mood-icon">👨‍👩‍👧‍👦</span>
+                            <span class="mood-label">Family-Friendly</span>
+                        </div>
+                    </label>
+
+                    <label class="mood-card">
+                        <input type="radio" name="mood" value="foodie" required>
+                        <div class="mood-content">
+                            <span class="mood-icon">🍛</span>
+                            <span class="mood-label">Foodie</span>
+                        </div>
+                    </label>
+
+                    <label class="mood-card">
+                        <input type="radio" name="mood" value="nature" required>
+                        <div class="mood-content">
+                            <span class="mood-icon">🌲</span>
+                            <span class="mood-label">Nature & Peace</span>
+                        </div>
+                    </label>
+
+                    <label class="mood-card">
+                        <input type="radio" name="mood" value="cultural" required>
+                        <div class="mood-content">
+                            <span class="mood-icon">🕌</span>
+                            <span class="mood-label">Cultural</span>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Budget Selection -->
+            <div class="form-group">
+                <h2>Select Your Budget</h2>
+                <div class="budget-options">
+                    <label class="budget-card">
+                        <input type="radio" name="budget" value="budget" required>
+                        <div class="budget-content">
+                            <span class="budget-icon">💰</span>
+                            <span class="budget-label">Budget-Friendly</span>
+                            <span class="budget-range">Under 20,000 PKR</span>
+                        </div>
+                    </label>
+
+                    <label class="budget-card">
+                        <input type="radio" name="budget" value="moderate" required>
+                        <div class="budget-content">
+                            <span class="budget-icon">💵</span>
+                            <span class="budget-label">Moderate</span>
+                            <span class="budget-range">20,000 - 50,000 PKR</span>
+                        </div>
+                    </label>
+
+                    <label class="budget-card">
+                        <input type="radio" name="budget" value="luxury" required>
+                        <div class="budget-content">
+                            <span class="budget-icon">💎</span>
+                            <span class="budget-label">Luxury</span>
+                            <span class="budget-range">Above 50,000 PKR</span>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Duration Select -->
+            <div class="form-group">
+                <h2>Trip Duration (Optional)</h2>
+                <div class="duration-options">
+                    <label class="duration-card">
+                        <input type="radio" name="duration" value="weekend">
+                        <div class="duration-content">
+                            <span class="duration-label">Weekend</span>
+                            <span class="duration-days">2-3 days</span>
+                        </div>
+                    </label>
+
+                    <label class="duration-card">
+                        <input type="radio" name="duration" value="week">
+                        <div class="duration-content">
+                            <span class="duration-label">Week</span>
+                            <span class="duration-days">5-7 days</span>
+                        </div>
+                    </label>
+
+                    <label class="duration-card">
+                        <input type="radio" name="duration" value="extended">
+                        <div class="duration-content">
+                            <span class="duration-label">Extended</span>
+                            <span class="duration-days">10+ days</span>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <button class="btn-get-recommendations" onclick="getRecommendations()">
+                Get Recommendations
+            </button>
+
+
+            <!-- add saved page's link here later -->
+            <a href=".html" class="link-saved-destinations">
+                View My Saved Destinations →
+            </a>
+        </div>
+    </div>
+
+    <!-- Recommendations Modal -->
+    <div id="recommendationsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Your Personalized Recommendations</h2>
+                <span class="close-modal" onclick="closeModal()">&times;</span>
+            </div>
+            <div class="modal-body" id="recommendationsContainer">
+                <!-- Recommendations will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading icon -->
+    <div id="loadingSpinner" class="loading-spinner">
+        <div class="spinner"></div>
+        <p>Finding perfect destinations for you...</p>
+    </div>
+
+    <script src="recommendation.js"></script>
+    <script src="common.js"></script>
+
+    
+</body>
+</html>
