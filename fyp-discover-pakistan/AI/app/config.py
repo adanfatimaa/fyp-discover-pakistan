@@ -4,26 +4,16 @@ from functools import lru_cache
 
 class Settings(BaseSettings):
     # App
-    APP_NAME: str = "AI Chat Platform"
+    APP_NAME: str = "Discover Pakistan AI"
     DEBUG: bool = False
     ALLOWED_ORIGINS: str = "http://localhost:3000"
 
     # Database
     DATABASE_URL: str
 
-    # Redis — optional, disabled by default (Docker ki zaroorat nahi)
-    REDIS_URL: str = ""
-    USE_CACHE: bool = False
-
-    # JWT
-    SECRET_KEY: str
-    ALGORITHM: str = "HS256"
-    ACCESS_TOKEN_EXPIRE_HOURS: int = 24
-
-    # LLM — sirf Gemini chahiye, baaki optional
-    GEMINI_API_KEY: str
-    OPENAI_API_KEY: str = ""      
-    ANTHROPIC_API_KEY: str = "" 
+    # Groq LLM
+    GROQ_API_KEY: str
+    GROQ_MODEL: str = "llama-3.3-70b-versatile"
 
     @property
     def origins_list(self) -> list[str]:

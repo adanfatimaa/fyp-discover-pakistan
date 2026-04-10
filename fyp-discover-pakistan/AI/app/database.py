@@ -23,13 +23,12 @@ class Base(DeclarativeBase):
 
 
 async def create_tables():
-    from app.auth.models import User
     from app.chat.models import Conversation, Message
     from app.rag.models import Document
 
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
-    print(" Database tables created successfully")
+    print("Database tables created successfully")
 
 
 async def get_db():

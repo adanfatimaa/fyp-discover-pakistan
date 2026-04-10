@@ -2,14 +2,11 @@ import json
 import logging
 import math
 
-from sqlalchemy import select, text
+from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
-
 from app.rag.models import Document
 
 logger = logging.getLogger(__name__)
-
-# Lazy import — sentence_transformers bhari library hai
 _embedder = None
 
 
@@ -18,141 +15,80 @@ def get_embedder():
     if _embedder is None:
         from sentence_transformers import SentenceTransformer
         _embedder = SentenceTransformer("all-MiniLM-L6-v2")
-        logger.info(" Embedding model loaded!")
+        logger.info("Embedding model loaded!")
     return _embedder
 
 
 class RAGService:
 
-    #  Text Processing 
-    def chunk_text(
-        self,
-        text: str,  # noqa: F811
-        chunk_size: int = 400,
-        overlap: int = 50,
-    ) -> list[str]:
+    def chunk_text(self, text: str, chunk_size: int = 400, overlap: int = 50) -> list[str]:
         words  = text.split()
         chunks = []
         start  = 0
-
         while start < len(words):
-            end   = start + chunk_size
-            chunk = " ".join(words[start:end])
-            chunks.append(chunk)
-            start += chunk_size - overlap  # Overlap ke saath aage badho
-
+            chunks.append(" ".join(words[start:start + chunk_size]))
+            start += chunk_size - overlap
         return chunks
 
     def embed_text(self, text: str) -> list[float]:
-        embedder  = get_embedder()
-        embedding = embedder.encode(text, normalize_embeddings=True)
-        return embedding.tolist()
+        return get_embedder().encode(text, normalize_embeddings=True).tolist()
 
-    # Cosine Similarity (Manual — pgvector na ho to) 
-    def cosine_similarity(self, vec1: list[float], vec2: list[float]) -> float:
-        dot_product = sum(a * b for a, b in zip(vec1, vec2))
-        magnitude1  = math.sqrt(sum(a * a for a in vec1))
-        magnitude2  = math.sqrt(sum(b * b for b in vec2))
+    def cosine_similarity(self, v1: list[float], v2: list[float]) -> float:
+        dot = sum(a * b for a, b in zip(v1, v2))
+        m1  = math.sqrt(sum(a * a for a in v1))
+        m2  = math.sqrt(sum(b * b for b in v2))
+        return dot / (m1 * m2) if m1 and m2 else 0.0
 
-        if magnitude1 == 0 or magnitude2 == 0:
-            return 0.0
-        return dot_product / (magnitude1 * magnitude2)
-
-    #  Document Indexing 
     async def index_document(
-        self,
-        content: str,
-        filename: str,
-        user_id: int,
-        db: AsyncSession,
+        self, content: str, filename: str, db: AsyncSession
     ) -> int:
-        # Step 1: Chunks banao
         chunks = self.chunk_text(content)
-        logger.info(f"Document '{filename}' → {len(chunks)} chunks")
-
-        # Step 2: Har chunk ko embed karo aur save karo
         for i, chunk in enumerate(chunks):
-            embedding = self.embed_text(chunk)
-
-            doc = Document(
-                user_id=user_id,
+            db.add(Document(
                 filename=filename,
                 content=chunk,
-                embedding=json.dumps(embedding),  # JSON string mein store
+                embedding=json.dumps(self.embed_text(chunk)),
                 chunk_idx=i,
-            )
-            db.add(doc)
-
+            ))
         await db.commit()
-        logger.info(f" Indexed {len(chunks)} chunks for '{filename}'")
+        logger.info(f"Indexed {len(chunks)} chunks for '{filename}'")
         return len(chunks)
 
-    #  Document Search 
     async def search_documents(
-        self,
-        query: str,
-        user_id: int,
-        db: AsyncSession,
-        top_k: int = 3,
-        min_similarity: float = 0.3,
+        self, query: str, db: AsyncSession,
+        top_k: int = 3, min_similarity: float = 0.3
     ) -> list[dict]:
-        # Query embed karo
-        query_embedding = self.embed_text(query)
+        query_emb = self.embed_text(query)
+        result    = await db.execute(select(Document))
+        docs      = result.scalars().all()
 
-        # Is user ke saare documents lo
-        result = await db.execute(
-            select(Document).where(Document.user_id == user_id)
-        )
-        documents = result.scalars().all()
-
-        if not documents:
-            logger.info("Koi documents nahi milse")
-            return []
-
-        # Similarity calculate karo
-        scored_docs = []
-        for doc in documents:
+        scored = []
+        for doc in docs:
             if not doc.embedding:
                 continue
-
-            doc_embedding = json.loads(doc.embedding)
-            similarity    = self.cosine_similarity(query_embedding, doc_embedding)
-
-            if similarity >= min_similarity:
-                scored_docs.append({
+            sim = self.cosine_similarity(query_emb, json.loads(doc.embedding))
+            if sim >= min_similarity:
+                scored.append({
                     "content":    doc.content,
                     "filename":   doc.filename,
                     "chunk_idx":  doc.chunk_idx,
-                    "similarity": round(similarity, 4),
+                    "similarity": round(sim, 4),
                 })
 
-        # Similarity ke hisaab se sort karo (highest first)
-        scored_docs.sort(key=lambda x: x["similarity"], reverse=True)
+        scored.sort(key=lambda x: x["similarity"], reverse=True)
+        return scored[:top_k]
 
-        top_results = scored_docs[:top_k]
-        logger.info(f"Query: '{query[:50]}...' → {len(top_results)} results mili")
-        return top_results
-
-    # Stats 
-    async def get_user_documents(self, user_id: int, db: AsyncSession) -> list[dict]:
-        """User ke indexed documents ki list"""
+    async def get_all_documents(self, db: AsyncSession) -> list[dict]:
         result = await db.execute(
-            select(Document.filename, Document.chunk_idx, Document.created_at)
-            .where(Document.user_id == user_id)
+            select(Document.filename, Document.created_at)
             .order_by(Document.created_at.desc())
         )
-        rows = result.fetchall()
-        seen = set()
-        files = []
-        for row in rows:
+        seen, files = set(), []
+        for row in result.fetchall():
             if row.filename not in seen:
                 seen.add(row.filename)
-                files.append({
-                    "filename":   row.filename,
-                    "created_at": str(row.created_at),
-                })
+                files.append({"filename": row.filename, "created_at": str(row.created_at)})
         return files
 
 
-#  Singleton 
 rag_service = RAGService()

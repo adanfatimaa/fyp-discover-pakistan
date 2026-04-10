@@ -1,0 +1,25 @@
+#  Web Framework 
+fastapi==0.115.0
+uvicorn[standard]==0.30.6
+
+#  Database 
+sqlalchemy==2.0.36
+asyncpg==0.29.0              # PostgreSQL async driver
+alembic==1.13.3              # DB migrations (optional but recommended)
+
+#  Pydantic / Settings 
+pydantic==2.9.2
+pydantic-settings==2.5.2
+
+#  Groq LLM (Gemini ki jagah) 
+groq==0.11.0
+
+#  RAG / Embeddings 
+sentence-transformers==3.1.1
+torch==2.4.1                 # sentence-transformers ki dependency
+
+#  File Upload 
+python-multipart==0.0.12
+
+#  Environment Variables 
+python-dotenv==1.0.1
