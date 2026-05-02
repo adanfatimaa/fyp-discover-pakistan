@@ -65,7 +65,50 @@ document.addEventListener('DOMContentLoaded', function() {
         loginBtn.classList.add('loading');
         loginBtn.textContent = 'Logging in';
 
-        // Replace later with actual backend API call
+        
+
+
+        try {
+    const response = await fetch('http://localhost:3000/api/auth/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email, password })
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+        // Save token and role
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('userRole', data.role);
+        localStorage.setItem('userName', data.name);
+
+        showSuccess('Login successful! Redirecting...');
+
+        // Check role and redirect
+        setTimeout(function() {
+            if (data.role === 'admin') {
+                window.location.href = 'adminDashboard.html';
+            } else {
+                window.location.href = 'homepage.html';
+            }
+        }, 1500);
+
+    } else {
+        showError(data.message || 'Invalid email or password.');
+    }
+
+} catch (error) {
+    console.log('Error:', error);
+    showError('Something went wrong. Please try again later.');
+
+} finally {
+    // Remove loading state whether success or error
+    loginBtn.classList.remove('loading');
+    loginBtn.textContent = 'Login';
+}
         
    
 

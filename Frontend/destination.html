@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Destination</title>
+
+     <!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Oswald:wght@200..700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="common.css" />
+
+    <style>
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: #f0f0f0;
+            color: #1a1a1a;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* ============================================================
+           HERO SECTION
+           — FRONTEND: layout, overlay, badges, animations
+           — BACKEND/DB LATER: city name, tagline, hero image URL,
+             and badge tags will all come from the database.
+             The backend will give you something like:
+             { name: "Lahore", tagline: "The Cultural Heart",
+               hero_image: "url...", badges: ["Punjab","Winter"...] }
+             You will then set these values via JS instead of hardcoding.
+        ============================================================ */
+        .hero {
+            position: relative;
+            height: 310px;
+            overflow: hidden;
+            background-color: #2d4a18;
+            margin-top: 100px;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            /* -------------------------------------------------------
+               BACKEND/DB LATER: this background-image will be set
+               dynamically by JS using the city's image from database.
+               e.g. heroBg.style.backgroundImage = `url(${city.hero_image})`
+               For now it is a green gradient as a placeholder.
+            ------------------------------------------------------- */
+            background: linear-gradient(135deg, #1a2e0a 0%, #2d4a18 50%, #4a6b2a 100%);
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(to right, 
+                rgba(0,0,0,0.7) 0%, 
+                rgba(0,0,0,0.25) 100%
+            );
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            padding: 48px 80px;
+            color: #ffffff;
+            animation: fadeUp 0.6s ease both;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(18px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-tag {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: #c8e6a0;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .hero-title {
+            /* -------------------------------------------------------
+               BACKEND/DB LATER: set by JS →
+               document.getElementById('hero-title').textContent = city.name
+            ------------------------------------------------------- */
+            font-family: 'Oswald', sans-serif;
+            font-size: 48px;
+            font-weight: 600;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .hero-sub {
+            /* -------------------------------------------------------
+               BACKEND/DB LATER: city.tagline from database
+            ------------------------------------------------------- */
+            font-size: 15px;
+            color: rgba(255,255,255,0.75);
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+
+        .hero-badges {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            /* -------------------------------------------------------
+               BACKEND/DB LATER: built dynamically from city.badges
+               array. JS loops and creates each span.
+            ------------------------------------------------------- */
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            border: 1px solid rgba(255,255,255,0.3);
+            color: rgba(255,255,255,0.9);
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(4px);
+        }
+
+        /* ============================================================
+           TABS BAR — purely frontend, no backend needed
+        ============================================================ */
+        .tabs-bar {
+            background-color: #ffffff;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 0 80px;
+            display: flex;
+            gap: 4px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .tab-btn {
+            padding: 14px 20px;
+            font-size: 13px;
+            font-family: 'Lato', sans-serif;
+            color: #666666;
+            background: none;
+            border: none;
+            border-bottom: 2px solid transparent;
+            cursor: pointer;
+            transition: color 0.2s, border-color 0.2s;
+            margin-bottom: -1px;
+        }
+
+        .tab-btn:hover { color: #7ba047; }
+
+        .tab-btn.active {
+            color: #7ba047;
+            border-bottom-color: #7ba047;
+            font-weight: 700;
+        }
+
+        /* ============================================================
+           MAIN LAYOUT — two column grid
+        ============================================================ */
+        .main-layout {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 0;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        .left-col {
+            padding: 28px 28px 28px 0;
+            border-right: 1px solid #e0e0e0;
+        }
+
+        .right-col {
+            padding: 28px 0 28px 28px;
+        }
+
+        /* ============================================================
+           SHARED SECTION STYLES
+        ============================================================ */
+        .section { margin-bottom: 36px; }
+
+        .section-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 19px;
+            font-weight: 500;
+            color: #1a1a1a;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+             /* creates a dot before title */
+        .section-title::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #7ba047;
+            flex-shrink: 0;
+        }
+
+        /* ============================================================
+           WEATHER SECTION
+           — FRONTEND: card layout, icons, forecast row
+           — BACKEND LATER: backend calls OpenWeatherMap API with city
+             name and returns:
+             { temp, condition, humidity, wind, uv, visibility,
+               forecast: [{day, icon, temp}] }
+             All the elements below with id="weather-*" will be
+             filled in by the loadWeather() function in JS.
+             That function is already written — just uncomment it.
+        ============================================================ */
+        .weather-card {
+            background-color: #e8f5d8;
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid #c8e6a0;
+        }
+
+        .weather-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 16px;
+        }
+
+        .weather-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .weather-icon-circle {
+            width: 54px;
+            height: 54px;
+            background-color: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            border: 1px solid #c8e6a0;
+            flex-shrink: 0;
+        }
+
+        .weather-temp-big {
+            font-size: 32px;
+            font-weight: 700;
+            color: #4a6b2a;
+            line-height: 1;
+        }
+
+        .weather-condition {
+            font-size: 12px;
+            color: #4a6b2a;
+            margin-top: 4px;
+        }
+
+        .weather-details-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px 20px;
+            font-size: 12px;
+            text-align: right;
+        }
+
+        .w-label { color: #4a6b2a; opacity: 0.7; }
+        .w-value { font-weight: 700; color: #4a6b2a; }
+
+        .forecast-row { display: flex; gap: 8px; }
+
+        .forecast-day {
+            flex: 1;
+            text-align: center;
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 8px 4px;
+            border: 1px solid #c8e6a0;
+        }
+
+        .fc-label { font-size: 10px; color: #666666; margin-bottom: 4px; }
+        .fc-icon  { font-size: 16px; margin-bottom: 4px; }
+        .fc-temp  { font-size: 12px; font-weight: 700; color: #4a6b2a; }
+
+        /* ============================================================
+           PLACES TO VISIT
+           — FRONTEND: 3-column card grid layout
+           — BACKEND/DB LATER: places come from:
+             GET /api/places?city=lahore
+             Returns: [{ name, type, rating, distance, bg_color, emoji }]
+             The renderPlaces() JS function is written and ready.
+             Just uncomment loadPlaces() at the bottom of the script.
+        ============================================================ */
+        .places-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .place-card {
+            background-color: #ffffff;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid #e0e0e0;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .place-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+
+        .place-img {
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+        }
+
+        .place-body  { padding: 10px; }
+        .place-name  { font-size: 12px; font-weight: 700; color: #1a1a1a; margin-bottom: 2px; }
+        .place-type  { font-size: 10px; color: #666666; }
+
+        .place-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 6px;
+            font-size: 10px;
+        }
+
+        .place-rating { color: #e6a020; font-weight: 700; }
+        .place-dist   { color: #666666; }
+
+        /* ============================================================
+           RESTAURANTS
+           — FRONTEND: list rows, hidden gem badge styling
+           — BACKEND/DB LATER: data comes from:
+             GET /api/restaurants?city=lahore
+             Returns: [{ name, cuisine, location, rating,
+                         price_range, is_hidden_gem, bg_color, emoji }]
+             renderRestaurants() is written and ready.
+             is_hidden_gem: true → show the amber "Hidden gem" badge.
+        ============================================================ */
+        .restaurant-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .rest-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 14px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            border: 1px solid #e0e0e0;
+            cursor: pointer;
+            transition: box-shadow 0.2s;
+        }
+
+        .rest-row:hover { box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
+        .rest-row.is-gem { border-color: #fcd9a0; }
+
+        .rest-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .rest-info  { flex: 1; }
+        .rest-name  { font-size: 13px; font-weight: 700; color: #1a1a1a; }
+        .rest-tag   { font-size: 11px; color: #666666; margin-top: 2px; }
+        .rest-right { text-align: right; }
+        .rest-rating { font-size: 12px; color: #e6a020; font-weight: 700; }
+        .rest-price  { font-size: 10px; color: #666666; margin-top: 2px; }
+
+        .gem-badge {
+            display: inline-block;
+            font-size: 9px;
+            padding: 2px 8px;
+            background-color: #fff3e0;
+            color: #b45309;
+            border-radius: 10px;
+            border: 1px solid #fcd9a0;
+            font-weight: 700;
+            margin-bottom: 3px;
+        }
+
+        /* ============================================================
+           REVIEWS
+           — FRONTEND: review cards, stars, average score display
+           — BACKEND/DB LATER:
+             GET /api/reviews?city=lahore → list of reviews + average
+             POST /api/reviews → submit a new review (needs login)
+             renderReviews() is written and ready.
+        ============================================================ */
+        .reviews-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 18px;
+        }
+
+        .avg-block { display: flex; align-items: center; gap: 12px; }
+
+        .avg-num {
+            font-family: 'Oswald', sans-serif;
+            font-size: 40px;
+            font-weight: 600;
+            color: #7ba047;
+            line-height: 1;
+        }
+
+        .avg-stars { font-size: 16px; color: #e6a020; }
+        .avg-count { font-size: 12px; color: #666666; margin-top: 3px; }
+
+        .write-btn {
+            /* -------------------------------------------------------
+               BACKEND LATER: check if user is logged in.
+               If not → redirect to login.
+               If yes → show review form modal.
+            ------------------------------------------------------- */
+            padding: 8px 18px;
+            background-color: #7ba047;
+            color: #ffffff;
+            border: none;
+            border-radius: 6px;
+            font-size: 13px;
+            font-family: 'Lato', sans-serif;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .write-btn:hover { background-color: #4a6b2a; }
+
+        .review-card {
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 14px 16px;
+            border: 1px solid #e0e0e0;
+            margin-bottom: 10px;
+        }
+
+        .reviewer-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+
+        .avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: #e8f5d8;
+            border: 1px solid #c8e6a0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+            color: #4a6b2a;
+            flex-shrink: 0;
+        }
+
+        .reviewer-name { font-size: 13px; font-weight: 700; color: #1a1a1a; }
+        .reviewer-date { font-size: 11px; color: #666666; }
+        .review-stars  { font-size: 13px; color: #e6a020; margin-bottom: 6px; }
+
+        .review-text {
+            font-size: 12px;
+            color: #666666;
+            line-height: 1.7;
+        }
+
+        .review-place-tag {
+            display: inline-block;
+            margin-top: 8px;
+            font-size: 10px;
+            color: #4a6b2a;
+            background-color: #e8f5d8;
+            padding: 3px 10px;
+            border-radius: 10px;
+        }
+
+        .view-all-reviews { text-align: center; padding-top: 6px; }
+        .view-all-reviews a { font-size: 12px; color: #7ba047; text-decoration: none; font-weight: 700; }
+
+        /* ============================================================
+           SIDEBAR
+        ============================================================ */
+        .action-btn {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+
+        .fav-btn {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-family: 'Lato', sans-serif;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.2s;
+        }
+
+        .fav-btn {
+            border: 1px solid #7ba047;
+            background: transparent;
+            color: #7ba047;
+        }
+
+        .fav-btn:hover  { background-color: #e8f5d8; }
+
+        .fav-btn.saved {
+            background-color: #7ba047;
+            color: #ffffff;
+        }
+
+        .sidebar-label {
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #666666;
+            margin-bottom: 12px;
+        }
+
+        .sidebar-section { margin-bottom: 28px; }
+
+        /* Map — FRONTEND ONLY: just an iframe embed, no backend needed
+           BACKEND/DB LATER (optional): store each city's Google Maps
+           embed URL in the database. JS sets iframe src per city. */
+        .map-frame {
+            width: 100%;
+            height: 160px;
+            border-radius: 10px;
+            border: 1px solid #e0e0e0;
+            overflow: hidden;
+        }
+
+        .map-frame iframe { width: 100%; height: 100%; border: none; }
+
+        .map-link {
+            display: block;
+            text-align: center;
+            margin-top: 8px;
+            font-size: 12px;
+            color: #7ba047;
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        /* Quick Facts
+           — BACKEND/DB LATER: each span below gets filled by JS
+             using city data from the API. renderFacts(city) is ready. */
+        .facts-list { display: flex; flex-direction: column; }
+
+        .fact-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            padding: 7px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .fact-row:last-child { border-bottom: none; }
+        .fact-label { color: #666666; }
+        .fact-value { font-weight: 700; color: #1a1a1a; text-align: right; }
+
+        /* Travel Tips — static, no backend needed at all */
+        .tip-card {
+            background-color: #e8f5d8;
+            border-radius: 8px;
+            padding: 10px 12px;
+            border: 1px solid #c8e6a0;
+            margin-bottom: 8px;
+        }
+
+        .tip-title { font-size: 12px; font-weight: 700; color: #4a6b2a; margin-bottom: 4px; }
+        .tip-text  { font-size: 11px; color: #4a6b2a; line-height: 1.6; opacity: 0.85; }
+
+        /* ============================================================
+           TAB CONTENT — JS toggles which section is visible
+        ============================================================ */
+        .tab-section         { display: none; }
+        .tab-section.active  { display: block; }
+
+        /* ============================================================
+           RESPONSIVE
+        ============================================================ */
+        @media (max-width: 900px) {
+            .main-layout   { grid-template-columns: 1fr; padding: 0 20px; }
+            .left-col      { border-right: none; padding-right: 0; }
+            .right-col     { padding-left: 0; }
+            .hero-content  { padding: 36px 24px; }
+            .hero-title    { font-size: 36px; }
+            .breadcrumb    { padding: 10px 24px; }
+            .tabs-bar      { padding: 0 20px; overflow-x: auto; }
+            .places-grid   { grid-template-columns: repeat(2, 1fr); }
+            .footer-bar    { padding: 14px 24px; flex-direction: column; gap: 6px; text-align: center; }
+        }
+
+        @media (max-width: 480px) {
+            .places-grid        { grid-template-columns: 1fr; }
+            .weather-top        { flex-direction: column; gap: 12px; }
+            .weather-details-grid { text-align: left; }
+        }
+    </style>
+
+</head>
+
+<body>
+
+
+    <div id="navbar"></div>
+
+    <!-- ==============================================================
+         HERO SECTION
+         NOW: hardcoded Lahore data
+         BACKEND/DB LATER: JS will fill city name, tagline, image,
+         and badges from API. Functions are written below, just
+         uncomment loadCityData() in the script.
+    ============================================================== -->
+    <div class="hero">
+        <div class="hero-bg" id="hero-bg"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-tag">Destination Guide</div>
+            <h1 class="hero-title" id="hero-title">Lahore</h1>
+            <p class="hero-sub" id="hero-sub">The Cultural Heart of Pakistan</p>
+            <div class="hero-badges" id="hero-badges">
+                <!-- BACKEND/DB LATER: built by JS from city.badges array -->
+                <span class="badge">Punjab Province</span>
+                <span class="badge">Best in Winter</span>
+                <span class="badge">Food Capital</span>
+                <span class="badge">Mughal Heritage</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- TABS — purely frontend, no backend needed -->
+    <div class="tabs-bar">
+        <button class="tab-btn active" data-tab="overview">Overview</button>
+        <button class="tab-btn" data-tab="places">Places</button>
+        <button class="tab-btn" data-tab="food">Food</button>
+        <button class="tab-btn" data-tab="map">Map</button>
+        <button class="tab-btn" data-tab="reviews">Reviews</button>
+    </div>
+
+    <!-- MAIN TWO-COLUMN LAYOUT -->
+    <div class="main-layout">
+
+        <!-- LEFT COLUMN -->
+        <div class="left-col">
+
+            <!-- ======== OVERVIEW TAB ======== -->
+            <div class="tab-section active" id="tab-overview">
+
+                <!-- WEATHER
+                     BACKEND LATER: all id="weather-*" elements filled
+                     by loadWeather() using /api/weather?city=lahore -->
+                <div class="section">
+                    <div class="section-title">Current Weather</div>
+                    <div class="weather-card">
+                        <div class="weather-top">
+                            <div class="weather-left">
+                                <div class="weather-icon-circle" id="weather-icon">☀️</div>
+                                <div>
+                                    <div class="weather-temp-big" id="weather-temp">25°C</div>
+                                    <div class="weather-condition" id="weather-condition">Partly Cloudy · Lahore</div>
+                                </div>
+                            </div>
+                            <div class="weather-details-grid">
+                                <span class="w-label">Humidity</span>   <span class="w-value" id="w-humidity">62%</span>
+                                <span class="w-label">Wind</span>        <span class="w-value" id="w-wind">12 km/h</span>
+                                <span class="w-label">UV Index</span>   <span class="w-value" id="w-uv">Moderate</span>
+                                <span class="w-label">Visibility</span> <span class="w-value" id="w-vis">8 km</span>
+                            </div>
+                        </div>
+                        <!-- forecast row — BACKEND LATER: built by loadWeather() -->
+                        <div class="forecast-row" id="forecast-row">
+                            <div class="forecast-day"><div class="fc-label">Mon</div><div class="fc-icon">☀️</div><div class="fc-temp">28°</div></div>
+                            <div class="forecast-day"><div class="fc-label">Tue</div><div class="fc-icon">⛅</div><div class="fc-temp">25°</div></div>
+                            <div class="forecast-day"><div class="fc-label">Wed</div><div class="fc-icon">🌧️</div><div class="fc-temp">19°</div></div>
+                            <div class="forecast-day"><div class="fc-label">Thu</div><div class="fc-icon">☀️</div><div class="fc-temp">27°</div></div>
+                            <div class="forecast-day"><div class="fc-label">Fri</div><div class="fc-icon">⛅</div><div class="fc-temp">24°</div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PLACES TO VISIT
+                     BACKEND/DB LATER: built by renderPlaces() using
+                     /api/places?city=lahore — function is ready below -->
+                <div class="section">
+                    <div class="section-title">Places to Visit</div>
+                    <div class="places-grid" id="places-grid">
+                        <div class="place-card"><div class="place-img" style="background:#f0e6d3">🕌</div><div class="place-body"><div class="place-name">Badshahi Mosque</div><div class="place-type">Historic · Mosque</div><div class="place-meta"><span class="place-rating">★ 4.9</span><span class="place-dist">2.1 km</span></div></div></div>
+                        <div class="place-card"><div class="place-img" style="background:#e8f0e3">🏰</div><div class="place-body"><div class="place-name">Lahore Fort</div><div class="place-type">Heritage · Museum</div><div class="place-meta"><span class="place-rating">★ 4.8</span><span class="place-dist">2.3 km</span></div></div></div>
+                        <div class="place-card"><div class="place-img" style="background:#e8eef5">🌿</div><div class="place-body"><div class="place-name">Shalimar Gardens</div><div class="place-type">Nature · Heritage</div><div class="place-meta"><span class="place-rating">★ 4.7</span><span class="place-dist">8.5 km</span></div></div></div>
+                        <div class="place-card"><div class="place-img" style="background:#fdeef3">🎨</div><div class="place-body"><div class="place-name">Walled City</div><div class="place-type">Culture · Architecture</div><div class="place-meta"><span class="place-rating">★ 4.6</span><span class="place-dist">1.8 km</span></div></div></div>
+                        <div class="place-card"><div class="place-img" style="background:#eef5e8">🦁</div><div class="place-body"><div class="place-name">Lahore Zoo</div><div class="place-type">Family · Nature</div><div class="place-meta"><span class="place-rating">★ 4.2</span><span class="place-dist">3.4 km</span></div></div></div>
+                        <div class="place-card"><div class="place-img" style="background:#f5f0e8">🏛️</div><div class="place-body"><div class="place-name">Lahore Museum</div><div class="place-type">Art · History</div><div class="place-meta"><span class="place-rating">★ 4.5</span><span class="place-dist">1.2 km</span></div></div></div>
+                    </div>
+                </div>
+
+                <!-- RESTAURANTS
+                     BACKEND/DB LATER: built by renderRestaurants() using
+                     /api/restaurants?city=lahore — function is ready below -->
+                <div class="section">
+                    <div class="section-title">Where to Eat</div>
+                    <p style="font-size:12px;color:#666666;margin-bottom:12px;">Famous spots and hidden gems</p>
+                    <div class="restaurant-list" id="restaurant-list">
+                        <div class="rest-row"><div class="rest-icon" style="background:#fff3e0">🍖</div><div class="rest-info"><div class="rest-name">Butt Karahi</div><div class="rest-tag">Karahi · Walled City</div></div><div class="rest-right"><div class="rest-rating">★ 4.9</div><div class="rest-price">₨ 800–1500</div></div></div>
+                        <div class="rest-row"><div class="rest-icon" style="background:#e8f5e0">🥘</div><div class="rest-info"><div class="rest-name">Haveli Restaurant</div><div class="rest-tag">Traditional · Heritage building</div></div><div class="rest-right"><div class="rest-rating">★ 4.7</div><div class="rest-price">₨ 2000–4000</div></div></div>
+                        <div class="rest-row is-gem"><div class="rest-icon" style="background:#fff8ed">🥙</div><div class="rest-info"><div class="rest-name">Andaaz Lahori Dhaba</div><div class="rest-tag">Street food · Old Anarkali</div></div><div class="rest-right"><div class="gem-badge">Hidden gem</div><div class="rest-rating">★ 4.8</div><div class="rest-price">₨ 300–600</div></div></div>
+                        <div class="rest-row is-gem"><div class="rest-icon" style="background:#fef3e8">🍯</div><div class="rest-info"><div class="rest-name">Chaudhry Halwa Puri</div><div class="rest-tag">Breakfast · Shah Alam Market</div></div><div class="rest-right"><div class="gem-badge">Hidden gem</div><div class="rest-rating">★ 4.9</div><div class="rest-price">₨ 150–350</div></div></div>
+                    </div>
+                </div>
+
+                <!-- REVIEWS
+                     BACKEND/DB LATER: built by renderReviews() using
+                     /api/reviews?city=lahore — function is ready below -->
+                <div class="section">
+                    <div class="section-title">Traveler Reviews</div>
+                    <div class="reviews-header">
+                        <div class="avg-block">
+                            <div class="avg-num" id="avg-rating">4.8</div>
+                            <div>
+                                <div class="avg-stars">★★★★★</div>
+                                <div class="avg-count" id="review-count">Based on 2,341 reviews</div>
+                            </div>
+                        </div>
+                        <button class="write-btn" id="write-review-btn">+ Write a Review</button>
+                    </div>
+                    <div id="reviews-list">
+                        <div class="review-card"><div class="reviewer-row"><div class="avatar">AK</div><div><div class="reviewer-name">Ahmed K.</div><div class="reviewer-date">Visited March 2026</div></div></div><div class="review-stars">★★★★★</div><div class="review-text">The food scene in Lahore is absolutely unmatched. Butt Karahi at 2am was a spiritual experience. The Walled City walking tour is a must.</div><span class="review-place-tag">📍 Badshahi Mosque, Walled City</span></div>
+                        <div class="review-card"><div class="reviewer-row"><div class="avatar">SN</div><div><div class="reviewer-name">Sara N.</div><div class="reviewer-date">Visited January 2026</div></div></div><div class="review-stars">★★★★☆</div><div class="review-text">Lahore Fort exceeded every expectation. The Sheesh Mahal is breathtaking. Haveli Restaurant has the best rooftop view of Badshahi.</div><span class="review-place-tag">📍 Lahore Fort, Haveli Restaurant</span></div>
+                    </div>
+                    <div class="view-all-reviews">
+                        <!-- clicking this could switch to the Reviews tab -->
+                        <a href="#" id="view-all-link">View all reviews →</a>
+                    </div>
+                </div>
+
+            </div><!-- end overview tab -->
+
+            <!-- ======== PLACES TAB ======== -->
+            <div class="tab-section" id="tab-places">
+                <div class="section">
+                    <div class="section-title">All Places to Visit</div>
+                    <div class="places-grid" id="places-grid-full">
+                        <div class="place-card"><div class="place-img" style="background:#f0e6d3">🕌</div><div class="place-body"><div class="place-name">Badshahi Mosque</div><div class="place-type">Historic · Mosque</div><div class="place-meta"><span class="place-rating">★ 4.9</span><span class="place-dist">2.1 km</span></div></div></div>
+                        <div class="place-card"><div class="place-img" style="background:#e8f0e3">🏰</div><div class="place-body"><div class="place-name">Lahore Fort</div><div class="place-type">Heritage · Museum</div><div class="place-meta"><span class="place-rating">★ 4.8</span><span class="place-dist">2.3 km</span></div></div></div>
+                        <div class="place-card"><div class="place-img" style="background:#e8eef5">🌿</div><div class="place-body"><div class="place-name">Shalimar Gardens</div><div class="place-type">Nature · Heritage</div><div class="place-meta"><span class="place-rating">★ 4.7</span><span class="place-dist">8.5 km</span></div></div></div>
+                        <div class="place-card"><div class="place-img" style="background:#fdeef3">🎨</div><div class="place-body"><div class="place-name">Walled City</div><div class="place-type">Culture · Architecture</div><div class="place-meta"><span class="place-rating">★ 4.6</span><span class="place-dist">1.8 km</span></div></div></div>
+                        <div class="place-card"><div class="place-img" style="background:#eef5e8">🦁</div><div class="place-body"><div class="place-name">Lahore Zoo</div><div class="place-type">Family · Nature</div><div class="place-meta"><span class="place-rating">★ 4.2</span><span class="place-dist">3.4 km</span></div></div></div>
+                        <div class="place-card"><div class="place-img" style="background:#f5f0e8">🏛️</div><div class="place-body"><div class="place-name">Lahore Museum</div><div class="place-type">Art · History</div><div class="place-meta"><span class="place-rating">★ 4.5</span><span class="place-dist">1.2 km</span></div></div></div>
+                        <div class="place-card"><div class="place-img" style="background:#f0f5e8">🌸</div><div class="place-body"><div class="place-name">Jilani Park</div><div class="place-type">Nature · Recreation</div><div class="place-meta"><span class="place-rating">★ 4.3</span><span class="place-dist">5.0 km</span></div></div></div>
+                        <div class="place-card"><div class="place-img" style="background:#f5e8f0">🎭</div><div class="place-body"><div class="place-name">Anarkali Bazaar</div><div class="place-type">Shopping · Culture</div><div class="place-meta"><span class="place-rating">★ 4.4</span><span class="place-dist">1.5 km</span></div></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ======== FOOD TAB ======== -->
+            <div class="tab-section" id="tab-food">
+                <div class="section">
+                    <div class="section-title">Where to Eat in Lahore</div>
+                    <p style="font-size:12px;color:#666666;margin-bottom:16px;">Famous spots and hidden gems</p>
+                    <div class="restaurant-list">
+                        <div class="rest-row"><div class="rest-icon" style="background:#fff3e0">🍖</div><div class="rest-info"><div class="rest-name">Butt Karahi</div><div class="rest-tag">Karahi · Walled City</div></div><div class="rest-right"><div class="rest-rating">★ 4.9</div><div class="rest-price">₨ 800–1500</div></div></div>
+                        <div class="rest-row"><div class="rest-icon" style="background:#e8f5e0">🥘</div><div class="rest-info"><div class="rest-name">Haveli Restaurant</div><div class="rest-tag">Traditional · Heritage building</div></div><div class="rest-right"><div class="rest-rating">★ 4.7</div><div class="rest-price">₨ 2000–4000</div></div></div>
+                        <div class="rest-row is-gem"><div class="rest-icon" style="background:#fff8ed">🥙</div><div class="rest-info"><div class="rest-name">Andaaz Lahori Dhaba</div><div class="rest-tag">Street food · Old Anarkali</div></div><div class="rest-right"><div class="gem-badge">Hidden gem</div><div class="rest-rating">★ 4.8</div><div class="rest-price">₨ 300–600</div></div></div>
+                        <div class="rest-row is-gem"><div class="rest-icon" style="background:#fef3e8">🍯</div><div class="rest-info"><div class="rest-name">Chaudhry Halwa Puri</div><div class="rest-tag">Breakfast · Shah Alam Market</div></div><div class="rest-right"><div class="gem-badge">Hidden gem</div><div class="rest-rating">★ 4.9</div><div class="rest-price">₨ 150–350</div></div></div>
+                        <div class="rest-row"><div class="rest-icon" style="background:#e8f0ff">🍛</div><div class="rest-info"><div class="rest-name">Cuckoo's Den</div><div class="rest-tag">Mughlai · Heera Mandi</div></div><div class="rest-right"><div class="rest-rating">★ 4.6</div><div class="rest-price">₨ 1500–3000</div></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ======== MAP TAB ========
+                 FRONTEND ONLY: just an iframe, zero backend needed.
+                 BACKEND/DB LATER (optional): store embed URL in DB
+                 and set per city. -->
+            <div class="tab-section" id="tab-map">
+                <div class="section">
+                    <div class="section-title">Lahore on the Map</div>
+                    <div style="border-radius:12px;overflow:hidden;border:1px solid #e0e0e0;height:420px;">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d108851.93884882945!2d74.27432!3d31.5204!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39190483e58107d9%3A0xc23abe6ccc7e2462!2sLahore%2C%20Punjab%2C%20Pakistan!5e0!3m2!1sen!2s!4v1234567890"
+                            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy">
+                        </iframe>
+                    </div>
+                    <a href="https://maps.google.com/?q=Lahore,Pakistan" target="_blank" class="map-link" style="margin-top:10px;display:inline-block;">Open in Google Maps →</a>
+                </div>
+            </div>
+
+            <!-- ======== REVIEWS TAB ======== -->
+            <div class="tab-section" id="tab-reviews">
+                <div class="section">
+                    <div class="section-title">All Traveler Reviews</div>
+                    <div class="reviews-header">
+                        <div class="avg-block">
+                            <div class="avg-num">4.8</div>
+                            <div><div class="avg-stars">★★★★★</div><div class="avg-count">Based on 2,341 reviews</div></div>
+                        </div>
+                        <button class="write-btn">+ Write a Review</button>
+                    </div>
+                    <!-- BACKEND/DB LATER: renderReviews() fills this -->
+                    <div class="review-card"><div class="reviewer-row"><div class="avatar">AK</div><div><div class="reviewer-name">Ahmed K.</div><div class="reviewer-date">Visited March 2026</div></div></div><div class="review-stars">★★★★★</div><div class="review-text">The food scene in Lahore is absolutely unmatched. Butt Karahi at 2am was a spiritual experience.</div><span class="review-place-tag">📍 Badshahi Mosque, Walled City</span></div>
+                    <div class="review-card"><div class="reviewer-row"><div class="avatar">SN</div><div><div class="reviewer-name">Sara N.</div><div class="reviewer-date">Visited January 2026</div></div></div><div class="review-stars">★★★★☆</div><div class="review-text">Lahore Fort exceeded every expectation. The Sheesh Mahal is breathtaking.</div><span class="review-place-tag">📍 Lahore Fort, Haveli Restaurant</span></div>
+                    <div class="review-card"><div class="reviewer-row"><div class="avatar">MR</div><div><div class="reviewer-name">Maria R.</div><div class="reviewer-date">Visited December 2025</div></div></div><div class="review-stars">★★★★★</div><div class="review-text">Shalimar Gardens at sunset is something else. Definitely coming back!</div><span class="review-place-tag">📍 Shalimar Gardens</span></div>
+                </div>
+            </div>
+
+        </div><!-- end left col -->
+
+        <!-- RIGHT SIDEBAR -->
+        <div class="right-col">
+
+            <!-- SAVE / SHARE
+                 BACKEND LATER: fav-btn → POST /api/favourites
+                 On page load: GET /api/favourites/check to set state -->
+            <div class="action-btn">
+                <button class="fav-btn" id="fav-btn">🤍 Save to Favourites</button>
+            
+            </div>
+
+            <!-- MAP SIDEBAR
+                 FRONTEND ONLY — just an iframe -->
+            <div class="sidebar-section">
+                <div class="sidebar-label">Location</div>
+                <div class="map-frame">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d108851.93884882945!2d74.27432!3d31.5204!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39190483e58107d9%3A0xc23abe6ccc7e2462!2sLahore%2C%20Punjab%2C%20Pakistan!5e0!3m2!1sen!2s!4v1234567890"
+                        allowfullscreen="" loading="lazy">
+                    </iframe>
+                </div>
+                <a href="https://maps.google.com/?q=Lahore,Pakistan" target="_blank" class="map-link">Open in Google Maps →</a>
+            </div>
+
+            <!-- QUICK FACTS
+                 BACKEND/DB LATER: each id="fact-*" filled by JS
+                 using city data from /api/city?name=lahore -->
+            <div class="sidebar-section">
+                <div class="sidebar-label">Quick Facts</div>
+                <div class="facts-list">
+                    <div class="fact-row"><span class="fact-label">Province</span>   <span class="fact-value" id="fact-province">Punjab</span></div>
+                    <div class="fact-row"><span class="fact-label">Population</span> <span class="fact-value" id="fact-population">~14 million</span></div>
+                    <div class="fact-row"><span class="fact-label">Language</span>   <span class="fact-value" id="fact-language">Punjabi, Urdu</span></div>
+                    <div class="fact-row"><span class="fact-label">Best season</span><span class="fact-value" id="fact-season">Oct – Feb</span></div>
+                    <div class="fact-row"><span class="fact-label">Airport</span>    <span class="fact-value" id="fact-airport">Allama Iqbal Intl</span></div>
+                </div>
+            </div>
+
+            <!-- TRAVEL TIPS — 100% static, no backend ever needed -->
+            <div class="sidebar-section">
+                <div class="sidebar-label">Travel Tips</div>
+                <div class="tip-card"><div class="tip-title">🕐 Best Time to Visit</div><div class="tip-text">October to February offers pleasant 15–25°C weather. Avoid May–July — peak heat hits 45°C+.</div></div>
+                <div class="tip-card"><div class="tip-title">🚖 Getting Around</div><div class="tip-text">Use Careem or inDrive for rides. The Orange Line Metro covers major city routes affordably.</div></div>
+                <div class="tip-card"><div class="tip-title">🍽️ Food Tip</div><div class="tip-text">Head to Food Street (Fort Road) after sunset — best atmosphere and authentic Lahori cuisine.</div></div>
+                <div class="tip-card"><div class="tip-title">💰 Budget Guide</div><div class="tip-text">Budget: ₨3,000–5,000/day. Mid-range: ₨8,000–15,000/day including meals and sightseeing.</div></div>
+            </div>
+
+        </div><!-- end right col -->
+
+    </div><!-- end main layout -->
+
+
+
+    <script>
+        // ============================================================
+        // READ CITY FROM URL
+        // e.g. destination.html?city=lahore → city = "lahore"
+        // ============================================================
+        const city = new URLSearchParams(window.location.search).get('city');
+
+
+        // ============================================================
+        // LOAD NAVBAR — same as your other pages
+        // ============================================================
+        fetch('navbar.html')
+            .then(res => res.text())
+            .then(html => { document.getElementById('navbar').innerHTML = html; });
+
+
+        // ============================================================
+        // TABS — purely frontend JS, no backend needed
+        // ============================================================
+        const tabBtns     = document.querySelectorAll('.tab-btn');
+        const tabSections = document.querySelectorAll('.tab-section');
+
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                tabBtns.forEach(b => b.classList.remove('active'));
+                tabSections.forEach(s => s.classList.remove('active'));
+                btn.classList.add('active');
+                document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+            });
+        });
+
+        // "View all reviews" link switches to Reviews tab
+        document.getElementById('view-all-link').addEventListener('click', (e) => {
+            e.preventDefault();
+            document.querySelector('[data-tab="reviews"]').click();
+        });
+
+
+        // ============================================================
+        // SAVE TO FAVOURITES — frontend toggle only for now
+        //
+        // BACKEND LATER — your backend teammate needs to:
+        //   1. Create: POST /api/favourites
+        //      Body sent: { city: "lahore", userId: 123 }
+        //      Response:  { success: true }
+        //
+        //   2. Create: DELETE /api/favourites
+        //      Body sent: { city: "lahore", userId: 123 }
+        //
+        //   3. On page load: GET /api/favourites/check?city=lahore
+        //      Response: { isSaved: true/false }
+        //      Use that to set button state on load.
+        // ============================================================
+        const favBtn = document.getElementById('fav-btn');
+        let isSaved = false;
+
+        favBtn.addEventListener('click', () => {
+            isSaved = !isSaved;
+            if (isSaved) {
+                favBtn.textContent = '❤️ Saved';
+                favBtn.classList.add('saved');
+                // BACKEND LATER: uncomment below
+                // fetch('/api/favourites', {
+                //     method: 'POST',
+                //     headers: { 'Content-Type': 'application/json' },
+                //     body: JSON.stringify({ city: city })
+                // });
+            } else {
+                favBtn.textContent = '🤍 Save to Favourites';
+                favBtn.classList.remove('saved');
+                // BACKEND LATER: uncomment below
+                // fetch('/api/favourites', {
+                //     method: 'DELETE',
+                //     headers: { 'Content-Type': 'application/json' },
+                //     body: JSON.stringify({ city: city })
+                // });
+            }
+        });
+
+
+       
+
+
+        // ============================================================
+        // WRITE REVIEW BUTTON — placeholder for now
+        //
+        // BACKEND LATER — your backend teammate needs to:
+        //   1. Check if user is logged in (session/token check)
+        //   2. If not logged in → redirect to login page
+        //   3. If logged in → show a review form
+        //   4. Form submits to: POST /api/reviews
+        //      Body: { city, stars, text, placeName }
+        //      Backend saves to DB, returns the new review object.
+        //   5. You then add the new review card to the top of the list.
+        // ============================================================
+        document.getElementById('write-review-btn').addEventListener('click', () => {
+            // BACKEND LATER: replace this alert with the real flow
+            alert('Review feature coming soon! ');
+        });
+
+
+        // ================================================================
+        // EVERYTHING BELOW = BACKEND-READY FUNCTIONS
+        // These are already written for you. When your backend teammate
+        // gives you the API URLs, just uncomment the loader calls at
+        // the very bottom and DELETE the hardcoded HTML above each section.
+        // ================================================================
+
+
+        /*
+        // ----------------------------------------------------------------
+        // LOAD CITY DATA
+        // Backend needs: GET /api/city?name=lahore
+        // Returns: { name, tagline, hero_image, badges[],
+        //            province, population, language, best_season,
+        //            timezone, airport, maps_embed_url }
+        // ----------------------------------------------------------------
+        function loadCityData() {
+            fetch(`/api/city?name=${city}`)
+                .then(res => res.json())
+                .then(data => {
+                    // Hero
+                    document.getElementById('hero-title').textContent    = data.name;
+                    document.getElementById('hero-sub').textContent      = data.tagline;
+                    document.getElementById('breadcrumb-city').textContent = data.name;
+                    document.title = data.name + ' — Discover Pakistan';
+
+                    // Hero background image
+                    const bg = document.getElementById('hero-bg');
+                    bg.style.backgroundImage  = `url(${data.hero_image})`;
+                    bg.style.backgroundSize   = 'cover';
+                    bg.style.backgroundPosition = 'center';
+
+                    // Badges
+                    const badgesEl = document.getElementById('hero-badges');
+                    badgesEl.innerHTML = data.badges
+                        .map(b => `<span class="badge">${b}</span>`)
+                        .join('');
+
+                    // Quick facts
+                    document.getElementById('fact-province').textContent   = data.province;
+                    document.getElementById('fact-population').textContent = data.population;
+                    document.getElementById('fact-language').textContent   = data.language;
+                    document.getElementById('fact-season').textContent     = data.best_season;
+                    document.getElementById('fact-timezone').textContent   = data.timezone;
+                    document.getElementById('fact-airport').textContent    = data.airport;
+
+                    // Map iframes
+                    document.querySelectorAll('.map-frame iframe, #tab-map iframe')
+                        .forEach(f => f.src = data.maps_embed_url);
+                });
+        }
+
+
+        // ----------------------------------------------------------------
+        // LOAD PLACES
+        // Backend needs: GET /api/places?city=lahore
+        // Returns: [{ name, type, rating, distance, bg_color, emoji }]
+        // ----------------------------------------------------------------
+        function renderPlaces(places, containerId) {
+            document.getElementById(containerId).innerHTML = places.map(p => `
+                <div class="place-card">
+                    <div class="place-img" style="background:${p.bg_color}">${p.emoji}</div>
+                    <div class="place-body">
+                        <div class="place-name">${p.name}</div>
+                        <div class="place-type">${p.type}</div>
+                        <div class="place-meta">
+                            <span class="place-rating">★ ${p.rating}</span>
+                            <span class="place-dist">${p.distance} km</span>
+                        </div>
+                    </div>
+                </div>`).join('');
+        }
+
+        function loadPlaces() {
+            fetch(`/api/places?city=${city}`)
+                .then(res => res.json())
+                .then(places => {
+                    renderPlaces(places, 'places-grid');
+                    renderPlaces(places, 'places-grid-full');
+                });
+        }
+
+
+        // ----------------------------------------------------------------
+        // LOAD RESTAURANTS
+        // Backend needs: GET /api/restaurants?city=lahore
+        // Returns: [{ name, cuisine, location, rating,
+        //             price_range, is_hidden_gem, bg_color, emoji }]
+        // ----------------------------------------------------------------
+        function loadRestaurants() {
+            fetch(`/api/restaurants?city=${city}`)
+                .then(res => res.json())
+                .then(restaurants => {
+                    document.getElementById('restaurant-list').innerHTML = restaurants.map(r => `
+                        <div class="rest-row ${r.is_hidden_gem ? 'is-gem' : ''}">
+                            <div class="rest-icon" style="background:${r.bg_color}">${r.emoji}</div>
+                            <div class="rest-info">
+                                <div class="rest-name">${r.name}</div>
+                                <div class="rest-tag">${r.cuisine} · ${r.location}</div>
+                            </div>
+                            <div class="rest-right">
+                                ${r.is_hidden_gem ? '<div class="gem-badge">Hidden gem</div>' : ''}
+                                <div class="rest-rating">★ ${r.rating}</div>
+                                <div class="rest-price">₨ ${r.price_range}</div>
+                            </div>
+                        </div>`).join('');
+                });
+        }
+
+
+        // ----------------------------------------------------------------
+        // LOAD REVIEWS
+        // Backend needs: GET /api/reviews?city=lahore
+        // Returns: { average, total,
+        //            reviews: [{ initials, name, date, stars, text, places }] }
+        // ----------------------------------------------------------------
+        function loadReviews() {
+            fetch(`/api/reviews?city=${city}`)
+                .then(res => res.json())
+                .then(data => {
+                    document.getElementById('avg-rating').textContent   = data.average;
+                    document.getElementById('review-count').textContent = `Based on ${data.total.toLocaleString()} reviews`;
+
+                    const cards = data.reviews.map(r => `
+                        <div class="review-card">
+                            <div class="reviewer-row">
+                                <div class="avatar">${r.initials}</div>
+                                <div>
+                                    <div class="reviewer-name">${r.name}</div>
+                                    <div class="reviewer-date">${r.date}</div>
+                                </div>
+                            </div>
+                            <div class="review-stars">${'★'.repeat(r.stars)}${'☆'.repeat(5-r.stars)}</div>
+                            <div class="review-text">${r.text}</div>
+                            <span class="review-place-tag">📍 ${r.places}</span>
+                        </div>`).join('');
+
+                    document.getElementById('reviews-list').innerHTML      = cards;
+                    document.getElementById('reviews-list-full') && 
+                        (document.getElementById('reviews-list-full').innerHTML = cards);
+                });
+        }
+
+
+        // ----------------------------------------------------------------
+        // LOAD WEATHER
+        // Backend needs: GET /api/weather?city=lahore
+        // Returns: { temp, condition, humidity, wind, uv, visibility,
+        //            forecast: [{day, icon, temp}] }
+        // ----------------------------------------------------------------
+        function loadWeather() {
+            fetch(`/api/weather?city=${city}`)
+                .then(res => res.json())
+                .then(w => {
+                    document.getElementById('weather-temp').textContent      = w.temp + '°C';
+                    document.getElementById('weather-condition').textContent = w.condition + ' · ' + city;
+                    document.getElementById('w-humidity').textContent        = w.humidity + '%';
+                    document.getElementById('w-wind').textContent            = w.wind + ' km/h';
+                    document.getElementById('w-uv').textContent              = w.uv;
+                    document.getElementById('w-vis').textContent             = w.visibility + ' km';
+
+                    document.getElementById('forecast-row').innerHTML = w.forecast.map(d => `
+                        <div class="forecast-day">
+                            <div class="fc-label">${d.day}</div>
+                            <div class="fc-icon">${d.icon}</div>
+                            <div class="fc-temp">${d.temp}°</div>
+                        </div>`).join('');
+                });
+        }
+
+
+        // ----------------------------------------------------------------
+        // CALL ALL LOADERS
+        // When backend is ready: uncomment these lines and remove
+        // all the hardcoded HTML cards/data above each section.
+        // ----------------------------------------------------------------
+        // loadCityData();
+        // loadPlaces();
+        // loadRestaurants();
+        // loadReviews();
+        // loadWeather();
+
+        */
+
+    </script>
+
+</body>
+</html>
