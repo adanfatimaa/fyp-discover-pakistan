@@ -1,32 +1,31 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const dns = require("dns");
-const connectDB = require("./config/db");
-const searchRoutes = require("./routes/searchRoutes");
 
-// Load .env
 dotenv.config();
 
-// Change DNS servers
 dns.setServers(["1.1.1.1", "8.8.8.8"]);
 
-// Connect MongoDB
+const connectDB = require("./config/db");
+
 connectDB();
 
 const app = express();
 
 app.use(express.json());
 
-// Routes
+// Search Routes
+const searchRoutes = require("./routes/searchroutes,js");
 app.use("/api", searchRoutes);
 
-app.get("/", (req, res) => {
-  res.send("API is running...");
-});
-
 const PORT = process.env.PORT || 5000;
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
+
+
+
 
 
