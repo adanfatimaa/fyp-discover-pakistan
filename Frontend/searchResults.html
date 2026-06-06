@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Oswald:wght@200..700&display=swap" rel="stylesheet" />
+
+    <!-- this line was missing! -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+    <link rel="stylesheet" href="common.css" />
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background: #e0e0e0;
+            overflow-x: hidden;
+        }
+
+        .main-wrapper {
+            margin-top: 120px;
+            padding: 0 50px 50px 50px;
+        }
+
+        /* --- top search bar area --- */
+        .search-section {
+            margin-bottom: 30px;
+        }
+
+        .search-section h1 {
+            font-family: 'Oswald', sans-serif;
+            color: #9cc05a;
+            margin-bottom: 16px;
+        }
+
+        /* the search bar on this page */
+        .search-bar-wrapper {
+            display: flex;
+            gap: 0;
+            max-width: 500px;
+        }
+
+        .search-bar-wrapper input {
+            flex: 1;
+            padding: 12px 18px;
+            border: 2px solid #9cc05a;
+            border-right: none;
+            border-radius: 25px 0 0 25px;
+            outline: none;
+            font-size: 15px;
+            font-family: 'Lato', sans-serif;
+            background: #fff;
+        }
+
+        .search-bar-wrapper input:focus {
+            border-color: #7ba047;
+        }
+
+        .search-bar-wrapper button {
+            padding: 12px 20px;
+            background: #7ba047;
+            color: white;
+            border: none;
+            border-radius: 0 25px 25px 0;
+            cursor: pointer;
+            font-size: 15px;
+            transition: background 0.2s;
+        }
+
+        .search-bar-wrapper button:hover {
+            background: #608431;
+        }
+
+        /* --- result count text --- */
+        .result-info {
+            font-size: 14px;
+            color: #666;
+            margin-top: 10px;
+        }
+
+        .result-info span {
+            color: #516931;
+            font-weight: 700;
+        }
+
+        /* --- no results message --- */
+        .no-results {
+            text-align: center;
+            padding: 80px 20px;
+            display: none; /* hidden by default, shown by JS */
+        }
+
+        .no-results i {
+            font-size: 50px;
+            color: #ccc;
+            margin-bottom: 16px;
+        }
+
+        .no-results h3 {
+            font-family: 'Oswald', sans-serif;
+            color: #888;
+            font-size: 1.4rem;
+            margin-bottom: 8px;
+        }
+
+        .no-results p {
+            color: #aaa;
+            font-size: 14px;
+        }
+
+        .no-results a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 24px;
+            background: #7ba047;
+            color: white;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 14px;
+            transition: background 0.2s;
+        }
+
+        .no-results a:hover {
+            background: #608431;
+        }
+
+        /* --- cards grid (same as allDestinations.html) --- */
+        .card-group {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+            margin-top: 24px;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-img-top {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-body {
+            padding: 16px;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+            font-family: 'Oswald', sans-serif;
+            color: #26452d;
+        }
+
+        .card-text {
+            font-size: 0.9rem;
+            color: #555;
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+
+        /* small province badge */
+        .card-province {
+            font-size: 12px;
+            color: #7ba047;
+            font-weight: 700;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .view-btn {
+            font-size: 1rem;
+            padding: 0.5em 1em;
+            background-color: #7ba047;
+            color: white;
+            border: none;
+            text-decoration: none;
+            cursor: pointer;
+            border-radius: 4px;
+            display: inline-block;
+        }
+
+        .view-btn:hover {
+            background: linear-gradient(135deg, #608431, #7ba047);
+        }
+
+        /* loading spinner */
+        .loading {
+            text-align: center;
+            padding: 60px;
+            display: none;
+        }
+
+        .loading i {
+            font-size: 36px;
+            color: #9cc05a;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+            .main-wrapper {
+                padding: 0 20px 50px 20px;
+            }
+            .card-group {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .card-group {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="navbar"></div>
+
+    <div class="main-wrapper">
+
+        <!-- search bar at top of results page -->
+        <div class="search-section">
+            <h1>Search Results</h1>
+            <div class="search-bar-wrapper">
+                <input type="text" id="search-input" placeholder="Search destinations..." />
+                <button onclick="doSearch()">
+    <i class="fa-solid fa-magnifying-glass" style="color: white; font-size: 16px;"></i>
+</button>
+            </div>
+            <p class="result-info" id="result-info"></p>
+        </div>
+
+        <!-- loading spinner (shown while fetching) -->
+        <div class="loading" id="loading">
+            <i class="fa-solid fa-spinner"></i>
+        </div>
+
+        <!-- no results message -->
+        <div class="no-results" id="no-results">
+            <i class="fa-solid fa-map-location-dot"></i>
+            <h3>No destinations found</h3>
+            <p>Try searching with a different keyword</p>
+            <a href="allDestinations.html">Browse All Destinations</a>
+        </div>
+
+        <!-- results will appear here -->
+        <div class="card-group" id="results-container"></div>
+
+    </div>
+
+    <script src="common.js"></script>
+
+    <script>
+
+        // =============================================
+        // DUMMY DATA - used until backend is ready
+        // When backend is ready:
+        //   1. delete this dummyDestinations array
+        //   2. uncomment the fetch() call below
+        // =============================================
+        const dummyDestinations = [
+            {
+                name: "Lahore",
+                province: "Punjab",
+                description: "Lahore is Pakistan's second-largest city, renowned as the country's cultural, historical, and intellectual heart.",
+                image: "images/badshahiosque.jpg",
+                slug: "lahore"
+            },
+            {
+                name: "Islamabad",
+                province: "Federal Capital",
+                description: "Pakistan's modern capital, a serene green city with iconic landmarks like Faisal Mosque and scenic Daman-e-Koh.",
+                image: "images/islamabad.jfif",
+                slug: "islamabad"
+            },
+            {
+                name: "Karachi",
+                province: "Sindh",
+                description: "Known as the City of Lights, Pakistan's largest and most vibrant city on the Arabian Sea with diverse food and beaches.",
+                image: "images/karachi.avif",
+                slug: "karachi"
+            },
+            {
+                name: "Hunza",
+                province: "Gilgit-Baltistan",
+                description: "A stunning mountainous paradise known for turquoise lakes, ancient forts, and towering 7,000m peaks.",
+                image: "images/hunzaBg.jpg",
+                slug: "hunza"
+            },
+            {
+                name: "Murree",
+                province: "Punjab",
+                description: "Pakistan's most popular hill station with cool summers and snow-covered winter scenery, easily accessed from Islamabad.",
+                image: "images/murree.jpg",
+                slug: "murree"
+            },
+            {
+                name: "Skardu",
+                province: "Gilgit-Baltistan",
+                description: "A premier trekking hub known for dramatic landscapes and beautiful valleys like Chunda and Basho.",
+                image: "images/skardu.jfif",
+                slug: "skardu"
+            },
+            {
+                name: "Swat",
+                province: "Khyber Pakhtunkhwa",
+                description: "Often called the Switzerland of the East, known for lush green mountains and clear rivers.",
+                image: "images/swat.jfif",
+                slug: "swat"
+            },
+            {
+                name: "Peshawar",
+                province: "Khyber Pakhtunkhwa",
+                description: "The historic City of Flowers, famous for Pashtun hospitality, ancient history, and intense rustic street food.",
+                image: "images/peshawar.jfif",
+                slug: "peshawar"
+            },
+            {
+                name: "Quetta",
+                province: "Balochistan",
+                description: "The Fruit Garden of Pakistan, a high-altitude city surrounded by rugged mountains with scenic Hanna Lake.",
+                image: "images/quettaBG.webp",
+                slug: "quetta"
+            },
+            {
+                name: "Multan",
+                province: "Punjab",
+                description: "The City of Saints, one of Pakistan's oldest cities famous for Sufi shrines, blue pottery, and bustling bazaars.",
+                image: "images/multan.jfif",
+                slug: "multan"
+            },
+            {
+                name: "Gwadar",
+                province: "Balochistan",
+                description: "A rising coastal city where dramatic rocky mountains meet the Arabian Sea with pristine beaches.",
+                image: "images/gwadar.jpg",
+                slug: "gwadar"
+            },
+            {
+                name: "Fairy Meadows",
+                province: "Gilgit-Baltistan",
+                description: "A breathtaking alpine plateau offering unparalleled views of Nanga Parbat, known as Heaven on Earth.",
+                image: "images/fairy-meadows.jfif",
+                slug: "fairyMeadows"
+            },
+            {
+                name: "Kashmir",
+                province: "Azad Kashmir",
+                description: "Often called Heaven on Earth, featuring lush green valleys, Himalayan peaks, and the beautiful Neelum Valley.",
+                image: "images/kashmir.jfif",
+                slug: "kashmir"
+            },
+            {
+                name: "Chitral",
+                province: "Khyber Pakhtunkhwa",
+                description: "An enchanting destination known for the unique Kalash culture and dramatic Hindu Kush landscapes.",
+                image: "images/chitral.jfif",
+                slug: "chitral"
+            },
+            {
+                name: "Kaghan Valley",
+                province: "Khyber Pakhtunkhwa",
+                description: "A premier summer destination with alpine meadows, the Kunhar River, and iconic Saif-ul-Malook Lake.",
+                image: "images/kaghanValley.jfif",
+                slug: "kaghan"
+            },
+            {
+                name: "Deosai National Park",
+                province: "Gilgit-Baltistan",
+                description: "One of the highest plateaus in the world, known as the Land of Giants with vast golden plains and brown bears.",
+                image: "images/deosai.jfif",
+                slug: "deosai"
+            },
+            {
+                name: "Neelam Valley",
+                province: "Azad Kashmir",
+                description: "A 144 km forested paradise with the rushing Neelum River and scenic hilltop villages.",
+                image: "images/neelam-valley.jfif",
+                slug: "neelamValley"
+            },
+            {
+                name: "Bahawalpur",
+                province: "Punjab",
+                description: "The City of Nawabs, offering royal heritage, Derawar Fort in Cholistan Desert, and Noor Mahal palace.",
+                image: "images/bahawalpurBg.jpg",
+                slug: "bahawalpur"
+            },
+            {
+                name: "Mohenjo Daro",
+                province: "Sindh",
+                description: "A 5,000 year old ancient city of the Indus Valley Civilization with the famous Great Bath ruins.",
+                image: "images/mohenjoDaroBg.jpg",
+                slug: "mohenjoDaro"
+            },
+            {
+                name: "Khewra Salt Mine",
+                province: "Punjab",
+                description: "The world's second-largest salt mine, famous for Himalayan pink salt and illuminated crystal formations.",
+                image: "images/khewra.jfif",
+                slug: "khewra"
+            },
+            {
+                name: "Kumrat Valley",
+                province: "Khyber Pakhtunkhwa",
+                description: "A serene alpine destination with lush pine forests, snowy mountains, and the sparkling Panjkora River.",
+                image: "images/kumrat.jfif",
+                slug: "kumrat"
+            },
+            {
+                name: "Hingol National Park",
+                province: "Balochistan",
+                description: "Pakistan's largest national park on the Makran coast with mud volcanoes and diverse wildlife.",
+                image: "images/hingol.jpg",
+                slug: "hingol"
+            },
+            {
+                name: "Malam Jabba",
+                province: "Khyber Pakhtunkhwa",
+                description: "A premier hill station with Pakistan's only ski resort, scenic pine forests and adventure sports.",
+                image: "images/malam-jabba.jfif",
+                slug: "malamJabba"
+            },
+            {
+                name: "Toli Pir",
+                province: "Azad Kashmir",
+                description: "A high-altitude meadow in Rawalakot with sweeping views of the Poonch River and Himalayan range.",
+                image: "images/tolipir.jfif",
+                slug: "toliPir"
+            },
+            {
+                name: "Kalar Kahar",
+                province: "Punjab",
+                description: "A scenic saltwater lake with gardens, migratory peacocks, boating and the historic Takht-e-Babri.",
+                image: "images/kalar-kahar.jfif",
+                slug: "kalarKahar"
+            },
+            {
+                name: "Sheikhupura",
+                province: "Punjab",
+                description: "Founded by Mughal Emperor Jahangir, featuring the historic Sheikhupura Fort and scenic Hiran Minar.",
+                image: "images/sheikhupura.jpg",
+                slug: "sheikhupura"
+            },
+            {
+                name: "Rohtas Fort",
+                province: "Punjab",
+                description: "A 16th-century fortress near Jhelum, one of the largest and most formidable forts in Punjab.",
+                image: "images/rohtas.jpg",
+                slug: "rohtas"
+            }
+        ];
+
+
+        // =============================================
+        // MAIN SEARCH FUNCTION
+        // =============================================
+
+        function doSearch() {
+            const query = document.getElementById('search-input').value.trim();
+
+            if (query === '') return;
+
+            // update the URL so user can share/bookmark the search
+            window.history.pushState({}, '', 'searchResults.html?q=' + encodeURIComponent(query));
+
+            // show loading spinner
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('results-container').innerHTML = '';
+            document.getElementById('no-results').style.display = 'none';
+            document.getElementById('result-info').textContent = '';
+
+            // small delay to show spinner (remove this when using real backend)
+            setTimeout(function() {
+                searchFromDummyData(query);
+            }, 400);
+
+            // =============================================
+            // BACKEND FETCH - uncomment this when backend is ready
+            // also delete the setTimeout + searchFromDummyData call above
+            // =============================================
+            /*
+            fetch('http://localhost:5000/api/destinations/search?q=' + encodeURIComponent(query))
+                .then(function(response) {
+                    return response.json();
+                })
+                .then(function(data) {
+                    document.getElementById('loading').style.display = 'none';
+                    showResults(data.destinations, query);
+                })
+                .catch(function(error) {
+                    document.getElementById('loading').style.display = 'none';
+                    console.log('Search error:', error);
+                    // fallback to dummy data if backend fails
+                    searchFromDummyData(query);
+                });
+            */
+        }
+
+
+        // search through dummy data (delete this function when backend is ready)
+        function searchFromDummyData(query) {
+            document.getElementById('loading').style.display = 'none';
+
+            const queryLower = query.toLowerCase();
+
+            // filter destinations where name, province, or description contains the query
+            const matched = dummyDestinations.filter(function(dest) {
+                return dest.name.toLowerCase().includes(queryLower) ||
+                       dest.province.toLowerCase().includes(queryLower) ||
+                       dest.description.toLowerCase().includes(queryLower);
+            });
+
+            showResults(matched, query);
+        }
+
+
+        // build and show the result cards
+        function showResults(results, query) {
+            const container = document.getElementById('results-container');
+            const noResults = document.getElementById('no-results');
+            const resultInfo = document.getElementById('result-info');
+
+            container.innerHTML = '';
+
+            if (results.length === 0) {
+                noResults.style.display = 'block';
+                resultInfo.innerHTML = 'No results for <span>"' + query + '"</span>';
+                return;
+            }
+
+            resultInfo.innerHTML = '<span>' + results.length + ' result' + (results.length > 1 ? 's' : '') + '</span> found for "' + query + '"';
+
+            // create a card for each result
+            results.forEach(function(dest) {
+                const card = document.createElement('div');
+                card.classList.add('card');
+
+                card.innerHTML = `
+                    <img src="${dest.image}" class="card-img-top" alt="${dest.name}" onerror="this.src='images/placeholder.jpg'">
+                    <div class="card-body">
+                        <p class="card-province">${dest.province}</p>
+                        <h5 class="card-title">${dest.name}</h5>
+                        <p class="card-text">${dest.description}</p>
+                        <a class="view-btn" href="destination.html?city=${dest.slug}">View</a>
+                    </div>
+                `;
+
+                container.appendChild(card);
+            });
+        }
+
+
+        // =============================================
+        // ON PAGE LOAD
+        // read the ?q= from the URL and auto-search
+        // =============================================
+        window.addEventListener('DOMContentLoaded', function() {
+
+            // get the search query from URL e.g. searchResults.html?q=hunza
+            const urlParams = new URLSearchParams(window.location.search);
+            const query = urlParams.get('q');
+
+            if (query) {
+                // put the query in the search box
+                document.getElementById('search-input').value = query;
+                // run the search automatically
+                doSearch();
+            }
+
+            // also search when user presses Enter in the search box
+            document.getElementById('search-input').addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    doSearch();
+                }
+            });
+        });
+
+    </script>
+
+</body>
+
+</html>

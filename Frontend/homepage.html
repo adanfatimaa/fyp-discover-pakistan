@@ -12,13 +12,11 @@
       rel="stylesheet"
     />
     <!-- font awesome -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
     <!-- stylesheet -->
     <link rel="stylesheet" href="homepage.css" />
     <link rel="stylesheet" href="common.css" />
+    <link rel="stylesheet" href="chatbot.css" />
 
     <!-- Viewport Meta Tag -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -43,16 +41,17 @@
           Your complete guide to pakistan's destinations, culture,<br />and
           adventures
         </h2>
-        <form class="search-form">
-          <input
-            type="text"
-            class="search-bar"
-            placeholder="Search Destinations"
-          />
-          <button type="submit" class="search-btn">
-            <i class="fa-solid fa-magnifying-glass"></i>
-          </button>
-        </form>
+       <form class="search-form" onsubmit="goToSearch(event)">
+  <input
+    type="text"
+    id="search-input"
+    class="search-bar"
+    placeholder="Search Destinations"
+  />
+  <button type="submit" class="search-btn">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+</form>
 
         <div class="cta-buttons">
           <a href="#destinations" class="btn btn-primary"
@@ -234,5 +233,15 @@
 
     <script src="homepage.js"></script>
     <script src="common.js"></script>
+    <script>
+  function goToSearch(event) {
+    event.preventDefault(); // stop page from refreshing
+    const query = document.getElementById('search-input').value.trim();
+    if (query !== '') {
+      // send user to search results page with their query in the URL
+      window.location.href = 'searchResults.html?q=' + encodeURIComponent(query);
+    }
+  }
+</script>
   </body>
 </html>

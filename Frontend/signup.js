@@ -28,11 +28,6 @@ document.getElementById('signupForm').addEventListener('submit', function(e) {
         isValid = false;
     }
     
-    // Validate username
-    if (username === '') {
-        document.getElementById('usernameError').style.display = 'block';
-        isValid = false;
-    }
     
     // Validate password
     if (password.length < 6) {

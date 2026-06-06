@@ -15,6 +15,7 @@
     />
 
     <link rel="stylesheet" href="common.css" />
+    <link rel="stylesheet" href="chatbot.css" />
 
     <style>
 
@@ -641,6 +642,7 @@
             .weather-top        { flex-direction: column; gap: 12px; }
             .weather-details-grid { text-align: left; }
         }
+
     </style>
 
 </head>
@@ -902,6 +904,82 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Review Modal -->
+<div id="review-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:9999; align-items:center; justify-content:center;">
+    <div style="background:#fff; border-radius:16px; padding:28px; width:90%; max-width:480px; position:relative;">
+
+        <button id="modal-close" style="position:absolute; top:14px; right:16px; background:none; border:none; font-size:20px; cursor:pointer; color:#888;">✕</button>
+
+        <h3 style="font-family:'Oswald',sans-serif; color:#26452d; margin-bottom:6px;">Write a Review</h3>
+        <p style="font-size:13px; color:#888; margin-bottom:20px;">Share your experience</p>
+
+        <form id="review-form">
+
+            
+
+            <!-- star rating -->
+            <div style="margin-bottom:14px;">
+                <label style="font-size:13px; font-weight:700; color:#333; display:block; margin-bottom:8px;">Rating</label>
+                <div style="display:flex; gap:6px; flex-direction:row-reverse; justify-content:flex-end;">
+                    <input type="radio" name="stars" id="s5" value="5" style="display:none">
+                    <label for="s5" style="font-size:28px; cursor:pointer; color:#ddd;">★</label>
+                    <input type="radio" name="stars" id="s4" value="4" style="display:none">
+                    <label for="s4" style="font-size:28px; cursor:pointer; color:#ddd;">★</label>
+                    <input type="radio" name="stars" id="s3" value="3" style="display:none">
+                    <label for="s3" style="font-size:28px; cursor:pointer; color:#ddd;">★</label>
+                    <input type="radio" name="stars" id="s2" value="2" style="display:none">
+                    <label for="s2" style="font-size:28px; cursor:pointer; color:#ddd;">★</label>
+                    <input type="radio" name="stars" id="s1" value="1" style="display:none">
+                    <label for="s1" style="font-size:28px; cursor:pointer; color:#ddd;">★</label>
+                </div>
+            </div>
+
+            <!-- review text -->
+            <div style="margin-bottom:20px;">
+                <label style="font-size:13px; font-weight:700; color:#333; display:block; margin-bottom:6px;">Your Review</label>
+                <textarea id="review-text-input" required rows="4" placeholder="Tell others about your experience..."
+                    style="width:100%; padding:10px 14px; border:1.5px solid #ddd; border-radius:8px; font-size:14px; outline:none; resize:none; font-family:'Lato',sans-serif;"></textarea>
+            </div>
+
+            <button type="submit"
+                style="width:100%; padding:12px; background:#7ba047; color:white; border:none; border-radius:8px; font-size:15px; font-family:'Lato',sans-serif; cursor:pointer; font-weight:700;">
+                Submit Review
+            </button>
+
+        </form>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <script>
         // ============================================================
         // READ CITY FROM URL
@@ -996,11 +1074,122 @@
         //      Body: { city, stars, text, placeName }
         //      Backend saves to DB, returns the new review object.
         //   5. You then add the new review card to the top of the list.
-        // ============================================================
+        // 
+
+
+
+
+
+
         document.getElementById('write-review-btn').addEventListener('click', () => {
-            // BACKEND LATER: replace this alert with the real flow
-            alert('Review feature coming soon! ');
+    document.getElementById('review-modal').style.display = 'flex';
+});
+
+
+
+
+
+// star highlighting with JS
+document.querySelectorAll('input[name="stars"]').forEach(function(radio) {
+    radio.addEventListener('change', function() {
+        const selected = parseInt(this.value);
+        document.querySelectorAll('input[name="stars"]').forEach(function(r) {
+            const label = document.querySelector('label[for="' + r.id + '"]');
+            if (parseInt(r.value) <= selected) {
+                label.style.color = '#e6a020';
+            } else {
+                label.style.color = '#ddd';
+            }
         });
+    });
+});
+
+// reset stars color when form resets
+document.getElementById('review-form').addEventListener('reset', function() {
+    document.querySelectorAll('input[name="stars"]').forEach(function(r) {
+        document.querySelector('label[for="' + r.id + '"]').style.color = '#ddd';
+    });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+document.getElementById('modal-close').addEventListener('click', () => {
+    document.getElementById('review-modal').style.display = 'none';
+});
+
+// clicking outside the modal closes it
+document.getElementById('review-modal').addEventListener('click', function(e) {
+    if (e.target === this) this.style.display = 'none';
+});
+
+document.getElementById('review-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+   // -------------------------------------------------------
+// BACKEND LATER: uncomment the line below and delete the
+// dummy name line. This will get the logged in user's name
+// from the session/token that your backend teammate sets.
+// -------------------------------------------------------
+// const name = loggedInUser.full_name;
+
+// DELETE this line when backend is ready:
+const name = 'Sara Noor';
+
+
+
+
+
+
+    const stars = document.querySelector('input[name="stars"]:checked')?.value;
+    const text  = document.getElementById('review-text-input').value.trim();
+
+    if (!stars) { alert('Please select a star rating!'); return; }
+
+    // build initials from name
+    const initials = name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2);
+
+    // create the new review card and add it to the top of the list
+    const newCard = `
+        <div class="review-card">
+            <div class="reviewer-row">
+                <div class="avatar">${initials}</div>
+                <div>
+                    <div class="reviewer-name">${name}</div>
+                    <div class="reviewer-date">Just now</div>
+                </div>
+            </div>
+            <div class="review-stars">${'★'.repeat(stars)}${'☆'.repeat(5 - stars)}</div>
+            <div class="review-text">${text}</div>
+        </div>`;
+
+    document.getElementById('reviews-list').insertAdjacentHTML('afterbegin', newCard);
+
+    // close modal and reset form
+    document.getElementById('review-modal').style.display = 'none';
+    document.getElementById('review-form').reset();
+
+    // BACKEND LATER: uncomment this to actually save to database
+    /*
+    fetch('/api/reviews', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ city, stars, text, name })
+    });
+    */
+});
+
+
+
+
 
 
         // ================================================================
