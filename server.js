@@ -3,6 +3,7 @@ const dotenv = require("dotenv");
 const dns = require("dns");
 const connectDB = require("./config/db");
 const searchRoutes = require("./routes/searchRoutes");
+const reviewRoutes = require("./routes/reviewRoutes");
 
 // Load .env
 dotenv.config();
@@ -19,6 +20,7 @@ app.use(express.json());
 
 // Routes
 app.use("/api", searchRoutes);
+app.use("/api/reviews", reviewRoutes);
 
 app.get("/", (req, res) => {
   res.send("API is running...");

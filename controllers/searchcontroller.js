@@ -2,38 +2,28 @@ const Destination = require("../models/Destination");
 
 const searchDestination = async (req, res) => {
   try {
-    const keyword = req.query.keyword || "";
+    const query = req.query.query;
 
-    const destinations = await Destination.find({
-      $or: [
-        {
-          city: {
-            $regex: keyword,
-            $options: "i",
-          },
-        },
-        {
-          province: {
-            $regex: keyword,
-            $options: "i",
-          },
-        },
-      ],
+  
+    const all = await Destination.find();
+    console.log("ALL DATA FROM DB:", all);
+
+    const result = await Destination.find({
+      city: { $regex: query, $options: "i" }
     });
 
-    res.status(200).json({
+    console.log("SEARCH RESULT:", result);
+    res.json({
       success: true,
-      count: destinations.length,
-      data: destinations,
+      count: result.length,
+      data: result
     });
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: error.message,
-    });
+
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ success: false, message: err.message });
   }
 };
 
-module.exports = {
-  searchDestination,
-};
+module.exports = { searchDestination };
+    

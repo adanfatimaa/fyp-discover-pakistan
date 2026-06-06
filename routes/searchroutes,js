@@ -1,9 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const {
-  searchDestination,
-} = require("../controllers/searchController");
+const { searchDestination } = require("../controllers/searchController");
 
 router.get("/search", searchDestination);
 
