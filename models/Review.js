@@ -2,13 +2,15 @@ const mongoose = require("mongoose");
 
 const reviewSchema = new mongoose.Schema(
   {
-    destination: {
+    destinationId: {
       type: String,
       required: true,
+      trim: true,
     },
-    userName: {
+    userId: {
       type: String,
       required: true,
+      trim: true,
     },
     rating: {
       type: Number,
@@ -19,9 +21,15 @@ const reviewSchema = new mongoose.Schema(
     comment: {
       type: String,
       required: true,
+      trim: true,
     },
   },
-  { timestamps: true }
+  {
+    timestamps: true,
+  }
 );
 
 module.exports = mongoose.model("Review", reviewSchema);
+
+
+  

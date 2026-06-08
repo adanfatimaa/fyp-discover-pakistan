@@ -3,6 +3,9 @@ const express = require("express");
 const mongoose = require("mongoose");
 const dns = require("dns")
 const searchRoutes= require("./routes/searchRoutes.js");
+const reviewRoutes= require("./routes/reviewRoutes.js");
+const favouriteRoutes = require("./routes/favouriteRoutes.js");
+ 
 const connectDB = require("./config/db");
 // Load .env
 require("dotenv").config();
@@ -28,6 +31,8 @@ app.get("/api/test-direct", (req, res) => {
     res.json({ message: "Direct route is working" });
 });
 app.use("/api", searchRoutes);
+app.use("/api/reviews", reviewRoutes);
+app.use("/api/favourites", favouriteRoutes);
 // Default Route
 app.get("/", (req, res) => {
     res.send("API Working");

@@ -1,7 +1,7 @@
 {
   "name": "backend",
   "version": "1.0.0",
-    "description": "Login Signup and Search API",
+    "description": "Login Signup Search Review and Favourite API",
 
   "type": "commonjs",
     "main": "searchserver.js",

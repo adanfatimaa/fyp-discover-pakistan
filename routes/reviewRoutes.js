@@ -6,7 +6,7 @@ const {
   getReviews,
 } = require("../controllers/reviewController");
 
-router.post("/", addReview);
-router.get("/:destination", getReviews);
+router.post("/:destinationId", addReview);
+router.get("/:destinationId", getReviews);
 
 module.exports = router;

@@ -2,8 +2,10 @@ const express = require("express");
 const dotenv = require("dotenv");
 const dns = require("dns");
 const connectDB = require("./config/db");
-const searchRoutes = require("./routes/searchRoutes");
-const reviewRoutes = require("./routes/reviewRoutes");
+const searchRoutes = require("./routes/searchRoutes.js");
+const reviewRoutes = require("./routes/reviewRoutes.js");
+const favouriteRoutes = require("./routes/favouriteRoutes.js");
+
 
 // Load .env
 dotenv.config();
@@ -21,6 +23,7 @@ app.use(express.json());
 // Routes
 app.use("/api", searchRoutes);
 app.use("/api/reviews", reviewRoutes);
+app.use("/api/favourites", favouriteRoutes);
 
 app.get("/", (req, res) => {
   res.send("API is running...");

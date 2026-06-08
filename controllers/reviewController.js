@@ -3,13 +3,11 @@ const Review = require("../models/Review");
 // Add Review
 const addReview = async (req, res) => {
   try {
-    const { destination, userName, rating, comment } = req.body;
-
     const review = await Review.create({
-      destination,
-      userName,
-      rating,
-      comment,
+      destinationId: req.params.destinationId,
+      userId: req.body.userId,
+      rating: req.body.rating,
+      comment: req.body.comment,
     });
 
     res.status(201).json({
@@ -24,11 +22,11 @@ const addReview = async (req, res) => {
   }
 };
 
-// Get Reviews by Destination
+// Get Reviews
 const getReviews = async (req, res) => {
   try {
     const reviews = await Review.find({
-      destination: req.params.destination,
+      destinationId: req.params.destinationId,
     });
 
     res.status(200).json({
