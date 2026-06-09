@@ -1,7 +1,8 @@
 import logging
+import time
 from typing import AsyncGenerator
 
-from groq import Groq
+from groq import Groq, RateLimitError
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -10,7 +11,18 @@ from app.config import settings
 
 logger = logging.getLogger(__name__)
 
-groq_client = Groq(api_key=settings.GROQ_API_KEY)
+#  Backup Groq clients (429 ke liye)
+_primary_client = Groq(api_key=settings.GROQ_API_KEY)
+_backup_client  = Groq(api_key=settings.GROQ_API_KEY_BACKUP) if settings.GROQ_API_KEY_BACKUP else None
+
+
+def get_groq_client(use_backup: bool = False) -> Groq:
+    """Return backup client if primary rate-limited."""
+    if use_backup and _backup_client:
+        logger.warning("Switching to backup Groq API key.")
+        return _backup_client
+    return _primary_client
+
 
 PAKISTAN_TRAVEL_SYSTEM_PROMPT = """
 You are an AI-powered travel guide assistant for "Discover Pakistan" —
@@ -27,13 +39,24 @@ Pakistan by providing accurate, helpful, and positive travel information.
 5. Culture & etiquette: dress code, mosque rules, Ramadan tips
 6. Basic Urdu phrases for tourists
 7. Safety tips and practical travel advice
+8. Mood-based destination recommendations (adventure, nature, cultural, foodie, family, historical)
+
+== MOOD-BASED RECOMMENDATIONS ==
+When user mentions a mood or travel style:
+- adventure/adventurous: Hunza, Skardu, K2 Base Camp, Swat, Naran
+- nature/peace: Fairy Meadows, Deosai, Kumrat Valley, Neelam Valley
+- cultural/historical: Lahore, Multan, Mohenjo-Daro, Peshawar, Rohtas Fort
+- foodie: Lahore (Burns Road), Karachi (Burns Road), Peshawar (Namak Mandi)
+- family: Murree, Islamabad, Kalar Kahar, Lahore Zoo
+- spiritual: Multan shrines, Data Darbar Lahore, Bahauddin Zakariya
 
 == RULES ==
 - Always be positive and accurate about Pakistan
 - If RAG context is provided, use it as PRIMARY source
 - Give specific names of places, restaurants, hotels
 - Mention prices in PKR where possible
-- Keep responses friendly and structured
+- Keep responses friendly, structured, concise
+- For mood queries: give top 3 destinations with brief reason each
 
 == ABOUT ==
 Discover Pakistan — Final Year Project, BSCSF2022,
@@ -45,7 +68,6 @@ Team: Aisha Amir, Adan Fatima, Seeman Bibi, Sidra Ghafoor
 
 class ChatService:
 
-    # ── History ────────────────────────────────────────────────────────────────
     async def get_conversation_history(
         self, conversation_id: int, db: AsyncSession, limit: int = 10
     ) -> list[dict]:
@@ -68,15 +90,21 @@ class ChatService:
         db: AsyncSession,
     ):
         db.add_all([
-            Message(conversation_id=conversation_id, role="user",
-                    content=user_message),
-            Message(conversation_id=conversation_id, role="assistant",
-                    content=assistant_message, tokens_used=tokens_used,
-                    model_used=settings.GROQ_MODEL),
+            Message(
+                conversation_id=conversation_id,
+                role="user",
+                content=user_message,
+            ),
+            Message(
+                conversation_id=conversation_id,
+                role="assistant",
+                content=assistant_message,
+                tokens_used=tokens_used,
+                model_used=settings.GROQ_MODEL,
+            ),
         ])
         await db.commit()
 
-    # ── Conversation CRUD ──────────────────────────────────────────────────────
     async def create_conversation(
         self, title: str, db: AsyncSession
     ) -> Conversation:
@@ -92,7 +120,6 @@ class ChatService:
         )
         return result.scalars().all()
 
-    # ── Helper: messages list banana ──────────────────────────────────────────
     def _build_messages(
         self,
         user_message: str,
@@ -115,7 +142,6 @@ Above data ke basis pe user ka sawal answer karo.
         messages.append({"role": "user", "content": user_message})
         return messages
 
-    # ── Normal Chat ────────────────────────────────────────────────────────────
     async def chat(
         self,
         user_message: str,
@@ -129,24 +155,40 @@ Above data ke basis pe user ka sawal answer karo.
             system_prompt or PAKISTAN_TRAVEL_SYSTEM_PROMPT,
             rag_context,
         )
-        try:
-            response = groq_client.chat.completions.create(
-                model=settings.GROQ_MODEL,
-                messages=messages,
-                max_tokens=1024,
-                temperature=0.7,
-            )
-            return {
-                "content":       response.choices[0].message.content,
-                "tokens_used":   response.usage.total_tokens,
-                "model":         response.model,
-                "finish_reason": response.choices[0].finish_reason,
-            }
-        except Exception as e:
-            logger.error(f"Groq Error: {e}")
-            raise
 
-    # ── Streaming Chat ─────────────────────────────────────────────────────────
+        for attempt, use_backup in enumerate([False, False, True]):
+            try:
+                if attempt == 1:
+                    logger.warning("Rate limit hit. Waiting 10 seconds...")
+                    time.sleep(10)  # 10 sec wait before retry
+
+                client = get_groq_client(use_backup=use_backup)
+                response = client.chat.completions.create(
+                    model=settings.GROQ_MODEL,
+                    messages=messages,
+                    max_tokens=1024,
+                    temperature=0.7,
+                )
+                return {
+                    "content":       response.choices[0].message.content,
+                    "tokens_used":   response.usage.total_tokens,
+                    "model":         response.model,
+                    "finish_reason": response.choices[0].finish_reason,
+                }
+
+            except RateLimitError as e:
+                logger.warning(f"429 Rate Limit (attempt {attempt + 1}): {e}")
+                if attempt == 2:  # last attempt bhi fail
+                    raise Exception(
+                        "Groq rate limit reached on both API keys. "
+                        "Please wait a minute and try again."
+                    )
+                continue
+
+            except Exception as e:
+                logger.error(f"Groq Error (attempt {attempt + 1}): {e}")
+                raise
+
     async def stream(
         self,
         user_message: str,
@@ -160,21 +202,35 @@ Above data ke basis pe user ka sawal answer karo.
             system_prompt or PAKISTAN_TRAVEL_SYSTEM_PROMPT,
             rag_context,
         )
-        try:
-            stream = groq_client.chat.completions.create(
-                model=settings.GROQ_MODEL,
-                messages=messages,
-                max_tokens=1024,
-                temperature=0.7,
-                stream=True,
-            )
-            for chunk in stream:
-                delta = chunk.choices[0].delta.content
-                if delta:
-                    yield delta
-        except Exception as e:
-            logger.error(f"Groq Stream Error: {e}")
-            yield f"\n[Error: {str(e)}]"
+
+        for attempt, use_backup in enumerate([False, True]):
+            try:
+                client = get_groq_client(use_backup=use_backup)
+                stream = client.chat.completions.create(
+                    model=settings.GROQ_MODEL,
+                    messages=messages,
+                    max_tokens=1024,
+                    temperature=0.7,
+                    stream=True,
+                )
+                for chunk in stream:
+                    delta = chunk.choices[0].delta.content
+                    if delta:
+                        yield delta
+                return  
+
+            except RateLimitError:
+                logger.warning(f"429 on stream (attempt {attempt + 1})")
+                if attempt == 1:
+                    yield "\n\n[Rate limit reached. Please wait a moment and try again.]"
+                    return
+                time.sleep(10)
+                continue
+
+            except Exception as e:
+                logger.error(f"Groq Stream Error: {e}")
+                yield f"\n[Error: {str(e)}]"
+                return
 
 
 chat_service = ChatService()
