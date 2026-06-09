@@ -112,7 +112,7 @@ function sendMessage() {
 
     // --- Call the Python/FastAPI chatbot backend ---
     // TODO: replace this URL with your actual backend URL when ready
-    const backendURL = 'http://localhost:8000/chat';  
+    const backendURL = 'http://localhost:8000/chat/message';  
 
     fetch(backendURL, {
         method: 'POST',
