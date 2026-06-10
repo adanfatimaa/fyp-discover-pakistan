@@ -115,8 +115,8 @@ CREATE TABLE places (
   image          VARCHAR(255),
   FOREIGN KEY (destination_id) REFERENCES destination(destination_id)
 );
-INSERT INTO places (destination_id, name, type) VALUES
-(1,'Badshahi Mosque','Historic'),(1,'Lahore Fort','Heritage'),(1,'Shalimar Gardens','Garden'),(1,'Minar-e-Pakistan','Monument'),(1,'Lahore Museum','Museum'),(1,'Walled City','Cultural'),
+INSERT INTO places (destination_id, name, type,imagge) VALUES
+(1,'Badshahi Mosque','Historic','assets/images/places/0badshahiMosque.jpg'),(1,'Lahore Fort','Heritage','assets/images/places/0lahoreFort.jpg'),(1,'Shalimar Gardens','Garden','assets/images/places/0shalimar.jpg'),(1,'Minar-e-Pakistan','Monument','assets/images/places/0minarePakistan.jpg'),(1,'Lahore Museum','Museum','assets/images/places/0lahoreMusuem.jpg'),(1,'Walled City','Cultural','assets/images/places/0walledCity.jpg'),
 (2,'Faisal Mosque','Religious'),(2,'Pakistan Monument','Monument'),(2,'Daman-e-Koh','Viewpoint'),(2,'Lok Virsa Museum','Museum'),(2,'Saidpur Village','Cultural'),(2,'Margalla Hills','Nature'),
 (3,'Clifton Beach','Beach'),(3,'Mohatta Palace','Museum'),(3,'Quaid-e-Azam Mausoleum','Monument'),(3,'Frere Hall','Heritage'),(3,'Pakistan Maritime Museum','Museum'),(3,'Burns Road Food Street','Food Street'),
 (4,'Mall Road','Shopping Street'),(4,'Kashmir Point','Viewpoint'),(4,'Pindi Point','Viewpoint'),(4,'Patriata Chairlift','Adventure'),(4,'Murree Hills','Nature'),(4,'Ayubia National Park','National Park'),
