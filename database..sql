@@ -115,11 +115,11 @@ CREATE TABLE places (
   image          VARCHAR(255),
   FOREIGN KEY (destination_id) REFERENCES destination(destination_id)
 );
-INSERT INTO places (destination_id, name, type,imagge) VALUES
+INSERT INTO places (destination_id, name, type,image) VALUES
 (1,'Badshahi Mosque','Historic','assets/images/places/0badshahiMosque.jpg'),(1,'Lahore Fort','Heritage','assets/images/places/0lahoreFort.jpg'),(1,'Shalimar Gardens','Garden','assets/images/places/0shalimar.jpg'),(1,'Minar-e-Pakistan','Monument','assets/images/places/0minarePakistan.jpg'),(1,'Lahore Museum','Museum','assets/images/places/0lahoreMusuem.jpg'),(1,'Walled City','Cultural','assets/images/places/0walledCity.jpg'),
 (2,'Faisal Mosque','Religious','assets/images/places/0faisalmosque.jpg'),(2,'Pakistan Monument','Monument','assets/images/places/0paksitanMonument.jpg'),(2,'Daman-e-Koh','Viewpoint','assets/images/places/0damanekoh.jpg'),(2,'Lok Virsa Museum','Museum','assets/images/places/0lokVirsa.jpg'),(2,'Saidpur Village','Cultural','assets/images/places/0saidpurVillage.jpg'),(2,'Margalla Hills','Nature','assets/images/places/0margalaHills.jpg'),
 (3,'Clifton Beach','Beach','assets/images/places/0cliftonBeach.jpg'),(3,'Mohatta Palace','Museum','assets/images/places/0mohattaPalace.jpg'),(3,'Quaid-e-Azam Mausoleum','Monument',assets/images/places/0quaideazamMausoleum.jpg''),(3,'Frere Hall','Heritage','assets/images/places/0frereHall.jpg'),(3,'Pakistan Maritime Museum','Museum','assets/images/places/0PakistanMaritimeMuseum.jpg'),(3,'Burns Road Food Street','Food Street','assets/images/places/0burnsRoadFoodStreet.jpg'),
-(4,'Mall Road','Shopping Street'),(4,'Kashmir Point','Viewpoint'),(4,'Pindi Point','Viewpoint'),(4,'Patriata Chairlift','Adventure'),(4,'Murree Hills','Nature'),(4,'Ayubia National Park','National Park'),
+(4,'Mall Road','Shopping Street',''),(4,'Kashmir Point','Viewpoint'),(4,'Pindi Point','Viewpoint'),(4,'Patriata Chairlift','Adventure'),(4,'Murree Hills','Nature'),(4,'Ayubia National Park','National Park'),
 (5,'Baltit Fort','Heritage'),(5,'Altit Fort','Heritage'),(5,'Attabad Lake','Lake'),(5,'Eagle\'s Nest','Viewpoint'),(5,'Passu Cones','Mountain Landmark'),(5,'Hussaini Suspension Bridge','Adventure'),
 (6,'Shangrila Resort','Resort'),(6,'Upper Kachura Lake','Lake'),(6,'Lower Kachura Lake','Lake'),(6,'Shigar Fort','Heritage'),(6,'Satpara Lake','Lake'),(6,'Deosai Access Point','Adventure'),
 (8,'Princess of Hope','Rock Formation'),(8,'Hingol River','River'),(8,'Buzzi Pass','Mountain Pass'),(8,'Kund Malir Beach','Beach'),(8,'Sphinx Formation','Rock Formation'),(8,'Hinglaj Mata Temple','Religious Site'),
