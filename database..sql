@@ -21,7 +21,7 @@ CREATE TABLE destination (
   best_season    VARCHAR(100)
 );
 INSERT INTO destination (name, slug, province, description, tagline, hero_image, population, language, best_season) VALUES
-('Lahore',               'lahore',               'Punjab',                      'A city rich in Mughal history, vibrant food culture, and colorful traditions.',       'The Cultural Heart of Pakistan',         'destinations/lahore.jpg',          '14 Million',  'Punjabi, Urdu',          'October – February'),
+('Lahore',               'lahore',               'Punjab',                      'A city rich in Mughal history, vibrant food culture, and colorful traditions.',       'The Cultural Heart of Pakistan',         'assets/images/destinationImages/0lahore.jpg',          '14 Million',  'Punjabi, Urdu',          'October – February'),
 ('Islamabad',            'islamabad',            'Islamabad Capital Territory', 'A planned modern city surrounded by lush Margalla Hills.',                           'Pakistan\'s Modern Capital',             'destinations/islamabad.jpg',        '2.3 Million', 'Urdu, English',          'September – April'),
 ('Karachi',              'karachi',              'Sindh',                       'Pakistan\'s largest city and economic hub with vibrant coastal energy.',              'The City of Lights',                     'destinations/karachi.jpg',          '20 Million',  'Urdu, Sindhi',           'November – February'),
 ('Murree',               'murree',               'Punjab',                      'A beloved hill station famous for pine forests and cool mountain air.',               'Pakistan\'s Most Famous Hill Station',   'destinations/murree.jpg',           '230,000',     'Urdu, Punjabi',          'April – September'),
