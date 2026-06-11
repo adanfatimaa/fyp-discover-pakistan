@@ -1,19 +1,17 @@
 from pydantic_settings import BaseSettings
 from functools import lru_cache
+from typing import Optional
 
 
 class Settings(BaseSettings):
-    # App
     APP_NAME: str = "Discover Pakistan AI"
     DEBUG: bool = False
-    ALLOWED_ORIGINS: str = "http://localhost:3000"
+    ALLOWED_ORIGINS: str = "http://localhost:3000,http://127.0.0.1:5500"
 
-    # Database
     DATABASE_URL: str
-
-    # Groq LLM
     GROQ_API_KEY: str
     GROQ_MODEL: str = "llama-3.3-70b-versatile"
+    GROQ_API_KEY_BACKUP: Optional[str] = None
 
     @property
     def origins_list(self) -> list[str]:

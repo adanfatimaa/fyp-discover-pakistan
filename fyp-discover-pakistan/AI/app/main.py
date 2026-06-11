@@ -34,7 +34,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Routers — auth router hata diya
 from app.chat.router import router as chat_router
 from app.rag.router  import router as rag_router
 
