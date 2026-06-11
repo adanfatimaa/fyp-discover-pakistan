@@ -65,65 +65,60 @@ document.addEventListener('DOMContentLoaded', function() {
         loginBtn.classList.add('loading');
         loginBtn.textContent = 'Logging in';
 
-        
-
-
         try {
-    const response = await fetch('http://localhost:3000/api/auth/login', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ email, password })
+            const response = await fetch('http://localhost:5000/api/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email, password })
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                // Save token, role and name to localStorage
+                localStorage.setItem('token', data.token);
+                localStorage.setItem('userRole', data.role);
+                localStorage.setItem('userName', data.name);
+
+                showSuccess('Login successful! Redirecting...');
+
+                // Redirect based on role
+                setTimeout(function() {
+                    if (data.role === 'admin') {
+                        window.location.href = 'adminDashboard.html';
+                    } else {
+                        window.location.href = 'homepage.html';
+                    }
+                }, 1500);
+
+            } else {
+                showError(data.message || 'Invalid email or password.');
+            }
+
+        } catch (error) {
+            console.log('Error:', error);
+            showError('Something went wrong. Please try again later.');
+
+        } finally {
+            // Remove loading state whether success or error
+            loginBtn.classList.remove('loading');
+            loginBtn.textContent = 'Login';
+        }
     });
 
-    const data = await response.json();
+    // Check if user is already logged in — skip login page if they are
+    window.addEventListener('load', function() {
+        const token = localStorage.getItem('token');
+        const role = localStorage.getItem('userRole');
 
-    if (response.ok) {
-        // Save token and role
-        localStorage.setItem('token', data.token);
-        localStorage.setItem('userRole', data.role);
-        localStorage.setItem('userName', data.name);
-
-        showSuccess('Login successful! Redirecting...');
-
-        // Check role and redirect
-        setTimeout(function() {
-            if (data.role === 'admin') {
+        if (token) {
+            if (role === 'admin') {
                 window.location.href = 'adminDashboard.html';
             } else {
                 window.location.href = 'homepage.html';
             }
-        }, 1500);
-
-    } else {
-        showError(data.message || 'Invalid email or password.');
-    }
-
-} catch (error) {
-    console.log('Error:', error);
-    showError('Something went wrong. Please try again later.');
-
-} finally {
-    // Remove loading state whether success or error
-    loginBtn.classList.remove('loading');
-    loginBtn.textContent = 'Login';
-}
-        
-   
-
-        
-});
-
-// Check if user is already logged in
-window.addEventListener('load', function() {
-    const authToken = localStorage.getItem('authToken');
-    const userEmail = localStorage.getItem('userEmail');
-    
-    if (authToken || userEmail) {
-        // TODO: Verify token with backend
-        // If valid, redirect to dashboard
-        // window.location.href = 'dashboard.html';
-    }
-});
+        }
+    });
 });

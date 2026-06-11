@@ -965,26 +965,11 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <script>
-        // ============================================================
+        
         // READ CITY FROM URL
         // e.g. destination.html?city=lahore → city = "lahore"
-        // ============================================================
+        
         const city = new URLSearchParams(window.location.search).get('city');
 
 
@@ -1063,25 +1048,15 @@
        
 
 
-        // ============================================================
-        // WRITE REVIEW BUTTON — placeholder for now
-        //
-        // BACKEND LATER — your backend teammate needs to:
-        //   1. Check if user is logged in (session/token check)
-        //   2. If not logged in → redirect to login page
-        //   3. If logged in → show a review form
-        //   4. Form submits to: POST /api/reviews
-        //      Body: { city, stars, text, placeName }
-        //      Backend saves to DB, returns the new review object.
-        //   5. You then add the new review card to the top of the list.
-        // 
-
-
-
-
 
 
         document.getElementById('write-review-btn').addEventListener('click', () => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+        alert('Review likhne ke liye pehle login karein!');
+        window.location.href = 'login.html';
+        return;
+    }
     document.getElementById('review-modal').style.display = 'flex';
 });
 
@@ -1131,8 +1106,38 @@ document.getElementById('review-modal').addEventListener('click', function(e) {
     if (e.target === this) this.style.display = 'none';
 });
 
-document.getElementById('review-form').addEventListener('submit', function(e) {
+document.getElementById('review-form').addEventListener('submit', async function(e) {
     e.preventDefault();
+    const stars = document.querySelector('input[name="stars"]:checked')?.value;
+    const text  = document.getElementById('review-text-input').value.trim();
+    if (!stars) { alert('Stars select karein!'); return; }
+
+    const token    = localStorage.getItem('token');
+    const userName = localStorage.getItem('userName') || 'Traveler';
+
+    try {
+        const res = await fetch('http://localhost:3000/api/cities/' + city + '/reviews', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+            body: JSON.stringify({ stars: parseInt(stars), reviewText: text, userName })
+        });
+        const data = await res.json();
+        if (res.ok) {
+            const initials = userName.split(' ').map(w => w[0]).join('').toUpperCase().slice(0,2);
+            const newCard  = `<div class="review-card">
+                <div class="reviewer-row"><div class="avatar">${initials}</div>
+                <div><div class="reviewer-name">${userName}</div>
+                <div class="reviewer-date">Just now</div></div></div>
+                <div class="review-stars">${'★'.repeat(stars)}${'☆'.repeat(5-stars)}</div>
+                <div class="review-text">${text}</div></div>`;
+            document.getElementById('reviews-list').insertAdjacentHTML('afterbegin', newCard);
+            document.getElementById('review-modal').style.display = 'none';
+            document.getElementById('review-form').reset();
+        }
+    } catch(e) {
+        alert('Review submit nahi ho saka.');
+    }
+});
 
    // -------------------------------------------------------
 // BACKEND LATER: uncomment the line below and delete the

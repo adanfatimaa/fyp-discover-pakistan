@@ -1,12 +1,14 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "Login Signup Backend",
+    "description": "Login Signup Search Review and Favourite API",
+
   "type": "commonjs",
-  "main": "server.js",
+    "main": "searchserver.js",
+
   "scripts": {
-    "start": "node server.js",
-    "dev": "nodemon server.js"
+    "start": "node  searchserver.js",
+    "dev": "nodemon searchserver.js"
   },
   "keywords": [],
   "author": "",

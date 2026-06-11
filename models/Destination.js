@@ -2,22 +2,17 @@ const mongoose = require("mongoose");
 
 const destinationSchema = new mongoose.Schema(
   {
-    city: {
+    name: {
       type: String,
       required: true,
     },
-    province: {
-      type: String,
-      required: true,
-    },
-    description: {
-      type: String,
-      default: "",
-    },
+    province: String,
+    city: String,
+    category: String,
+    description: String,
+    image: String,
   },
-  {
-    timestamps: true,
-  }
+  { collection: "destination" }
 );
 
 module.exports = mongoose.model("Destination", destinationSchema);

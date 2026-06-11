@@ -1009,29 +1009,31 @@
 
     <script>
 
-        // DATA STORAGE
-        // Right now we save to localStorage.
-        // When backend is ready, replace localStorage with
-        // fetch() API calls to your backend endpoints.
 
 
         var cities = [];         // main array holding all cities
         var editingIndex = -1;   // -1 = adding new, anything else = editing that index
         var deleteIndex = -1;    // holds index of city we want to delete
 
-        // Load cities from localStorage when page opens
-        function loadCities() {
-            var saved = localStorage.getItem('adminCities');
-            if (saved) {
-                cities = JSON.parse(saved);
-            }
-        }
+        async function loadCities() {
+    try {
+        const res  = await fetch('http://localhost:3000/api/cities');
+        const data = await res.json();
+        cities = data.data || [];
+        renderTable();
+    } catch(e) {
+        // Fallback to localStorage agar backend na chale
+        const saved = localStorage.getItem('adminCities');
+        if (saved) cities = JSON.parse(saved);
+        renderTable();
+    }
+}
 
-        // Save cities to localStorage
-        // TODO: replace this with a fetch POST/PUT to your backend
-        function saveToStorage() {
-            localStorage.setItem('adminCities', JSON.stringify(cities));
-        }
+
+
+       async function saveToStorage() {
+
+       }
 
 
         // render table
@@ -1171,9 +1173,9 @@
             }
         }
 
-        // ===================================================
+        
         // OPEN ADD MODAL
-        // ===================================================
+        
         function openAddModal() {
             editingIndex = -1;
             document.getElementById('modalTitle').textContent = 'Add New City';
@@ -1182,9 +1184,9 @@
             document.getElementById('modalOverlay').classList.add('active');
         }
 
-        // ===================================================
+       
         // OPEN EDIT MODAL
-        // ===================================================
+       
         function openEditModal(index) {
             editingIndex = index;
             var c = cities[index];
@@ -1262,57 +1264,59 @@
 
         // Save city (add or edit)
 
-        function saveCity() {
-            var name = document.getElementById('cityName').value.trim();
-            var province = document.getElementById('cityProvince').value;
-            var description = document.getElementById('cityDescription').value.trim();
-
-            // Basic validation
-            if (name === '' || province === '' || description === '') {
-                alert('Please fill in City Name, Province, and Description. These are required.');
-                return;
-            }
+        async function saveCity() {
+    const name = document.getElementById('cityName').value.trim();
+    const province = document.getElementById('cityProvince').value;
+    const description = document.getElementById('cityDescription').value.trim();
+    if (!name || !province || !description) {
+        alert('City Name, Province, aur Description zaruri hain.');
+        return;
+    }
 
             // Get selected moods
-            var moods = [];
-            var checkboxes = document.querySelectorAll('input[name="mood"]:checked');
-            for (var i = 0; i < checkboxes.length; i++) {
-                moods.push(checkboxes[i].value);
-            }
+            
 
-            var cityObj = {
-                name: name,
-                province: province,
-                description: description,
-                about: document.getElementById('cityAbout').value.trim(),
-                season: document.getElementById('citySeason').value.trim(),
-                budget: document.getElementById('cityBudget').value.trim(),
-                language: document.getElementById('cityLanguage').value.trim(),
-                food: document.getElementById('cityFood').value.trim(),
-                safety: document.getElementById('citySafety').value.trim(),
-                moods: moods,
-                attractions: getAttractions(),
-                image: document.getElementById('cityImage').value.trim(),
-                gallery: document.getElementById('cityGallery').value.trim(),
-                mapUrl: document.getElementById('cityMapUrl').value.trim()
-            };
+            const moods = [];
+    document.querySelectorAll('input[name="mood"]:checked').forEach(cb => moods.push(cb.value));
+    
+    const cityObj = {
+        name, province, description,
+        about: document.getElementById('cityAbout').value.trim(),
+        season: document.getElementById('citySeason').value.trim(),
+        budget: document.getElementById('cityBudget').value.trim(),
+        language: document.getElementById('cityLanguage').value.trim(),
+        food: document.getElementById('cityFood').value.trim(),
+        safety: document.getElementById('citySafety').value.trim(),
+        moods,
+        attractions: getAttractions(),
+        image: document.getElementById('cityImage').value.trim(),
+        gallery: document.getElementById('cityGallery').value.trim(),
+        mapUrl: document.getElementById('cityMapUrl').value.trim()
+    };
 
-            if (editingIndex === -1) {
-                // ADDING NEW
-                cities.push(cityObj);
-                showSuccess('✅ City "' + name + '" added successfully!');
-            } else {
-                // EDITING EXISTING
-                cities[editingIndex] = cityObj;
-                showSuccess('✅ City "' + name + '" updated successfully!');
-            }
+    const token = localStorage.getItem('token');
+    const url    = editingIndex === -1 ? 'http://localhost:3000/api/cities' : 'http://localhost:3000/api/cities/' + cities[editingIndex]._id;
+    const method = editingIndex === -1 ? 'POST' : 'PUT';
 
-            // Todo: When backend is ready, replace saveToStorage() with a fetch() call:
-            // fetch('/api/cities', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(cityObj) })
-            saveToStorage();
-            renderTable();
+    try {
+        const res  = await fetch(url, {
+            method,
+            headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+            body: JSON.stringify(cityObj)
+        });
+        const data = await res.json();
+        if (res.ok) {
+            showSuccess('✅ City "' + name + '" saved!');
+            await loadCities();
             closeModal();
+        } else {
+            alert(data.message || 'Error saving city');
         }
+    } catch(e) {
+        alert('Could not connect to backend');
+    }
+}
+
 
 
         // delete city
@@ -1329,15 +1333,22 @@
             document.getElementById('confirmOverlay').classList.remove('active');
         }
 
-        function confirmDelete() {
-            if (deleteIndex === -1) return;
-            var name = cities[deleteIndex].name;
-            cities.splice(deleteIndex, 1);
-            saveToStorage();
-            renderTable();
-            closeConfirm();
-            showSuccess('🗑️ "' + name + '" has been deleted.');
-        }
+        async function confirmDelete() {
+    if (deleteIndex === -1) return;
+    const token = localStorage.getItem('token');
+    try {
+        await fetch('http://localhost:3000/api/cities/' + cities[deleteIndex]._id, {
+            method: 'DELETE',
+            headers: { 'Authorization': 'Bearer ' + token }
+        });
+        const name = cities[deleteIndex].name;
+        await loadCities();
+        closeConfirm();
+        showSuccess('🗑️ "' + name + '" deleted.');
+    } catch(e) {
+        alert('Delete nahi ho saka.');
+    }
+}
 
     
         // view detail modal
@@ -1427,12 +1438,11 @@
             window.location.href = 'login.html';
         }
 
-        // ===================================================
+       
         // INIT
-        // ===================================================
-        loadCities();
-        renderTable();
-        addAttractionField(''); // start with one empty attraction field in the form
+        
+       loadCities();  
+addAttractionField('');
 
     </script>
 
