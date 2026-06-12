@@ -1,7 +1,7 @@
 // controllers/reviewcontroller.js
 const { pool } = require('../config/db');
 
-// ── GET reviews for a city ────────────────────────────────────
+//  GET reviews for a city 
 const getReviews = async (req, res) => {
   try {
     // Get destination_id from slug
@@ -36,7 +36,7 @@ const getReviews = async (req, res) => {
   }
 };
 
-// ── POST submit a review ──────────────────────────────────────
+//  POST submit a review 
 const addReview = async (req, res) => {
   try {
     const { stars, review_text } = req.body;
