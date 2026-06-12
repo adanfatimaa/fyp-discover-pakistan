@@ -480,34 +480,30 @@
         ];
 
 
-        
         // MAIN SEARCH FUNCTION
-        
+        function doSearch() {
+            const query = document.getElementById('search-input').value.trim();
+            if (!query) return;
+
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('results-container').innerHTML = '';
+            document.getElementById('no-results').style.display = 'none';
+            document.getElementById('result-info').innerHTML = '';
+
+            fetch('http://localhost:3000/api/cities/search?q=' + encodeURIComponent(query))
+                .then(function(res) { return res.json(); })
+                .then(function(data) {
+                    document.getElementById('loading').style.display = 'none';
+                    showResults(data.destinations || [], query);
+                })
+                .catch(function() {
+                    document.getElementById('loading').style.display = 'none';
+                    // Backend na chale to dummy data fallback
+                    searchFromDummyData(query);
+                });
+        }
 
 
-        // small delay to show spinner (remove this when using real backend)
-        setTimeout(function() {
-                searchFromDummyData(query);
-        }, 400);
-
-
- fetch('http://localhost:3000/api/cities/search?q=' + encodeURIComponent(query))
-        .then(res => res.json())
-        .then(data => {
-            document.getElementById('loading').style.display = 'none';
-            // data.destinations array aata hai
-            showResults(data.destinations || [], query);
-        })
-        .catch(() => {
-            document.getElementById('loading').style.display = 'none';
-            // Backend na chale to dummy data fallback
-            searchFromDummyData(query);
-        });
-
-
-
-
-            
         // search through dummy data (delete this function when backend is ready)
         function searchFromDummyData(query) {
             document.getElementById('loading').style.display = 'none';
@@ -561,10 +557,7 @@
         }
 
 
-    
         // ON PAGE LOAD
-        // read the ?q= from the URL and auto-search
-       
         window.addEventListener('DOMContentLoaded', function() {
 
             // get the search query from URL e.g. searchResults.html?q=hunza

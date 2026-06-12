@@ -1,7 +1,7 @@
 // controllers/authcontroller.js
 const bcrypt   = require('bcryptjs');
 const jwt      = require('jsonwebtoken');
-const { pool } = require('..backend/config/db');
+const { pool } = require('../config/db');
 
 // ── Signup ────────────────────────────────────────────────────
 const signup = async (req, res) => {

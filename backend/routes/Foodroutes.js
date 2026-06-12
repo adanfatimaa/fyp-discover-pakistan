@@ -3,7 +3,7 @@
 // MySQL mein food_categories + food_items tables hain
 const express  = require('express');
 const router   = express.Router();
-const { pool } = require('..backend/config/db');
+const { pool } = require('../config/db');
 
 // GET /api/food-categories
 // food_categories table + food_items joined karke bheja

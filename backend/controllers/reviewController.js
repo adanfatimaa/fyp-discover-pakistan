@@ -1,5 +1,5 @@
 // controllers/reviewcontroller.js
-const { pool } = require('..backend/config/db');
+const { pool } = require('../config/db');
 
 // ── GET reviews for a city ────────────────────────────────────
 const getReviews = async (req, res) => {

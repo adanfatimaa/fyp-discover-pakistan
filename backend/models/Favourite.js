@@ -1,7 +1,7 @@
 // models/Favourite.js
 // MySQL version — favourites table
 // favourites: favourite_id, user_id, destination_id, created_at
-const { pool } = require('..backend/config/db');
+const { pool } = require('../config/db');
 
 const Favourite = {
 

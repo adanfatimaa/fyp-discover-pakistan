@@ -1,4 +1,4 @@
-const Favourite = require("..backend/models/Favourite");
+const Favourite = require("../models/Favourite");
 
 // Add Favourite
 exports.addFavourite = async (req, res) => {

@@ -1,7 +1,7 @@
 // models/Review.js
 // MySQL version — reviews table
 // reviews: review_id, user_id, destination_id, stars, review_text, created_at
-const { pool } = require('..backend/config/db');
+const { pool } = require('../config/db');
 
 const Review = {
 

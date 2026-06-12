@@ -1,7 +1,7 @@
 // models/user.js
 // MySQL version — no mongoose
 // users table: user_id, full_name, email, password_hash, role, created_at
-const { pool } = require('..backend/config/db');
+const { pool } = require('../config/db');
 
 const User = {
 

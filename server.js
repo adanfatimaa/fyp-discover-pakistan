@@ -1,10 +1,11 @@
 // server.js  —  Discover Pakistan Backend (MySQL)
-const express   = require('express');
 const dotenv    = require('dotenv');
+dotenv.config();
+
+const express   = require('express');
 const cors      = require('cors');
 const path      = require('path');
-const db = require('.backend/config/db');
-dotenv.config();
+const { pool, connectDB } = require('./backend/config/db');
 
 // ── Connect MySQL ─────────────────────────────────────────────
 connectDB();
@@ -26,9 +27,10 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'Frontend')));
 
 // ── Routes ────────────────────────────────────────────────────
-app.use('/api/auth',         require('.backend/routes/authroutes.js'));
-app.use('/api/cities',       require('.backend/routes/searchroutes.js'));
-app.use('/api',              require('.backend/routes/Foodroutes.js'));
+app.use('/api/auth',         require('./backend/routes/authroutes.js'));
+app.use('/api/cities',       require('./backend/routes/searchroutes.js'));
+app.use('/api',              require('./backend/routes/Foodroutes.js'));
+app.use('/api/reviews',      require('./backend/routes/reviewroutes.js'));
 
 // ── Health check ──────────────────────────────────────────────
 app.get('/api/health', (_req, res) => {

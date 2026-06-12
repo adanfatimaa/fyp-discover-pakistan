@@ -1,5 +1,4 @@
-CREATE DATABASE pakistan_travel_guide;
-USE pakistan_travel_guide;
+USE discover_pakistan;
 CREATE TABLE users (
   user_id       INT AUTO_INCREMENT PRIMARY KEY,
   full_name     VARCHAR(100) NOT NULL,

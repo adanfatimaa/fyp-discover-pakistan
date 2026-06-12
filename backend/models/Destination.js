@@ -1,7 +1,7 @@
 // models/Destination.js
 // MySQL version — no mongoose
 // Yeh file direct queries provide karti hai destination table ke liye
-const { pool } = require('..backend/config/db');
+const { pool } = require('../config/db');
 
 const Destination = {
 

@@ -1,7 +1,7 @@
 // controllers/citycontroller.js
 // Tumhara exact MySQL schema use kar raha hai:
 // Tables: destination, city_badges, places, restaurants, mood, destination_mood
-const { pool } = require('..backend/config/db');
+const { pool } = require('../config/db');
 
 // ── GET all destinations (for allDestinations.html) ───────────
 const getAllCities = async (req, res) => {

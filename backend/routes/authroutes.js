@@ -1,10 +1,11 @@
-// controllers/authcontroller.js
+const express = require('express');
+const router  = express.Router();
 const bcrypt   = require('bcryptjs');
 const jwt      = require('jsonwebtoken');
-const { pool } = require('..backend/config/db');
+const { pool } = require('../config/db');
 
-// ── Signup ────────────────────────────────────────────────────
-const signup = async (req, res) => {
+// ── Signup Route ────────────────────────────────────────────────────
+router.post('/signup', async (req, res) => {
   try {
     const { name, email, password } = req.body;
 
@@ -38,10 +39,10 @@ const signup = async (req, res) => {
     console.error('Signup error:', err.message);
     res.status(500).json({ message: 'Server error. Please try again.' });
   }
-};
+});
 
-// ── Login ─────────────────────────────────────────────────────
-const login = async (req, res) => {
+// ── Login Route ─────────────────────────────────────────────────────
+router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
 
@@ -85,10 +86,10 @@ const login = async (req, res) => {
     console.error('Login error:', err.message);
     res.status(500).json({ message: 'Server error. Please try again.' });
   }
-};
+});
 
-// ── Get current user (for auth check) ────────────────────────
-const getMe = async (req, res) => {
+// ── Get current user Route ────────────────────────
+router.get('/me', async (req, res) => {
   try {
     const [rows] = await pool.query(
       'SELECT user_id, full_name, email, role FROM users WHERE user_id = ?',
@@ -101,6 +102,7 @@ const getMe = async (req, res) => {
   } catch (err) {
     res.status(500).json({ message: 'Server error' });
   }
-};
+});
 
-module.exports = { signup, login, getMe };
+// 🔥 Ab server.js ko aik valid router object milega
+module.exports = router;
