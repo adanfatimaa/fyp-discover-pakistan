@@ -1,5 +1,4 @@
 // config/db.js  —  MySQL Connection Pool
-// mysql2/promise use kar rahe hain taake async/await kaam kare
 const mysql = require('mysql2/promise');
 
 const pool = mysql.createPool({
