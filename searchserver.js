@@ -6,7 +6,7 @@
 const express   = require('express');
 const dotenv    = require('dotenv');
 const cors      = require('cors');
-const { connectDB } = require('.backend/config/db');
+const { connectDB } = require('./backend/config/db');
 
 dotenv.config();
 connectDB();
@@ -17,7 +17,7 @@ app.use(cors({ origin: '*' }));
 app.use(express.json());
 
 // Search route only
-app.use('/api/search', require('.backend/routes/searchRoutes'));
+app.use('/api/search', require('./backend/routes/searchRoutes'));
 
 app.get('/', (_req, res) => {
   res.json({ message: 'Search Server running' });

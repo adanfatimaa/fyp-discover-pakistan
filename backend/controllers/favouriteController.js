@@ -1,31 +1,28 @@
-const Favourite = require("../models/Favourite");
+const { pool } = require('../config/db'); // MySQL connection import karein
 
-// Add Favourite
+// Add Favourite (MySQL)
 exports.addFavourite = async (req, res) => {
   try {
-    const favourite = await Favourite.create({
-      userId: req.body.userId,
-      destinationId: req.params.destinationId,
-    });
+    const { userId, destinationId } = req.body;
+    await pool.query(
+      'INSERT INTO favourites (user_id, destination_id) VALUES (?, ?)',
+      [userId, destinationId]
+    );
 
-    res.status(201).json({
-      success: true,
-      data: favourite,
-    });
+    res.status(201).json({ success: true, message: "Favourite added" });
   } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: error.message,
-    });
+    res.status(500).json({ success: false, message: error.message });
   }
 };
 
-// Get User Favourites
+// Get User Favourites (MySQL)
 exports.getFavourites = async (req, res) => {
   try {
-    const favourites = await Favourite.find({
-      userId: req.query.userId,
-    });
+    const userId = req.query.userId;
+    const [favourites] = await pool.query(
+      'SELECT * FROM favourites WHERE user_id = ?',
+      [userId]
+    );
 
     res.status(200).json({
       success: true,
@@ -33,29 +30,21 @@ exports.getFavourites = async (req, res) => {
       data: favourites,
     });
   } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: error.message,
-    });
+    res.status(500).json({ success: false, message: error.message });
   }
 };
 
-// Delete Favourite
+// Delete Favourite (MySQL)
 exports.deleteFavourite = async (req, res) => {
   try {
-    await Favourite.findOneAndDelete({
-      userId: req.query.userId,
-      destinationId: req.params.destinationId,
-    });
+    const { userId, destinationId } = req.query;
+    await pool.query(
+      'DELETE FROM favourites WHERE user_id = ? AND destination_id = ?',
+      [userId, destinationId]
+    );
 
-    res.status(200).json({
-      success: true,
-      message: "Favourite removed",
-    });
+    res.status(200).json({ success: true, message: "Favourite removed" });
   } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: error.message,
-    });
+    res.status(500).json({ success: false, message: error.message });
   }
 };

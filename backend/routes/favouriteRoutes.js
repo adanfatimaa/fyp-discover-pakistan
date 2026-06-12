@@ -1,13 +1,13 @@
 // routes/favouriteRoutes.js
 const express = require('express');
 const router  = express.Router();
-const { protect } = require('..backend/middleware/authmiddleware');
+const { protect } = require('../backend/middleware/authmiddleware');
 const {
   saveFavourite,
   removeFavourite,
   checkFavourite,
   getUserFavourites
-} = require('..backend/controllers/favouriteController');
+} = require('../backend/controllers/favouriteController');
 
 // All favourite routes require login
 router.use(protect);

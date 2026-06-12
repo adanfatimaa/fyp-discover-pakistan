@@ -27,10 +27,10 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'Frontend')));
 
 // ── Routes ────────────────────────────────────────────────────
-app.use('/api/auth',         require('./backend/routes/authroutes.js'));
-app.use('/api/cities',       require('./backend/routes/searchroutes.js'));
-app.use('/api',              require('./backend/routes/Foodroutes.js'));
-app.use('/api/reviews',      require('./backend/routes/reviewroutes.js'));
+app.use('/api/auth',         require('./backend/routes/authroutes'));
+app.use('/api/cities',       require('./backend/routes/searchRoutes'));
+app.use('/api',              require('./backend/routes/Foodroutes'));
+app.use('/api/reviews',      require('./backend/routes/reviewRoutes'));
 
 // ── Health check ──────────────────────────────────────────────
 app.get('/api/health', (_req, res) => {
