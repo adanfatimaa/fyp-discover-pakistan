@@ -1,8 +1,4 @@
 // searchserver.js
-// NOTE: Yeh file ab zaruri nahi — search route server.js mein hi hai
-// /api/search?q=lahore  — directly server.js handle karta hai
-// Lekin agar alag search server chahiye to:
-
 const express   = require('express');
 const dotenv    = require('dotenv');
 const cors      = require('cors');
