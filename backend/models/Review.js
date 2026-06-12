@@ -1,11 +1,9 @@
 // models/Review.js
-// MySQL version — reviews table
-// reviews: review_id, user_id, destination_id, stars, review_text, created_at
+
 const { pool } = require('../config/db');
 
 const Review = {
 
-  // City ke reviews lao (slug se)
   getBySlug: async (slug) => {
     const [rows] = await pool.query(
       `SELECT r.review_id, r.stars, r.review_text, r.created_at,
@@ -20,7 +18,6 @@ const Review = {
     return rows;
   },
 
-  // Review add karo
   create: async (userId, destinationId, stars, reviewText) => {
     const [result] = await pool.query(
       'INSERT INTO reviews (user_id, destination_id, stars, review_text) VALUES (?, ?, ?, ?)',
@@ -29,7 +26,6 @@ const Review = {
     return result.insertId;
   },
 
-  // Average rating calculate karo
   getAverage: async (destinationId) => {
     const [rows] = await pool.query(
       'SELECT AVG(stars) AS average, COUNT(*) AS total FROM reviews WHERE destination_id = ?',
