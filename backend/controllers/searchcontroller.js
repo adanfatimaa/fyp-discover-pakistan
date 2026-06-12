@@ -1,4 +1,4 @@
-const Destination = require("../models/Destination");
+const Destination = require("..backend/models/Destination");
 
 const searchDestination = async (req, res) => {
   try {

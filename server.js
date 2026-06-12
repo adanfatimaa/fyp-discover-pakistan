@@ -1,37 +1,50 @@
-const express = require("express");
-const dotenv = require("dotenv");
-const dns = require("dns");
-const connectDB = require("./config/db");
-const searchRoutes = require("./routes/searchRoutes.js");
-const reviewRoutes = require("./routes/reviewRoutes.js");
-const favouriteRoutes = require("./routes/favouriteRoutes.js");
-
-
-// Load .env
+// server.js  —  Discover Pakistan Backend (MySQL)
+const express   = require('express');
+const dotenv    = require('dotenv');
+const cors      = require('cors');
+const path      = require('path');
+const db = require('.backend/config/db');
 dotenv.config();
 
-// Change DNS servers
-dns.setServers(["1.1.1.1", "8.8.8.8"]);
-
-// Connect MongoDB
+// ── Connect MySQL ─────────────────────────────────────────────
 connectDB();
 
 const app = express();
 
+// ── Middleware ────────────────────────────────────────────────
+app.use(cors({
+  origin: [
+    'http://127.0.0.1:5500',
+    'http://localhost:5500',
+    'http://localhost:3000'
+  ],
+  credentials: true
+}));
 app.use(express.json());
 
-// Routes
-app.use("/api", searchRoutes);
-app.use("/api/reviews", reviewRoutes);
-app.use("/api/favourites", favouriteRoutes);
+// Optional: serve frontend folder directly
+app.use(express.static(path.join(__dirname, 'Frontend')));
 
-app.get("/", (req, res) => {
-  res.send("API is running...");
+// ── Routes ────────────────────────────────────────────────────
+app.use('/api/auth',         require('.backend/routes/authroutes.js'));
+app.use('/api/cities',       require('.backend/routes/searchroutes.js'));
+app.use('/api',              require('.backend/routes/Foodroutes.js'));
+
+// ── Health check ──────────────────────────────────────────────
+app.get('/api/health', (_req, res) => {
+  res.json({
+    status:   'OK',
+    database: 'MySQL',
+    message:  'Discover Pakistan API running'
+  });
 });
 
-const PORT = process.env.PORT || 5000;
+app.get('/', (_req, res) => {
+  res.json({ message: 'Discover Pakistan API — MySQL Backend' });
+});
+
+// ── Start ─────────────────────────────────────────────────────
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`  Server running on http://localhost:${PORT}`);
 });
-
-

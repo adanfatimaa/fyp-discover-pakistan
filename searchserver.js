@@ -1,51 +1,30 @@
-require("dotenv").config();
-const express = require("express");
-const mongoose = require("mongoose");
-const dns = require("dns")
-const searchRoutes= require("./routes/searchRoutes.js");
-const reviewRoutes= require("./routes/reviewRoutes.js");
-const favouriteRoutes = require("./routes/favouriteRoutes.js");
- 
-const connectDB = require("./config/db");
-// Load .env
-require("dotenv").config();
-// Change DNS servers
-dns.setServers(["1.1.1.1", "8.8.8.8"]);
+// searchserver.js
+// NOTE: Yeh file ab zaruri nahi — search route server.js mein hi hai
+// /api/search?q=lahore  — directly server.js handle karta hai
+// Lekin agar alag search server chahiye to:
+
+const express   = require('express');
+const dotenv    = require('dotenv');
+const cors      = require('cors');
+const { connectDB } = require('.backend/config/db');
+
+dotenv.config();
+connectDB();
+
 const app = express();
 
-// Middleware
+app.use(cors({ origin: '*' }));
 app.use(express.json());
 
-// MongoDB Connection
-connectDB();
-mongoose.connect(process.env.MONGO_URI)
-.then(() => {
-    console.log("MongoDB Connected");
-})
-.catch((err) => {
-    console.log("MongoDB Connection Error:", err.message);
+// Search route only
+app.use('/api/search', require('.backend/routes/searchRoutes'));
+
+app.get('/', (_req, res) => {
+  res.json({ message: 'Search Server running' });
 });
 
-// Routes
-app.get("/api/test-direct", (req, res) => {
-    res.json({ message: "Direct route is working" });
-});
-app.use("/api", searchRoutes);
-app.use("/api/reviews", reviewRoutes);
-app.use("/api/favourites", favouriteRoutes);
-// Default Route
-app.get("/", (req, res) => {
-    res.send("API Working");
-});
-    
-        
-        
-
-
-// Start Server
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.SEARCH_PORT || 5000;
 app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+  console.log(`  Search Server: http://localhost:${PORT}`);
+  console.log(`  Search API:   http://localhost:${PORT}/api/search?q=lahore`);
 });
-
-
