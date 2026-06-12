@@ -3,7 +3,7 @@ const bcrypt   = require('bcryptjs');
 const jwt      = require('jsonwebtoken');
 const { pool } = require('../config/db');
 
-// ── Signup ────────────────────────────────────────────────────
+//  Signup
 const signup = async (req, res) => {
   try {
     const { name, email, password } = req.body;
@@ -40,7 +40,7 @@ const signup = async (req, res) => {
   }
 };
 
-// ── Login ─────────────────────────────────────────────────────
+//  Login 
 const login = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -87,7 +87,7 @@ const login = async (req, res) => {
   }
 };
 
-// ── Get current user (for auth check) ────────────────────────
+//  Get current user (for auth check) 
 const getMe = async (req, res) => {
   try {
     const [rows] = await pool.query(
