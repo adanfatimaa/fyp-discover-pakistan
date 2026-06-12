@@ -260,7 +260,7 @@ Travel Guide Response (streaming or standard)
 | Name | Role |
 |---|---|
 | **Aisha Amir** |  AI/RAG (Python),Backend (Node.js), Database Design ,Testing |
-| **Adan Fatima** | Frontend Development, UI/UX ,Testing |
+| **Adan Fatima** | Frontend Development, UI/UX , Database Design ,Testing |
 | **Seeman Bibi** | Backend Development  |
 | **Sidra Ghafoor** | Database Development |
 
