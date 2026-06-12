@@ -1,11 +1,9 @@
 // models/Destination.js
-// MySQL version — no mongoose
-// Yeh file direct queries provide karti hai destination table ke liye
 const { pool } = require('../config/db');
 
 const Destination = {
 
-  // Sab destinations lao
+  
   getAll: async () => {
     const [rows] = await pool.query(
       `SELECT d.*,
@@ -21,7 +19,7 @@ const Destination = {
     return rows;
   },
 
-  // Slug se single destination
+  
   getBySlug: async (slug) => {
     const [rows] = await pool.query(
       `SELECT d.*,
@@ -38,7 +36,7 @@ const Destination = {
     return rows[0] || null;
   },
 
-  // ID se single destination
+ 
   getById: async (id) => {
     const [rows] = await pool.query(
       'SELECT * FROM destination WHERE destination_id = ?',
@@ -47,7 +45,7 @@ const Destination = {
     return rows[0] || null;
   },
 
-  // Search by name, province, description
+ 
   search: async (keyword) => {
     const like = `%${keyword}%`;
     const [rows] = await pool.query(
@@ -63,7 +61,6 @@ const Destination = {
     return rows;
   },
 
-  // Mood ke hisaab se destinations
   getByMood: async (moodName) => {
     const [rows] = await pool.query(
       `SELECT d.*, d.hero_image AS image
@@ -77,7 +74,6 @@ const Destination = {
     return rows;
   },
 
-  // Naya destination add karo (admin)
   create: async (conn, data) => {
     const { name, slug, province, description, tagline,
             hero_image, population, language, best_season } = data;
@@ -92,7 +88,6 @@ const Destination = {
     return result.insertId;
   },
 
-  // Update destination (admin)
   update: async (id, data) => {
     const { name, province, description, tagline,
             hero_image, population, language, best_season } = data;
@@ -107,7 +102,6 @@ const Destination = {
     );
   },
 
-  // Delete destination (admin)
   delete: async (conn, id) => {
     // Foreign key order mein delete karo
     await conn.query('DELETE FROM city_badges      WHERE destination_id = ?', [id]);
