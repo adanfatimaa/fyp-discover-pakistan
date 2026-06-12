@@ -1,7 +1,7 @@
 // middleware/authmiddleware.js
 const jwt = require('jsonwebtoken');
 
-// ── Verify JWT ────────────────────────────────────────────────
+//  Verify JWT 
 const protect = (req, res, next) => {
   try {
     const authHeader = req.headers.authorization;
@@ -17,7 +17,7 @@ const protect = (req, res, next) => {
   }
 };
 
-// ── Admin only ────────────────────────────────────────────────
+//  Admin only 
 const adminOnly = (req, res, next) => {
   if (req.user?.role !== 'admin') {
     return res.status(403).json({ message: 'Admin access required.' });
