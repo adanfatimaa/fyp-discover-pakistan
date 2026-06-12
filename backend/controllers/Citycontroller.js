@@ -1,9 +1,7 @@
 // controllers/citycontroller.js
-// Tumhara exact MySQL schema use kar raha hai:
-// Tables: destination, city_badges, places, restaurants, mood, destination_mood
 const { pool } = require('../config/db');
 
-// ── GET all destinations (for allDestinations.html) ───────────
+//  GET all destinations 
 const getAllCities = async (req, res) => {
   try {
     const [cities] = await pool.query(
@@ -24,7 +22,7 @@ const getAllCities = async (req, res) => {
   }
 };
 
-// ── GET single destination by slug (for destination.html) ─────
+//  GET single destination by slug 
 const getCityBySlug = async (req, res) => {
   try {
     const slug = req.params.slug;
@@ -77,7 +75,7 @@ const getCityBySlug = async (req, res) => {
   }
 };
 
-// ── GET search destinations (for searchResults.html) ──────────
+//  GET search destinations 
 const searchCities = async (req, res) => {
   try {
     const keyword = req.query.q || req.query.keyword || '';
@@ -101,7 +99,7 @@ const searchCities = async (req, res) => {
   }
 };
 
-// ── GET destinations by mood (for recommendation.html) ────────
+//  GET destinations by mood 
 const getCitiesByMood = async (req, res) => {
   try {
     const mood = req.params.mood; // e.g. 'Adventure', 'Cultural'
@@ -123,7 +121,7 @@ const getCitiesByMood = async (req, res) => {
   }
 };
 
-// ── POST add new destination (admin only) ─────────────────────
+// POST add new destination (admin only)
 const addCity = async (req, res) => {
   const conn = await pool.getConnection();
   try {
@@ -181,7 +179,7 @@ const addCity = async (req, res) => {
   }
 };
 
-// ── PUT update destination (admin only) ───────────────────────
+//  PUT update destination (admin only) 
 const updateCity = async (req, res) => {
   try {
     const { name, province, description, tagline,
@@ -203,7 +201,7 @@ const updateCity = async (req, res) => {
   }
 };
 
-// ── DELETE destination (admin only) ───────────────────────────
+//  DELETE destination (admin only) 
 const deleteCity = async (req, res) => {
   const conn = await pool.getConnection();
   try {
