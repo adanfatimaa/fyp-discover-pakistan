@@ -14,7 +14,6 @@ const searchDestination = async (req, res) => {
         }
 
         // 2. Raw MySQL Query execution
-        // Table ka naam 'destination' aur column 'name' ya 'province' ke mutabiq search karega
         const [rows] = await pool.query(
             'SELECT * FROM destination WHERE name LIKE ? OR province LIKE ?', 
             [`%${city}%`, `%${city}%`]
