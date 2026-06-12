@@ -4,7 +4,7 @@ const bcrypt   = require('bcryptjs');
 const jwt      = require('jsonwebtoken');
 const { pool } = require('../config/db');
 
-// ── Signup Route ────────────────────────────────────────────────────
+//  Signup Route 
 router.post('/signup', async (req, res) => {
   try {
     const { name, email, password } = req.body;
@@ -16,7 +16,6 @@ router.post('/signup', async (req, res) => {
       return res.status(400).json({ message: 'Password must be at least 6 characters' });
     }
 
-    // Check if email already exists
     const [existing] = await pool.query(
       'SELECT user_id FROM users WHERE email = ?',
       [email]
@@ -27,7 +26,6 @@ router.post('/signup', async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Insert into MySQL users table
     await pool.query(
       'INSERT INTO users (full_name, email, password_hash) VALUES (?, ?, ?)',
       [name, email, hashedPassword]
@@ -41,7 +39,6 @@ router.post('/signup', async (req, res) => {
   }
 });
 
-// ── Login Route ─────────────────────────────────────────────────────
 router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -50,7 +47,6 @@ router.post('/login', async (req, res) => {
       return res.status(400).json({ message: 'Please enter email and password' });
     }
 
-    // Fetch user from MySQL
     const [rows] = await pool.query(
       'SELECT user_id, full_name, email, password_hash, role FROM users WHERE email = ?',
       [email]
@@ -67,14 +63,12 @@ router.post('/login', async (req, res) => {
       return res.status(400).json({ message: 'Invalid email or password' });
     }
 
-    // Sign JWT — id = user_id, role from DB
     const token = jwt.sign(
       { id: user.user_id, role: user.role },
       process.env.JWT_SECRET,
       { expiresIn: '7d' }
     );
 
-    // Frontend login.js expects: token, role, name
     res.status(200).json({
       message: 'Login successful',
       token,
@@ -88,7 +82,6 @@ router.post('/login', async (req, res) => {
   }
 });
 
-// ── Get current user Route ────────────────────────
 router.get('/me', async (req, res) => {
   try {
     const [rows] = await pool.query(
@@ -104,5 +97,4 @@ router.get('/me', async (req, res) => {
   }
 });
 
-// 🔥 Ab server.js ko aik valid router object milega
 module.exports = router;
