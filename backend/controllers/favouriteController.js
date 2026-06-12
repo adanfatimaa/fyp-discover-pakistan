@@ -1,4 +1,4 @@
-const { pool } = require('../config/db'); // MySQL connection import karein
+const { pool } = require('../config/db'); 
 
 // Add Favourite (MySQL)
 exports.addFavourite = async (req, res) => {
