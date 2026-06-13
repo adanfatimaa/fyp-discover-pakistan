@@ -1295,7 +1295,7 @@
     };
 
     const token = localStorage.getItem('token');
-    const url    = editingIndex === -1 ? 'http://localhost:3000/api/cities' : 'http://localhost:3000/api/cities/' + cities[editingIndex]._id;
+    const url    = editingIndex === -1 ? 'http://localhost:3000/api/cities' : 'http://localhost:3000/api/cities/' + cities[editingIndex].destination_id;
     const method = editingIndex === -1 ? 'POST' : 'PUT';
 
     try {
@@ -1337,7 +1337,7 @@
     if (deleteIndex === -1) return;
     const token = localStorage.getItem('token');
     try {
-        await fetch('http://localhost:3000/api/cities/' + cities[deleteIndex]._id, {
+        await fetch('http://localhost:3000/api/cities/' + cities[deleteIndex].destination_id, {
             method: 'DELETE',
             headers: { 'Authorization': 'Bearer ' + token }
         });

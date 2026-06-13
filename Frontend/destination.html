@@ -647,36 +647,24 @@
 
 </head>
 
-<body>
 
+<body>
 
     <div id="navbar"></div>
 
-    <!-- ==============================================================
-         HERO SECTION
-         NOW: hardcoded Lahore data
-         BACKEND/DB LATER: JS will fill city name, tagline, image,
-         and badges from API. Functions are written below, just
-         uncomment loadCityData() in the script.
-    ============================================================== -->
+    <!-- HERO — filled dynamically by JS -->
     <div class="hero">
         <div class="hero-bg" id="hero-bg"></div>
         <div class="hero-overlay"></div>
         <div class="hero-content">
             <div class="hero-tag">Destination Guide</div>
-            <h1 class="hero-title" id="hero-title">Lahore</h1>
-            <p class="hero-sub" id="hero-sub">The Cultural Heart of Pakistan</p>
-            <div class="hero-badges" id="hero-badges">
-                <!-- BACKEND/DB LATER: built by JS from city.badges array -->
-                <span class="badge">Punjab Province</span>
-                <span class="badge">Best in Winter</span>
-                <span class="badge">Food Capital</span>
-                <span class="badge">Mughal Heritage</span>
-            </div>
+            <h1 class="hero-title" id="hero-title">Loading...</h1>
+            <p class="hero-sub" id="hero-sub"></p>
+            <div class="hero-badges" id="hero-badges"></div>
         </div>
     </div>
 
-    <!-- TABS — purely frontend, no backend needed -->
+    <!-- TABS -->
     <div class="tabs-bar">
         <button class="tab-btn active" data-tab="overview">Overview</button>
         <button class="tab-btn" data-tab="places">Places</button>
@@ -694,83 +682,63 @@
             <!-- ======== OVERVIEW TAB ======== -->
             <div class="tab-section active" id="tab-overview">
 
+                <!-- Weather -->
                 <div class="section">
                     <div class="section-title">Current Weather</div>
                     <div class="weather-card">
                         <div class="weather-top">
                             <div class="weather-left">
-                                <div class="weather-icon-circle" id="weather-icon">☀️</div>
+                                <div class="weather-icon-circle" id="weather-icon">⏳</div>
                                 <div>
-                                    <div class="weather-temp-big" id="weather-temp">25°C</div>
-                                    <div class="weather-condition" id="weather-condition">Partly Cloudy · Lahore</div>
+                                    <div class="weather-temp-big" id="weather-temp">--°C</div>
+                                    <div class="weather-condition" id="weather-condition">Loading weather...</div>
                                 </div>
                             </div>
                             <div class="weather-details-grid">
-                                <span class="w-label">Humidity</span>   <span class="w-value" id="w-humidity">62%</span>
-                                <span class="w-label">Wind</span>        <span class="w-value" id="w-wind">12 km/h</span>
-                                <span class="w-label">UV Index</span>   <span class="w-value" id="w-uv">Moderate</span>
-                                <span class="w-label">Visibility</span> <span class="w-value" id="w-vis">8 km</span>
+                                <span class="w-label">Humidity</span>   <span class="w-value" id="w-humidity">--%</span>
+                                <span class="w-label">Wind</span>        <span class="w-value" id="w-wind">-- km/h</span>
+                                <span class="w-label">UV Index</span>   <span class="w-value" id="w-uv">--</span>
+                                <span class="w-label">Visibility</span> <span class="w-value" id="w-vis">-- km</span>
                             </div>
                         </div>
-                        
                         <div class="forecast-row" id="forecast-row">
-                            <div class="forecast-day"><div class="fc-label">Mon</div><div class="fc-icon">☀️</div><div class="fc-temp">28°</div></div>
-                            <div class="forecast-day"><div class="fc-label">Tue</div><div class="fc-icon">⛅</div><div class="fc-temp">25°</div></div>
-                            <div class="forecast-day"><div class="fc-label">Wed</div><div class="fc-icon">🌧️</div><div class="fc-temp">19°</div></div>
-                            <div class="forecast-day"><div class="fc-label">Thu</div><div class="fc-icon">☀️</div><div class="fc-temp">27°</div></div>
-                            <div class="forecast-day"><div class="fc-label">Fri</div><div class="fc-icon">⛅</div><div class="fc-temp">24°</div></div>
+                            <!-- filled by JS -->
                         </div>
                     </div>
                 </div>
 
-             
+                <!-- Places preview (first 6) -->
                 <div class="section">
                     <div class="section-title">Places to Visit</div>
                     <div class="places-grid" id="places-grid">
-                        <div class="place-card"><div class="place-img" style="background:#f0e6d3">🕌</div><div class="place-body"><div class="place-name">Badshahi Mosque</div><div class="place-type">Historic · Mosque</div><div class="place-meta"><span class="place-rating">★ 4.9</span><span class="place-dist">2.1 km</span></div></div></div>
-                        <div class="place-card"><div class="place-img" style="background:#e8f0e3">🏰</div><div class="place-body"><div class="place-name">Lahore Fort</div><div class="place-type">Heritage · Museum</div><div class="place-meta"><span class="place-rating">★ 4.8</span><span class="place-dist">2.3 km</span></div></div></div>
-                        <div class="place-card"><div class="place-img" style="background:#e8eef5">🌿</div><div class="place-body"><div class="place-name">Shalimar Gardens</div><div class="place-type">Nature · Heritage</div><div class="place-meta"><span class="place-rating">★ 4.7</span><span class="place-dist">8.5 km</span></div></div></div>
-                        <div class="place-card"><div class="place-img" style="background:#fdeef3">🎨</div><div class="place-body"><div class="place-name">Walled City</div><div class="place-type">Culture · Architecture</div><div class="place-meta"><span class="place-rating">★ 4.6</span><span class="place-dist">1.8 km</span></div></div></div>
-                        <div class="place-card"><div class="place-img" style="background:#eef5e8">🦁</div><div class="place-body"><div class="place-name">Lahore Zoo</div><div class="place-type">Family · Nature</div><div class="place-meta"><span class="place-rating">★ 4.2</span><span class="place-dist">3.4 km</span></div></div></div>
-                        <div class="place-card"><div class="place-img" style="background:#f5f0e8">🏛️</div><div class="place-body"><div class="place-name">Lahore Museum</div><div class="place-type">Art · History</div><div class="place-meta"><span class="place-rating">★ 4.5</span><span class="place-dist">1.2 km</span></div></div></div>
+                        <p style="color:#999;font-size:13px;">Loading places...</p>
                     </div>
                 </div>
 
-                <!-- RESTAURANTS
-                     BACKEND/DB LATER: built by renderRestaurants() using
-                     /api/restaurants?city=lahore — function is ready below -->
+                <!-- Restaurants preview -->
                 <div class="section">
                     <div class="section-title">Where to Eat</div>
-                    <p style="font-size:12px;color:#666666;margin-bottom:12px;">Famous spots and hidden gems</p>
+                    <p style="font-size:12px;color:#666666;margin-bottom:12px;">Top rated spots</p>
                     <div class="restaurant-list" id="restaurant-list">
-                        <div class="rest-row"><div class="rest-icon" style="background:#fff3e0">🍖</div><div class="rest-info"><div class="rest-name">Butt Karahi</div><div class="rest-tag">Karahi · Walled City</div></div><div class="rest-right"><div class="rest-rating">★ 4.9</div><div class="rest-price">₨ 800–1500</div></div></div>
-                        <div class="rest-row"><div class="rest-icon" style="background:#e8f5e0">🥘</div><div class="rest-info"><div class="rest-name">Haveli Restaurant</div><div class="rest-tag">Traditional · Heritage building</div></div><div class="rest-right"><div class="rest-rating">★ 4.7</div><div class="rest-price">₨ 2000–4000</div></div></div>
-                        <div class="rest-row is-gem"><div class="rest-icon" style="background:#fff8ed">🥙</div><div class="rest-info"><div class="rest-name">Andaaz Lahori Dhaba</div><div class="rest-tag">Street food · Old Anarkali</div></div><div class="rest-right"><div class="gem-badge">Hidden gem</div><div class="rest-rating">★ 4.8</div><div class="rest-price">₨ 300–600</div></div></div>
-                        <div class="rest-row is-gem"><div class="rest-icon" style="background:#fef3e8">🍯</div><div class="rest-info"><div class="rest-name">Chaudhry Halwa Puri</div><div class="rest-tag">Breakfast · Shah Alam Market</div></div><div class="rest-right"><div class="gem-badge">Hidden gem</div><div class="rest-rating">★ 4.9</div><div class="rest-price">₨ 150–350</div></div></div>
+                        <p style="color:#999;font-size:13px;">Loading restaurants...</p>
                     </div>
                 </div>
 
-                <!-- REVIEWS
-                     BACKEND/DB LATER: built by renderReviews() using
-                     /api/reviews?city=lahore — function is ready below -->
+                <!-- Reviews snapshot -->
                 <div class="section">
                     <div class="section-title">Traveler Reviews</div>
                     <div class="reviews-header">
                         <div class="avg-block">
-                            <div class="avg-num" id="avg-rating">4.8</div>
+                            <div class="avg-num" id="avg-rating">--</div>
                             <div>
-                                <div class="avg-stars">★★★★★</div>
-                                <div class="avg-count" id="review-count">Based on 2,341 reviews</div>
+                                <div class="avg-stars" id="avg-stars-display">☆☆☆☆☆</div>
+                                <div class="avg-count" id="review-count">Loading reviews...</div>
                             </div>
                         </div>
                         <button class="write-btn" id="write-review-btn">+ Write a Review</button>
                     </div>
-                    <div id="reviews-list">
-                        <div class="review-card"><div class="reviewer-row"><div class="avatar">AK</div><div><div class="reviewer-name">Ahmed K.</div><div class="reviewer-date">Visited March 2026</div></div></div><div class="review-stars">★★★★★</div><div class="review-text">The food scene in Lahore is absolutely unmatched. Butt Karahi at 2am was a spiritual experience. The Walled City walking tour is a must.</div><span class="review-place-tag">📍 Badshahi Mosque, Walled City</span></div>
-                        <div class="review-card"><div class="reviewer-row"><div class="avatar">SN</div><div><div class="reviewer-name">Sara N.</div><div class="reviewer-date">Visited January 2026</div></div></div><div class="review-stars">★★★★☆</div><div class="review-text">Lahore Fort exceeded every expectation. The Sheesh Mahal is breathtaking. Haveli Restaurant has the best rooftop view of Badshahi.</div><span class="review-place-tag">📍 Lahore Fort, Haveli Restaurant</span></div>
-                    </div>
+                    <div id="reviews-list"></div>
                     <div class="view-all-reviews">
-                        <!-- clicking this could switch to the Reviews tab -->
                         <a href="#" id="view-all-link">View all reviews →</a>
                     </div>
                 </div>
@@ -782,14 +750,7 @@
                 <div class="section">
                     <div class="section-title">All Places to Visit</div>
                     <div class="places-grid" id="places-grid-full">
-                        <div class="place-card"><div class="place-img" style="background:#f0e6d3">🕌</div><div class="place-body"><div class="place-name">Badshahi Mosque</div><div class="place-type">Historic · Mosque</div><div class="place-meta"><span class="place-rating">★ 4.9</span><span class="place-dist">2.1 km</span></div></div></div>
-                        <div class="place-card"><div class="place-img" style="background:#e8f0e3">🏰</div><div class="place-body"><div class="place-name">Lahore Fort</div><div class="place-type">Heritage · Museum</div><div class="place-meta"><span class="place-rating">★ 4.8</span><span class="place-dist">2.3 km</span></div></div></div>
-                        <div class="place-card"><div class="place-img" style="background:#e8eef5">🌿</div><div class="place-body"><div class="place-name">Shalimar Gardens</div><div class="place-type">Nature · Heritage</div><div class="place-meta"><span class="place-rating">★ 4.7</span><span class="place-dist">8.5 km</span></div></div></div>
-                        <div class="place-card"><div class="place-img" style="background:#fdeef3">🎨</div><div class="place-body"><div class="place-name">Walled City</div><div class="place-type">Culture · Architecture</div><div class="place-meta"><span class="place-rating">★ 4.6</span><span class="place-dist">1.8 km</span></div></div></div>
-                        <div class="place-card"><div class="place-img" style="background:#eef5e8">🦁</div><div class="place-body"><div class="place-name">Lahore Zoo</div><div class="place-type">Family · Nature</div><div class="place-meta"><span class="place-rating">★ 4.2</span><span class="place-dist">3.4 km</span></div></div></div>
-                        <div class="place-card"><div class="place-img" style="background:#f5f0e8">🏛️</div><div class="place-body"><div class="place-name">Lahore Museum</div><div class="place-type">Art · History</div><div class="place-meta"><span class="place-rating">★ 4.5</span><span class="place-dist">1.2 km</span></div></div></div>
-                        <div class="place-card"><div class="place-img" style="background:#f0f5e8">🌸</div><div class="place-body"><div class="place-name">Jilani Park</div><div class="place-type">Nature · Recreation</div><div class="place-meta"><span class="place-rating">★ 4.3</span><span class="place-dist">5.0 km</span></div></div></div>
-                        <div class="place-card"><div class="place-img" style="background:#f5e8f0">🎭</div><div class="place-body"><div class="place-name">Anarkali Bazaar</div><div class="place-type">Shopping · Culture</div><div class="place-meta"><span class="place-rating">★ 4.4</span><span class="place-dist">1.5 km</span></div></div></div>
+                        <p style="color:#999;font-size:13px;">Loading...</p>
                     </div>
                 </div>
             </div>
@@ -797,32 +758,25 @@
             <!-- ======== FOOD TAB ======== -->
             <div class="tab-section" id="tab-food">
                 <div class="section">
-                    <div class="section-title">Where to Eat in Lahore</div>
-                    <p style="font-size:12px;color:#666666;margin-bottom:16px;">Famous spots and hidden gems</p>
-                    <div class="restaurant-list">
-                        <div class="rest-row"><div class="rest-icon" style="background:#fff3e0">🍖</div><div class="rest-info"><div class="rest-name">Butt Karahi</div><div class="rest-tag">Karahi · Walled City</div></div><div class="rest-right"><div class="rest-rating">★ 4.9</div><div class="rest-price">₨ 800–1500</div></div></div>
-                        <div class="rest-row"><div class="rest-icon" style="background:#e8f5e0">🥘</div><div class="rest-info"><div class="rest-name">Haveli Restaurant</div><div class="rest-tag">Traditional · Heritage building</div></div><div class="rest-right"><div class="rest-rating">★ 4.7</div><div class="rest-price">₨ 2000–4000</div></div></div>
-                        <div class="rest-row is-gem"><div class="rest-icon" style="background:#fff8ed">🥙</div><div class="rest-info"><div class="rest-name">Andaaz Lahori Dhaba</div><div class="rest-tag">Street food · Old Anarkali</div></div><div class="rest-right"><div class="gem-badge">Hidden gem</div><div class="rest-rating">★ 4.8</div><div class="rest-price">₨ 300–600</div></div></div>
-                        <div class="rest-row is-gem"><div class="rest-icon" style="background:#fef3e8">🍯</div><div class="rest-info"><div class="rest-name">Chaudhry Halwa Puri</div><div class="rest-tag">Breakfast · Shah Alam Market</div></div><div class="rest-right"><div class="gem-badge">Hidden gem</div><div class="rest-rating">★ 4.9</div><div class="rest-price">₨ 150–350</div></div></div>
-                        <div class="rest-row"><div class="rest-icon" style="background:#e8f0ff">🍛</div><div class="rest-info"><div class="rest-name">Cuckoo's Den</div><div class="rest-tag">Mughlai · Heera Mandi</div></div><div class="rest-right"><div class="rest-rating">★ 4.6</div><div class="rest-price">₨ 1500–3000</div></div></div>
+                    <div class="section-title" id="food-tab-title">Where to Eat</div>
+                    <p style="font-size:12px;color:#666666;margin-bottom:16px;">Top rated spots</p>
+                    <div class="restaurant-list" id="restaurant-list-full">
+                        <p style="color:#999;font-size:13px;">Loading...</p>
                     </div>
                 </div>
             </div>
 
-            <!-- ======== MAP TAB ========
-                 FRONTEND ONLY: just an iframe, zero backend needed.
-                 BACKEND/DB LATER (optional): store embed URL in DB
-                 and set per city. -->
+            <!-- ======== MAP TAB ======== -->
             <div class="tab-section" id="tab-map">
                 <div class="section">
-                    <div class="section-title">Lahore on the Map</div>
+                    <div class="section-title" id="map-tab-title">On the Map</div>
                     <div style="border-radius:12px;overflow:hidden;border:1px solid #e0e0e0;height:420px;">
-                        <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d108851.93884882945!2d74.27432!3d31.5204!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39190483e58107d9%3A0xc23abe6ccc7e2462!2sLahore%2C%20Punjab%2C%20Pakistan!5e0!3m2!1sen!2s!4v1234567890"
+                        <iframe id="map-iframe-big"
+                            src=""
                             width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy">
                         </iframe>
                     </div>
-                    <a href="https://maps.google.com/?q=Lahore,Pakistan" target="_blank" class="map-link" style="margin-top:10px;display:inline-block;">Open in Google Maps →</a>
+                    <a id="map-link-big" href="#" target="_blank" class="map-link" style="margin-top:10px;display:inline-block;">Open in Google Maps →</a>
                 </div>
             </div>
 
@@ -832,15 +786,15 @@
                     <div class="section-title">All Traveler Reviews</div>
                     <div class="reviews-header">
                         <div class="avg-block">
-                            <div class="avg-num">4.8</div>
-                            <div><div class="avg-stars">★★★★★</div><div class="avg-count">Based on 2,341 reviews</div></div>
+                            <div class="avg-num" id="avg-rating-2">--</div>
+                            <div>
+                                <div class="avg-stars" id="avg-stars-display-2">☆☆☆☆☆</div>
+                                <div class="avg-count" id="review-count-2">Loading...</div>
+                            </div>
                         </div>
-                        <button class="write-btn">+ Write a Review</button>
+                        <button class="write-btn" id="write-review-btn-2">+ Write a Review</button>
                     </div>
-                    <!-- BACKEND/DB LATER: renderReviews() fills this -->
-                    <div class="review-card"><div class="reviewer-row"><div class="avatar">AK</div><div><div class="reviewer-name">Ahmed K.</div><div class="reviewer-date">Visited March 2026</div></div></div><div class="review-stars">★★★★★</div><div class="review-text">The food scene in Lahore is absolutely unmatched. Butt Karahi at 2am was a spiritual experience.</div><span class="review-place-tag">📍 Badshahi Mosque, Walled City</span></div>
-                    <div class="review-card"><div class="reviewer-row"><div class="avatar">SN</div><div><div class="reviewer-name">Sara N.</div><div class="reviewer-date">Visited January 2026</div></div></div><div class="review-stars">★★★★☆</div><div class="review-text">Lahore Fort exceeded every expectation. The Sheesh Mahal is breathtaking.</div><span class="review-place-tag">📍 Lahore Fort, Haveli Restaurant</span></div>
-                    <div class="review-card"><div class="reviewer-row"><div class="avatar">MR</div><div><div class="reviewer-name">Maria R.</div><div class="reviewer-date">Visited December 2025</div></div></div><div class="review-stars">★★★★★</div><div class="review-text">Shalimar Gardens at sunset is something else. Definitely coming back!</div><span class="review-place-tag">📍 Shalimar Gardens</span></div>
+                    <div id="reviews-list-full"></div>
                 </div>
             </div>
 
@@ -849,48 +803,33 @@
         <!-- RIGHT SIDEBAR -->
         <div class="right-col">
 
-            <!-- SAVE / SHARE
-                 BACKEND LATER: fav-btn → POST /api/favourites
-                 On page load: GET /api/favourites/check to set state -->
             <div class="action-btn">
                 <button class="fav-btn" id="fav-btn">🤍 Save to Favourites</button>
-            
             </div>
 
-            <!-- MAP SIDEBAR
-                 FRONTEND ONLY — just an iframe -->
+            <!-- Map sidebar -->
             <div class="sidebar-section">
                 <div class="sidebar-label">Location</div>
                 <div class="map-frame">
-                    <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d108851.93884882945!2d74.27432!3d31.5204!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39190483e58107d9%3A0xc23abe6ccc7e2462!2sLahore%2C%20Punjab%2C%20Pakistan!5e0!3m2!1sen!2s!4v1234567890"
-                        allowfullscreen="" loading="lazy">
-                    </iframe>
+                    <iframe id="map-iframe-sidebar" src="" allowfullscreen="" loading="lazy"></iframe>
                 </div>
-                <a href="https://maps.google.com/?q=Lahore,Pakistan" target="_blank" class="map-link">Open in Google Maps →</a>
+                <a id="map-link-sidebar" href="#" target="_blank" class="map-link">Open in Google Maps →</a>
             </div>
 
-            <!-- QUICK FACTS
-                 BACKEND/DB LATER: each id="fact-*" filled by JS
-                 using city data from /api/city?name=lahore -->
+            <!-- Quick Facts — filled by JS from DB -->
             <div class="sidebar-section">
                 <div class="sidebar-label">Quick Facts</div>
                 <div class="facts-list">
-                    <div class="fact-row"><span class="fact-label">Province</span>   <span class="fact-value" id="fact-province">Punjab</span></div>
-                    <div class="fact-row"><span class="fact-label">Population</span> <span class="fact-value" id="fact-population">~14 million</span></div>
-                    <div class="fact-row"><span class="fact-label">Language</span>   <span class="fact-value" id="fact-language">Punjabi, Urdu</span></div>
-                    <div class="fact-row"><span class="fact-label">Best season</span><span class="fact-value" id="fact-season">Oct – Feb</span></div>
-                    <div class="fact-row"><span class="fact-label">Airport</span>    <span class="fact-value" id="fact-airport">Allama Iqbal Intl</span></div>
+                    <div class="fact-row"><span class="fact-label">Province</span>   <span class="fact-value" id="fact-province">--</span></div>
+                    <div class="fact-row"><span class="fact-label">Population</span> <span class="fact-value" id="fact-population">--</span></div>
+                    <div class="fact-row"><span class="fact-label">Language</span>   <span class="fact-value" id="fact-language">--</span></div>
+                    <div class="fact-row"><span class="fact-label">Best Season</span><span class="fact-value" id="fact-season">--</span></div>
                 </div>
             </div>
 
-            <!-- TRAVEL TIPS — 100% static, no backend ever needed -->
-            <div class="sidebar-section">
-                <div class="sidebar-label">Travel Tips</div>
-                <div class="tip-card"><div class="tip-title">🕐 Best Time to Visit</div><div class="tip-text">October to February offers pleasant 15–25°C weather. Avoid May–July — peak heat hits 45°C+.</div></div>
-                <div class="tip-card"><div class="tip-title">🚖 Getting Around</div><div class="tip-text">Use Careem or inDrive for rides. The Orange Line Metro covers major city routes affordably.</div></div>
-                <div class="tip-card"><div class="tip-title">🍽️ Food Tip</div><div class="tip-text">Head to Food Street (Fort Road) after sunset — best atmosphere and authentic Lahori cuisine.</div></div>
-                <div class="tip-card"><div class="tip-title">💰 Budget Guide</div><div class="tip-text">Budget: ₨3,000–5,000/day. Mid-range: ₨8,000–15,000/day including meals and sightseeing.</div></div>
+            <!-- Travel Tips — static -->
+            <div class="sidebar-section" id="sidebar-tips">
+                <!-- filled by JS based on city data -->
             </div>
 
         </div><!-- end right col -->
@@ -898,267 +837,472 @@
     </div><!-- end main layout -->
 
 
-
-
-
-
-
-
-
-
-
-
-
-
     <!-- Review Modal -->
-<div id="review-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:9999; align-items:center; justify-content:center;">
-    <div style="background:#fff; border-radius:16px; padding:28px; width:90%; max-width:480px; position:relative;">
-
-        <button id="modal-close" style="position:absolute; top:14px; right:16px; background:none; border:none; font-size:20px; cursor:pointer; color:#888;">✕</button>
-
-        <h3 style="font-family:'Oswald',sans-serif; color:#26452d; margin-bottom:6px;">Write a Review</h3>
-        <p style="font-size:13px; color:#888; margin-bottom:20px;">Share your experience</p>
-
-        <form id="review-form">
-
-            
-
-            <!-- star rating -->
-            <div style="margin-bottom:14px;">
-                <label style="font-size:13px; font-weight:700; color:#333; display:block; margin-bottom:8px;">Rating</label>
-                <div style="display:flex; gap:6px; flex-direction:row-reverse; justify-content:flex-end;">
-                    <input type="radio" name="stars" id="s5" value="5" style="display:none">
-                    <label for="s5" style="font-size:28px; cursor:pointer; color:#ddd;">★</label>
-                    <input type="radio" name="stars" id="s4" value="4" style="display:none">
-                    <label for="s4" style="font-size:28px; cursor:pointer; color:#ddd;">★</label>
-                    <input type="radio" name="stars" id="s3" value="3" style="display:none">
-                    <label for="s3" style="font-size:28px; cursor:pointer; color:#ddd;">★</label>
-                    <input type="radio" name="stars" id="s2" value="2" style="display:none">
-                    <label for="s2" style="font-size:28px; cursor:pointer; color:#ddd;">★</label>
-                    <input type="radio" name="stars" id="s1" value="1" style="display:none">
-                    <label for="s1" style="font-size:28px; cursor:pointer; color:#ddd;">★</label>
+    <div id="review-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:9999; align-items:center; justify-content:center;">
+        <div style="background:#fff; border-radius:16px; padding:28px; width:90%; max-width:480px; position:relative;">
+            <button id="modal-close" style="position:absolute; top:14px; right:16px; background:none; border:none; font-size:20px; cursor:pointer; color:#888;">✕</button>
+            <h3 style="font-family:'Oswald',sans-serif; color:#26452d; margin-bottom:6px;">Write a Review</h3>
+            <p style="font-size:13px; color:#888; margin-bottom:20px;">Share your experience</p>
+            <form id="review-form">
+                <div style="margin-bottom:14px;">
+                    <label style="font-size:13px; font-weight:700; color:#333; display:block; margin-bottom:8px;">Rating</label>
+                    <div style="display:flex; gap:6px; flex-direction:row-reverse; justify-content:flex-end;">
+                        <input type="radio" name="stars" id="s5" value="5" style="display:none">
+                        <label for="s5" style="font-size:28px; cursor:pointer; color:#ddd;">★</label>
+                        <input type="radio" name="stars" id="s4" value="4" style="display:none">
+                        <label for="s4" style="font-size:28px; cursor:pointer; color:#ddd;">★</label>
+                        <input type="radio" name="stars" id="s3" value="3" style="display:none">
+                        <label for="s3" style="font-size:28px; cursor:pointer; color:#ddd;">★</label>
+                        <input type="radio" name="stars" id="s2" value="2" style="display:none">
+                        <label for="s2" style="font-size:28px; cursor:pointer; color:#ddd;">★</label>
+                        <input type="radio" name="stars" id="s1" value="1" style="display:none">
+                        <label for="s1" style="font-size:28px; cursor:pointer; color:#ddd;">★</label>
+                    </div>
                 </div>
-            </div>
-
-            <!-- review text -->
-            <div style="margin-bottom:20px;">
-                <label style="font-size:13px; font-weight:700; color:#333; display:block; margin-bottom:6px;">Your Review</label>
-                <textarea id="review-text-input" required rows="4" placeholder="Tell others about your experience..."
-                    style="width:100%; padding:10px 14px; border:1.5px solid #ddd; border-radius:8px; font-size:14px; outline:none; resize:none; font-family:'Lato',sans-serif;"></textarea>
-            </div>
-
-            <button type="submit"
-                style="width:100%; padding:12px; background:#7ba047; color:white; border:none; border-radius:8px; font-size:15px; font-family:'Lato',sans-serif; cursor:pointer; font-weight:700;">
-                Submit Review
-            </button>
-
-        </form>
+                <div style="margin-bottom:20px;">
+                    <label style="font-size:13px; font-weight:700; color:#333; display:block; margin-bottom:6px;">Your Review</label>
+                    <textarea id="review-text-input" required rows="4" placeholder="Tell others about your experience..."
+                        style="width:100%; padding:10px 14px; border:1.5px solid #ddd; border-radius:8px; font-size:14px; outline:none; resize:none; font-family:'Lato',sans-serif; box-sizing:border-box;"></textarea>
+                </div>
+                <button type="submit" style="width:100%; padding:12px; background:#7ba047; color:white; border:none; border-radius:8px; font-size:15px; font-family:'Lato',sans-serif; cursor:pointer; font-weight:700;">
+                    Submit Review
+                </button>
+            </form>
+        </div>
     </div>
-</div>
-
-
-
 
 
     <script>
-        
-        
-        const city = new URLSearchParams(window.location.search).get('city');
+    // ================================================================
+    //  CITY SLUG — from URL e.g. destination.html?city=lahore
+    // ================================================================
+    const citySlug = new URLSearchParams(window.location.search).get('city');
 
+    // ================================================================
+    //  LOAD NAVBAR
+    // ================================================================
+    fetch('navbar.html')
+        .then(r => r.text())
+        .then(html => { document.getElementById('navbar').innerHTML = html; });
 
-        
-        fetch('navbar.html')
-            .then(res => res.text())
-            .then(html => { document.getElementById('navbar').innerHTML = html; });
-
-
-        
-        const tabBtns     = document.querySelectorAll('.tab-btn');
-        const tabSections = document.querySelectorAll('.tab-section');
-
-        tabBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                tabBtns.forEach(b => b.classList.remove('active'));
-                tabSections.forEach(s => s.classList.remove('active'));
-                btn.classList.add('active');
-                document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
-            });
+    // ================================================================
+    //  TABS
+    // ================================================================
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.tab-section').forEach(s => s.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
         });
+    });
+    document.getElementById('view-all-link').addEventListener('click', e => {
+        e.preventDefault();
+        document.querySelector('[data-tab="reviews"]').click();
+    });
 
-        // "View all reviews" link switches to Reviews tab
-        document.getElementById('view-all-link').addEventListener('click', (e) => {
-            e.preventDefault();
-            document.querySelector('[data-tab="reviews"]').click();
-        });
-
-
-        
-   const favBtn = document.getElementById('fav-btn');
-let isSaved = false;
-
-// On page load — check if this city is already saved
-const token = localStorage.getItem('token');
-if (token && city) {
-    fetch('http://localhost:3000/api/favourites/' + city, {
-        headers: { 'Authorization': 'Bearer ' + token }
-    })
-    .then(res => res.json())
-    .then(data => {
-        if (data.isSaved) {
-            isSaved = true;
-            favBtn.textContent = '❤️ Saved';
-            favBtn.classList.add('saved');
-        }
-    })
-    .catch(() => {}); // silently ignore if backend not running
-}
-
-// When button is clicked
-favBtn.addEventListener('click', async () => {
-    const token = localStorage.getItem('token');
-
-    // if not logged in, send to login
-    if (!token) {
-        alert('Favourites mein save karne ke liye pehle login karein!');
-        window.location.href = 'login.html';
-        return;
+    // ================================================================
+    //  HELPERS
+    // ================================================================
+    function starsHtml(n) {
+        const full = Math.round(n);
+        return '★'.repeat(full) + '☆'.repeat(5 - full);
     }
 
-    if (!isSaved) {
-        // save it
+    function placeCardHtml(p) {
+        // emoji fallback based on type keyword
+        const typeMap = {
+            'mosque':'🕌','fort':'🏰','garden':'🌿','museum':'🏛️','park':'🌳',
+            'beach':'🏖️','lake':'🏞️','market':'🛍️','monument':'🗿','valley':'🏔️',
+            'viewpoint':'🔭','cultural':'🎨','heritage':'🏯','nature':'🌿',
+            'religious':'⛪','adventure':'🧗','resort':'🏨','historic':'🏛️',
+            'waterfall':'💧','glacier':'🧊','meadow':'🌄'
+        };
+        const t = (p.type || '').toLowerCase();
+        let emoji = '📍';
+        for (const [key, val] of Object.entries(typeMap)) {
+            if (t.includes(key)) { emoji = val; break; }
+        }
+        const bgColors = ['#f0e6d3','#e8f0e3','#e8eef5','#fdeef3','#eef5e8','#f5f0e8','#f0f5e8','#f5e8f0'];
+        const bg = bgColors[Math.abs(p.name.charCodeAt(0)) % bgColors.length];
+        const imgTag = p.image
+            ? `<img src="${p.image}" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.innerHTML='<span style=font-size:28px>${emoji}</span>'">`
+            : `<span style="font-size:28px">${emoji}</span>`;
+        return `<div class="place-card">
+            <div class="place-img" style="background:${bg}">${imgTag}</div>
+            <div class="place-body">
+                <div class="place-name">${p.name}</div>
+                <div class="place-type">${p.type || ''}</div>
+            </div>
+        </div>`;
+    }
+
+    function restaurantRowHtml(r) {
+        const cuisineEmojis = {'bbq':'🍖','seafood':'🦐','italian':'🍝','chinese':'🥡','cafe':'☕','fast food':'🍔','continental':'🍽️','breakfast':'🍳'};
+        let emoji = '🥘';
+        const c = (r.cuisine || '').toLowerCase();
+        for (const [k, v] of Object.entries(cuisineEmojis)) {
+            if (c.includes(k)) { emoji = v; break; }
+        }
+        const bgColors = ['#fff3e0','#e8f5e0','#fff8ed','#fef3e8','#e8f0ff','#fde8f0'];
+        const bg = bgColors[Math.abs(r.name.charCodeAt(0)) % bgColors.length];
+        return `<div class="rest-row">
+            <div class="rest-icon" style="background:${bg}">${emoji}</div>
+            <div class="rest-info">
+                <div class="rest-name">${r.name}</div>
+                <div class="rest-tag">${r.cuisine || ''}</div>
+            </div>
+            <div class="rest-right">
+                <div class="rest-rating">★ ${r.rating || '--'}</div>
+                <div class="rest-price">${r.price_range || ''}</div>
+            </div>
+        </div>`;
+    }
+
+    function reviewCardHtml(r) {
+        const name = r.user_name || 'Traveler';
+        const initials = name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2);
+        const date = r.created_at ? new Date(r.created_at).toLocaleDateString('en-GB', { month:'long', year:'numeric' }) : '';
+        return `<div class="review-card">
+            <div class="reviewer-row">
+                <div class="avatar">${initials}</div>
+                <div>
+                    <div class="reviewer-name">${name}</div>
+                    <div class="reviewer-date">${date}</div>
+                </div>
+            </div>
+            <div class="review-stars">${starsHtml(r.stars)}</div>
+            <div class="review-text">${r.review_text || ''}</div>
+        </div>`;
+    }
+
+    // ================================================================
+    //  WEATHER — free Open-Meteo API (no key needed)
+    //  Uses city name from DB to geocode, then fetch weather
+    // ================================================================
+    const weatherConditions = {
+        0: {label:'Clear Sky', icon:'☀️'},
+        1: {label:'Mainly Clear', icon:'🌤️'},
+        2: {label:'Partly Cloudy', icon:'⛅'},
+        3: {label:'Overcast', icon:'☁️'},
+        45:{label:'Foggy', icon:'🌫️'},
+        48:{label:'Icy Fog', icon:'🌫️'},
+        51:{label:'Light Drizzle', icon:'🌦️'},
+        53:{label:'Drizzle', icon:'🌧️'},
+        61:{label:'Light Rain', icon:'🌧️'},
+        63:{label:'Rain', icon:'🌧️'},
+        71:{label:'Light Snow', icon:'🌨️'},
+        73:{label:'Snow', icon:'❄️'},
+        80:{label:'Rain Showers', icon:'🌦️'},
+        95:{label:'Thunderstorm', icon:'⛈️'}
+    };
+    const dayNames = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+
+    async function loadWeather(cityName) {
         try {
-            const res = await fetch('http://localhost:3000/api/favourites/' + city, {
-                method: 'POST',
-                headers: { 'Authorization': 'Bearer ' + token }
-            });
+            // Step 1: geocode city name → lat/lon
+            const geoRes = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(cityName + ' Pakistan')}&count=1`);
+            const geoData = await geoRes.json();
+            if (!geoData.results || geoData.results.length === 0) return;
+            const { latitude, longitude } = geoData.results[0];
+
+            // Step 2: fetch weather
+            const wRes = await fetch(
+                `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}` +
+                `&current=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code,visibility` +
+                `&daily=weather_code,temperature_2m_max&timezone=auto&forecast_days=5`
+            );
+            const w = await wRes.json();
+            const cur = w.current;
+            const cond = weatherConditions[cur.weather_code] || {label:'--', icon:'🌡️'};
+
+            document.getElementById('weather-icon').textContent = cond.icon;
+            document.getElementById('weather-temp').textContent = Math.round(cur.temperature_2m) + '°C';
+            document.getElementById('weather-condition').textContent = cond.label + ' · ' + cityName;
+            document.getElementById('w-humidity').textContent = cur.relative_humidity_2m + '%';
+            document.getElementById('w-wind').textContent = Math.round(cur.wind_speed_10m) + ' km/h';
+            document.getElementById('w-uv').textContent = '—';
+            document.getElementById('w-vis').textContent = cur.visibility ? Math.round(cur.visibility / 1000) + ' km' : '—';
+
+            // 5-day forecast
+            const forecastHtml = w.daily.time.slice(0, 5).map((dateStr, i) => {
+                const dayName = dayNames[new Date(dateStr).getDay()];
+                const fc = weatherConditions[w.daily.weather_code[i]] || {icon:'🌡️'};
+                const temp = Math.round(w.daily.temperature_2m_max[i]);
+                return `<div class="forecast-day">
+                    <div class="fc-label">${dayName}</div>
+                    <div class="fc-icon">${fc.icon}</div>
+                    <div class="fc-temp">${temp}°</div>
+                </div>`;
+            }).join('');
+            document.getElementById('forecast-row').innerHTML = forecastHtml;
+
+        } catch (e) {
+            document.getElementById('weather-condition').textContent = 'Weather unavailable';
+        }
+    }
+
+    // ================================================================
+    //  MAP — builds Google Maps embed URL from city name
+    // ================================================================
+    function loadMap(cityName) {
+        const query = encodeURIComponent(cityName + ', Pakistan');
+        const embedSrc = `https://www.google.com/maps/embed/v1/place?key=AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY&q=${query}`;
+        // Fallback: use maps search URL in iframe (works without API key for basic embed)
+        const fallbackSrc = `https://maps.google.com/maps?q=${query}&output=embed`;
+        const mapsUrl = `https://maps.google.com/?q=${query}`;
+
+        document.getElementById('map-iframe-big').src = fallbackSrc;
+        document.getElementById('map-iframe-sidebar').src = fallbackSrc;
+        document.getElementById('map-link-big').href = mapsUrl;
+        document.getElementById('map-link-sidebar').href = mapsUrl;
+        document.getElementById('map-tab-title').textContent = cityName + ' on the Map';
+        document.getElementById('map-link-big').textContent = 'Open ' + cityName + ' in Google Maps →';
+    }
+
+    // ================================================================
+    //  TRAVEL TIPS — static tips, shown in sidebar
+    // ================================================================
+    function renderTips(city) {
+        const season = city.best_season || 'Year round';
+        document.getElementById('sidebar-tips').innerHTML = `
+            <div class="sidebar-label">Travel Tips</div>
+            <div class="tip-card"><div class="tip-title">🕐 Best Time to Visit</div><div class="tip-text">${season}</div></div>
+            <div class="tip-card"><div class="tip-title">🚖 Getting Around</div><div class="tip-text">Use Careem or inDrive for rides in city areas. For remote areas, hire a local guide or jeep.</div></div>
+            <div class="tip-card"><div class="tip-title">💰 Budget Guide</div><div class="tip-text">Budget: ₨3,000–5,000/day. Mid-range: ₨8,000–15,000/day including meals and sightseeing.</div></div>
+            <div class="tip-card"><div class="tip-title">📋 Local Language</div><div class="tip-text">${city.language || 'Urdu'} — a few basic phrases go a long way!</div></div>
+        `;
+    }
+
+    // ================================================================
+    //  REVIEWS
+    // ================================================================
+    async function loadReviews() {
+        if (!citySlug) return;
+        try {
+            const res = await fetch(`http://localhost:3000/api/reviews/${citySlug}`);
             const data = await res.json();
-            if (res.ok) {
+            if (!data.success) return;
+
+            const avg = parseFloat(data.average) || 0;
+            const total = data.total || 0;
+            const avgText = avg > 0 ? avg.toFixed(1) : '--';
+            const starsDisplay = avg > 0 ? starsHtml(avg) : '☆☆☆☆☆';
+
+            // Update both overview + reviews tab
+            document.getElementById('avg-rating').textContent = avgText;
+            document.getElementById('avg-stars-display').innerHTML = `<span style="color:#e6a020">${starsDisplay}</span>`;
+            document.getElementById('review-count').textContent = `Based on ${total} review${total !== 1 ? 's' : ''}`;
+
+            document.getElementById('avg-rating-2').textContent = avgText;
+            document.getElementById('avg-stars-display-2').innerHTML = `<span style="color:#e6a020">${starsDisplay}</span>`;
+            document.getElementById('review-count-2').textContent = `Based on ${total} review${total !== 1 ? 's' : ''}`;
+
+            // Show max 2 in overview, all in reviews tab
+            const reviews = data.reviews || [];
+            document.getElementById('reviews-list').innerHTML = reviews.slice(0, 2).map(reviewCardHtml).join('') ||
+                '<p style="color:#999;font-size:13px;">No reviews yet. Be the first!</p>';
+            document.getElementById('reviews-list-full').innerHTML = reviews.map(reviewCardHtml).join('') ||
+                '<p style="color:#999;font-size:13px;">No reviews yet. Be the first!</p>';
+
+        } catch (e) {
+            document.getElementById('reviews-list').innerHTML = '<p style="color:#999;font-size:13px;">Could not load reviews.</p>';
+        }
+    }
+
+    // ================================================================
+    //  MAIN — load city from DB then render everything
+    // ================================================================
+    async function loadCity() {
+        if (!citySlug) {
+            document.getElementById('hero-title').textContent = 'City not found';
+            document.getElementById('hero-sub').textContent = 'No city specified in URL';
+            return;
+        }
+
+        try {
+            const res = await fetch(`http://localhost:3000/api/cities/details/${citySlug}`);
+            const json = await res.json();
+
+            if (!json.success || !json.data) {
+                document.getElementById('hero-title').textContent = 'City not found';
+                return;
+            }
+
+            const city = json.data;
+
+            // ---- HERO ----
+            document.title = city.name + ' — Discover Pakistan';
+            document.getElementById('hero-title').textContent = city.name;
+            document.getElementById('hero-sub').textContent = city.tagline || '';
+            if (city.hero_image) {
+                document.getElementById('hero-bg').style.backgroundImage = `url(${city.hero_image})`;
+                document.getElementById('hero-bg').style.backgroundSize = 'cover';
+                document.getElementById('hero-bg').style.backgroundPosition = 'center';
+            }
+            document.getElementById('hero-badges').innerHTML = (city.badges || [])
+                .map(b => `<span class="badge">${b}</span>`).join('');
+
+            // ---- QUICK FACTS ----
+            document.getElementById('fact-province').textContent   = city.province    || '--';
+            document.getElementById('fact-population').textContent = city.population  || '--';
+            document.getElementById('fact-language').textContent   = city.language    || '--';
+            document.getElementById('fact-season').textContent     = city.best_season || '--';
+
+            // ---- PLACES ----
+            const places = city.places || [];
+            const placeHtml = places.length
+                ? places.map(placeCardHtml).join('')
+                : '<p style="color:#999;font-size:13px;">No places listed yet.</p>';
+            document.getElementById('places-grid').innerHTML      = places.slice(0, 6).map(placeCardHtml).join('') || '<p style="color:#999;font-size:13px;">No places listed yet.</p>';
+            document.getElementById('places-grid-full').innerHTML = placeHtml;
+
+            // ---- RESTAURANTS ----
+            const restaurants = city.restaurants || [];
+            const restHtml = restaurants.length
+                ? restaurants.map(restaurantRowHtml).join('')
+                : '<p style="color:#999;font-size:13px;">No restaurants listed yet.</p>';
+            document.getElementById('restaurant-list').innerHTML      = restaurants.slice(0, 4).map(restaurantRowHtml).join('') || '<p style="color:#999;font-size:13px;">No restaurants listed yet.</p>';
+            document.getElementById('restaurant-list-full').innerHTML = restHtml;
+            document.getElementById('food-tab-title').textContent = 'Where to Eat in ' + city.name;
+
+            // ---- MAP ----
+            loadMap(city.name);
+
+            // ---- WEATHER ----
+            loadWeather(city.name);
+
+            // ---- TIPS ----
+            renderTips(city);
+
+        } catch (e) {
+            document.getElementById('hero-title').textContent = 'Could not load city';
+            console.error(e);
+        }
+
+        // ---- REVIEWS ----
+        loadReviews();
+    }
+
+    // ================================================================
+    //  FAVOURITES
+    // ================================================================
+    const favBtn = document.getElementById('fav-btn');
+    let isSaved = false;
+    const token = localStorage.getItem('token');
+
+    if (token && citySlug) {
+        fetch(`http://localhost:3000/api/favourites/${citySlug}`, {
+            headers: { 'Authorization': 'Bearer ' + token }
+        })
+        .then(r => r.json())
+        .then(data => {
+            if (data.isSaved) {
                 isSaved = true;
                 favBtn.textContent = '❤️ Saved';
                 favBtn.classList.add('saved');
-            } else {
-                alert(data.message || 'Could not save.');
             }
-        } catch (e) {
-            alert('Server se connect nahi ho saka.');
-        }
+        })
+        .catch(() => {});
+    }
 
-    } else {
-        // remove it
+    favBtn.addEventListener('click', async () => {
+        const tok = localStorage.getItem('token');
+        if (!tok) {
+            alert('Favourites mein save karne ke liye pehle login karein!');
+            window.location.href = 'login.html';
+            return;
+        }
         try {
-            const res = await fetch('http://localhost:3000/api/favourites/' + city, {
-                method: 'DELETE',
-                headers: { 'Authorization': 'Bearer ' + token }
+            const res = await fetch(`http://localhost:3000/api/favourites/${citySlug}`, {
+                method: isSaved ? 'DELETE' : 'POST',
+                headers: { 'Authorization': 'Bearer ' + tok }
             });
             const data = await res.json();
             if (res.ok) {
-                isSaved = false;
-                favBtn.textContent = '🤍 Save to Favourites';
-                favBtn.classList.remove('saved');
+                isSaved = !isSaved;
+                favBtn.textContent = isSaved ? '❤️ Saved' : '🤍 Save to Favourites';
+                isSaved ? favBtn.classList.add('saved') : favBtn.classList.remove('saved');
             } else {
-                alert(data.message || 'Could not remove.');
+                alert(data.message || 'Could not update favourites.');
             }
-        } catch (e) {
+        } catch {
             alert('Server se connect nahi ho saka.');
         }
-    }
-});
-
-
-       
-
-
-
-
-        document.getElementById('write-review-btn').addEventListener('click', () => {
-    const token = localStorage.getItem('token');
-    if (!token) {
-        alert('Review likhne ke liye pehle login karein!');
-        window.location.href = 'login.html';
-        return;
-    }
-    document.getElementById('review-modal').style.display = 'flex';
-});
-
-
-
-
-
-// star highlighting with JS
-document.querySelectorAll('input[name="stars"]').forEach(function(radio) {
-    radio.addEventListener('change', function() {
-        const selected = parseInt(this.value);
-        document.querySelectorAll('input[name="stars"]').forEach(function(r) {
-            const label = document.querySelector('label[for="' + r.id + '"]');
-            if (parseInt(r.value) <= selected) {
-                label.style.color = '#e6a020';
-            } else {
-                label.style.color = '#ddd';
-            }
-        });
     });
-});
 
-// reset stars color when form resets
-document.getElementById('review-form').addEventListener('reset', function() {
-    document.querySelectorAll('input[name="stars"]').forEach(function(r) {
-        document.querySelector('label[for="' + r.id + '"]').style.color = '#ddd';
-    });
-});
-
-
-
-
-
-
-
-
-
-
-
-
-document.getElementById('modal-close').addEventListener('click', () => {
-    document.getElementById('review-modal').style.display = 'none';
-});
-
-// clicking outside the modal closes it
-document.getElementById('review-modal').addEventListener('click', function(e) {
-    if (e.target === this) this.style.display = 'none';
-});
-
-document.getElementById('review-form').addEventListener('submit', async function(e) {
-    e.preventDefault();
-    const stars = document.querySelector('input[name="stars"]:checked')?.value;
-    const text  = document.getElementById('review-text-input').value.trim();
-    if (!stars) { alert('Stars select karein!'); return; }
-
-    const token    = localStorage.getItem('token');
-    const userName = localStorage.getItem('userName') || 'Traveler';
-
-    try {
-        const res = await fetch('http://localhost:3000/api/reviews/' + city , {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
-            body: JSON.stringify({ stars: parseInt(stars), review_text: text, userName })
-        });
-        const data = await res.json();
-        if (res.ok) {
-            const initials = userName.split(' ').map(w => w[0]).join('').toUpperCase().slice(0,2);
-            const newCard  = `<div class="review-card">
-                <div class="reviewer-row"><div class="avatar">${initials}</div>
-                <div><div class="reviewer-name">${userName}</div>
-                <div class="reviewer-date">Just now</div></div></div>
-                <div class="review-stars">${'★'.repeat(stars)}${'☆'.repeat(5-stars)}</div>
-                <div class="review-text">${text}</div></div>`;
-            document.getElementById('reviews-list').insertAdjacentHTML('afterbegin', newCard);
-            document.getElementById('review-modal').style.display = 'none';
-            document.getElementById('review-form').reset();
+    // ================================================================
+    //  REVIEW MODAL
+    // ================================================================
+    function openReviewModal() {
+        const tok = localStorage.getItem('token');
+        if (!tok) {
+            alert('Review likhne ke liye pehle login karein!');
+            window.location.href = 'login.html';
+            return;
         }
-    } catch(e) {
-        alert('Review submit nahi ho saka.');
+        document.getElementById('review-modal').style.display = 'flex';
     }
-});
 
+    document.getElementById('write-review-btn').addEventListener('click', openReviewModal);
+    document.getElementById('write-review-btn-2').addEventListener('click', openReviewModal);
+    document.getElementById('modal-close').addEventListener('click', () => {
+        document.getElementById('review-modal').style.display = 'none';
+    });
+    document.getElementById('review-modal').addEventListener('click', function(e) {
+        if (e.target === this) this.style.display = 'none';
+    });
+
+    // Star highlighting
+    document.querySelectorAll('input[name="stars"]').forEach(function(radio) {
+        radio.addEventListener('change', function() {
+            const selected = parseInt(this.value);
+            document.querySelectorAll('input[name="stars"]').forEach(function(r) {
+                const label = document.querySelector('label[for="' + r.id + '"]');
+                label.style.color = parseInt(r.value) <= selected ? '#e6a020' : '#ddd';
+            });
+        });
+    });
+    document.getElementById('review-form').addEventListener('reset', function() {
+        document.querySelectorAll('input[name="stars"]').forEach(function(r) {
+            document.querySelector('label[for="' + r.id + '"]').style.color = '#ddd';
+        });
+    });
+
+    document.getElementById('review-form').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const stars = document.querySelector('input[name="stars"]:checked')?.value;
+        const text  = document.getElementById('review-text-input').value.trim();
+        if (!stars) { alert('Stars select karein!'); return; }
+
+        const tok      = localStorage.getItem('token');
+        const userName = localStorage.getItem('userName') || 'Traveler';
+
+        try {
+            const res = await fetch(`http://localhost:3000/api/reviews/${citySlug}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + tok },
+                body: JSON.stringify({ stars: parseInt(stars), review_text: text })
+            });
+            const data = await res.json();
+            if (res.ok) {
+                const newCard = reviewCardHtml({ user_name: userName, stars: parseInt(stars), review_text: text, created_at: new Date() });
+                document.getElementById('reviews-list').insertAdjacentHTML('afterbegin', newCard);
+                document.getElementById('reviews-list-full').insertAdjacentHTML('afterbegin', newCard);
+                document.getElementById('review-modal').style.display = 'none';
+                document.getElementById('review-form').reset();
+            } else {
+                alert(data.message || 'Review submit nahi ho saka.');
+            }
+        } catch {
+            alert('Review submit nahi ho saka.');
+        }
+    });
+
+    // ================================================================
+    //  INIT
+    // ================================================================
+    loadCity();
 
     </script>
 
