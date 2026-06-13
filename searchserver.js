@@ -22,5 +22,4 @@ app.get('/', (_req, res) => {
 const PORT = process.env.SEARCH_PORT || 5000;
 app.listen(PORT, () => {
   console.log(`  Search Server: http://localhost:${PORT}`);
-  console.log(`  Search API:   http://localhost:${PORT}/api/search?q=lahore`);
 });

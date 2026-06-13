@@ -1,5 +1,5 @@
-// server.js  
-const dotenv    = require('dotenv');
+
+const dotenv = require('dotenv');
 dotenv.config();
 
 const express   = require('express');
@@ -21,13 +21,14 @@ app.use(cors({
 }));
 app.use(express.json());
 
-// Optional: serve frontend folder directly
+
 app.use(express.static(path.join(__dirname, 'Frontend')));
 
 app.use('/api/auth',         require('./backend/routes/authroutes'));
 app.use('/api/cities',       require('./backend/routes/searchRoutes'));
 app.use('/api',              require('./backend/routes/Foodroutes'));
 app.use('/api/reviews',      require('./backend/routes/reviewRoutes'));
+app.use('/api/favourites',   require('./backend/routes/favouriteRoutes'));  
 
 app.get('/api/health', (_req, res) => {
   res.json({

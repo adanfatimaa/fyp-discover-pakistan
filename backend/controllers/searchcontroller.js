@@ -3,7 +3,7 @@ const { pool } = require('../config/db');
 
 const searchDestination = async (req, res) => {
     try {
-        const { city } = req.query;
+        const { q: city } = req.query;
 
         // 1. Validation check
         if (!city) {

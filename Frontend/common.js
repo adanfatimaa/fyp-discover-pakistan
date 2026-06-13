@@ -1,4 +1,3 @@
-// wait for the whole page to load first
 document.addEventListener('DOMContentLoaded', function() {
 
   // --- load navbar ---
@@ -7,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     .then(html => {
       document.getElementById('navbar').innerHTML = html;
 
-      // hamburger menu (runs AFTER navbar is loaded)
+      // hamburger menu
       const hamburger = document.querySelector('.hamburger');
       const navLinks = document.querySelector('.nav-links');
 
@@ -29,6 +28,35 @@ document.addEventListener('DOMContentLoaded', function() {
           hamburger.classList.remove('active');
         }
       });
+
+      // --- CHECK LOGIN STATE and update navbar ---
+      const token    = localStorage.getItem('token');
+      const userName = localStorage.getItem('userName');
+
+      // find the "Sign Up" li in the navbar
+      const signupLi = document.querySelector('.nav-links li:last-child');
+
+      if (token && userName) {
+        // user is logged in — replace Sign Up with their name + logout
+        signupLi.innerHTML = `
+          <span style="color:#9cc05a; font-weight:700; margin-right:8px;">
+            👤 ${userName}
+          </span>
+          <a href="#" id="logout-btn" style="color:#fff;">Logout</a>
+        `;
+
+        document.getElementById('logout-btn').addEventListener('click', function(e) {
+          e.preventDefault();
+          localStorage.removeItem('token');
+          localStorage.removeItem('userName');
+          localStorage.removeItem('userRole');
+          window.location.href = 'login.html';
+        });
+
+      } else {
+        // not logged in — keep Sign Up as is
+      }
+
     });
 
   // --- load chatbot CSS ---

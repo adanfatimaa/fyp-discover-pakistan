@@ -281,204 +281,7 @@
 
     <script>
 
-        // =============================================
-        // DUMMY DATA - used until backend is ready
-        // When backend is ready:
-        //   1. delete this dummyDestinations array
-        //   2. uncomment the fetch() call below
-        // =============================================
-        const dummyDestinations = [
-            {
-                name: "Lahore",
-                province: "Punjab",
-                description: "Lahore is Pakistan's second-largest city, renowned as the country's cultural, historical, and intellectual heart.",
-                image: "images/badshahiosque.jpg",
-                slug: "lahore"
-            },
-            {
-                name: "Islamabad",
-                province: "Federal Capital",
-                description: "Pakistan's modern capital, a serene green city with iconic landmarks like Faisal Mosque and scenic Daman-e-Koh.",
-                image: "images/islamabad.jfif",
-                slug: "islamabad"
-            },
-            {
-                name: "Karachi",
-                province: "Sindh",
-                description: "Known as the City of Lights, Pakistan's largest and most vibrant city on the Arabian Sea with diverse food and beaches.",
-                image: "images/karachi.avif",
-                slug: "karachi"
-            },
-            {
-                name: "Hunza",
-                province: "Gilgit-Baltistan",
-                description: "A stunning mountainous paradise known for turquoise lakes, ancient forts, and towering 7,000m peaks.",
-                image: "images/hunzaBg.jpg",
-                slug: "hunza"
-            },
-            {
-                name: "Murree",
-                province: "Punjab",
-                description: "Pakistan's most popular hill station with cool summers and snow-covered winter scenery, easily accessed from Islamabad.",
-                image: "images/murree.jpg",
-                slug: "murree"
-            },
-            {
-                name: "Skardu",
-                province: "Gilgit-Baltistan",
-                description: "A premier trekking hub known for dramatic landscapes and beautiful valleys like Chunda and Basho.",
-                image: "images/skardu.jfif",
-                slug: "skardu"
-            },
-            {
-                name: "Swat",
-                province: "Khyber Pakhtunkhwa",
-                description: "Often called the Switzerland of the East, known for lush green mountains and clear rivers.",
-                image: "images/swat.jfif",
-                slug: "swat"
-            },
-            {
-                name: "Peshawar",
-                province: "Khyber Pakhtunkhwa",
-                description: "The historic City of Flowers, famous for Pashtun hospitality, ancient history, and intense rustic street food.",
-                image: "images/peshawar.jfif",
-                slug: "peshawar"
-            },
-            {
-                name: "Quetta",
-                province: "Balochistan",
-                description: "The Fruit Garden of Pakistan, a high-altitude city surrounded by rugged mountains with scenic Hanna Lake.",
-                image: "images/quettaBG.webp",
-                slug: "quetta"
-            },
-            {
-                name: "Multan",
-                province: "Punjab",
-                description: "The City of Saints, one of Pakistan's oldest cities famous for Sufi shrines, blue pottery, and bustling bazaars.",
-                image: "images/multan.jfif",
-                slug: "multan"
-            },
-            {
-                name: "Gwadar",
-                province: "Balochistan",
-                description: "A rising coastal city where dramatic rocky mountains meet the Arabian Sea with pristine beaches.",
-                image: "images/gwadar.jpg",
-                slug: "gwadar"
-            },
-            {
-                name: "Fairy Meadows",
-                province: "Gilgit-Baltistan",
-                description: "A breathtaking alpine plateau offering unparalleled views of Nanga Parbat, known as Heaven on Earth.",
-                image: "images/fairy-meadows.jfif",
-                slug: "fairyMeadows"
-            },
-            {
-                name: "Kashmir",
-                province: "Azad Kashmir",
-                description: "Often called Heaven on Earth, featuring lush green valleys, Himalayan peaks, and the beautiful Neelum Valley.",
-                image: "images/kashmir.jfif",
-                slug: "kashmir"
-            },
-            {
-                name: "Chitral",
-                province: "Khyber Pakhtunkhwa",
-                description: "An enchanting destination known for the unique Kalash culture and dramatic Hindu Kush landscapes.",
-                image: "images/chitral.jfif",
-                slug: "chitral"
-            },
-            {
-                name: "Kaghan Valley",
-                province: "Khyber Pakhtunkhwa",
-                description: "A premier summer destination with alpine meadows, the Kunhar River, and iconic Saif-ul-Malook Lake.",
-                image: "images/kaghanValley.jfif",
-                slug: "kaghan"
-            },
-            {
-                name: "Deosai National Park",
-                province: "Gilgit-Baltistan",
-                description: "One of the highest plateaus in the world, known as the Land of Giants with vast golden plains and brown bears.",
-                image: "images/deosai.jfif",
-                slug: "deosai"
-            },
-            {
-                name: "Neelam Valley",
-                province: "Azad Kashmir",
-                description: "A 144 km forested paradise with the rushing Neelum River and scenic hilltop villages.",
-                image: "images/neelam-valley.jfif",
-                slug: "neelamValley"
-            },
-            {
-                name: "Bahawalpur",
-                province: "Punjab",
-                description: "The City of Nawabs, offering royal heritage, Derawar Fort in Cholistan Desert, and Noor Mahal palace.",
-                image: "images/bahawalpurBg.jpg",
-                slug: "bahawalpur"
-            },
-            {
-                name: "Mohenjo Daro",
-                province: "Sindh",
-                description: "A 5,000 year old ancient city of the Indus Valley Civilization with the famous Great Bath ruins.",
-                image: "images/mohenjoDaroBg.jpg",
-                slug: "mohenjoDaro"
-            },
-            {
-                name: "Khewra Salt Mine",
-                province: "Punjab",
-                description: "The world's second-largest salt mine, famous for Himalayan pink salt and illuminated crystal formations.",
-                image: "images/khewra.jfif",
-                slug: "khewra"
-            },
-            {
-                name: "Kumrat Valley",
-                province: "Khyber Pakhtunkhwa",
-                description: "A serene alpine destination with lush pine forests, snowy mountains, and the sparkling Panjkora River.",
-                image: "images/kumrat.jfif",
-                slug: "kumrat"
-            },
-            {
-                name: "Hingol National Park",
-                province: "Balochistan",
-                description: "Pakistan's largest national park on the Makran coast with mud volcanoes and diverse wildlife.",
-                image: "images/hingol.jpg",
-                slug: "hingol"
-            },
-            {
-                name: "Malam Jabba",
-                province: "Khyber Pakhtunkhwa",
-                description: "A premier hill station with Pakistan's only ski resort, scenic pine forests and adventure sports.",
-                image: "images/malam-jabba.jfif",
-                slug: "malamJabba"
-            },
-            {
-                name: "Toli Pir",
-                province: "Azad Kashmir",
-                description: "A high-altitude meadow in Rawalakot with sweeping views of the Poonch River and Himalayan range.",
-                image: "images/tolipir.jfif",
-                slug: "toliPir"
-            },
-            {
-                name: "Kalar Kahar",
-                province: "Punjab",
-                description: "A scenic saltwater lake with gardens, migratory peacocks, boating and the historic Takht-e-Babri.",
-                image: "images/kalar-kahar.jfif",
-                slug: "kalarKahar"
-            },
-            {
-                name: "Sheikhupura",
-                province: "Punjab",
-                description: "Founded by Mughal Emperor Jahangir, featuring the historic Sheikhupura Fort and scenic Hiran Minar.",
-                image: "images/sheikhupura.jpg",
-                slug: "sheikhupura"
-            },
-            {
-                name: "Rohtas Fort",
-                province: "Punjab",
-                description: "A 16th-century fortress near Jhelum, one of the largest and most formidable forts in Punjab.",
-                image: "images/rohtas.jpg",
-                slug: "rohtas"
-            }
-        ];
-
+        
 
         // MAIN SEARCH FUNCTION
         function doSearch() {
@@ -494,31 +297,18 @@
                 .then(function(res) { return res.json(); })
                 .then(function(data) {
                     document.getElementById('loading').style.display = 'none';
-                    showResults(data.destinations || [], query);
+                    showResults(data.data || [], query);
                 })
                 .catch(function() {
-                    document.getElementById('loading').style.display = 'none';
-                    // Backend na chale to dummy data fallback
-                    searchFromDummyData(query);
-                });
+    showError();
+});
         }
 
-
-        // search through dummy data (delete this function when backend is ready)
-        function searchFromDummyData(query) {
-            document.getElementById('loading').style.display = 'none';
-
-            const queryLower = query.toLowerCase();
-
-            // filter destinations where name, province, or description contains the query
-            const matched = dummyDestinations.filter(function(dest) {
-                return dest.name.toLowerCase().includes(queryLower) ||
-                       dest.province.toLowerCase().includes(queryLower) ||
-                       dest.description.toLowerCase().includes(queryLower);
-            });
-
-            showResults(matched, query);
-        }
+function showError() {
+    document.getElementById('loading').style.display = 'none';
+    document.getElementById('result-info').innerHTML = 
+        '<span style="color:red;">Could not connect to server. </span>';
+}
 
 
         // build and show the result cards
@@ -543,7 +333,7 @@
                 card.classList.add('card');
 
                 card.innerHTML = `
-                    <img src="${dest.image}" class="card-img-top" alt="${dest.name}" onerror="this.src='images/placeholder.jpg'">
+                    <img src="${dest.hero_image}" class="card-img-top" alt="${dest.name}" onerror="this.src='images/placeholder.jpg'">
                     <div class="card-body">
                         <p class="card-province">${dest.province}</p>
                         <h5 class="card-title">${dest.name}</h5>
