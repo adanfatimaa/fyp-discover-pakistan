@@ -142,13 +142,22 @@ const addCity = async (req, res) => {
        province, description, tagline, hero_image, population, language, best_season]
     );
 
-    const destId = result.insertId;
+   const destId = result.insertId;
 
     // Insert badges
     for (const label of badges) {
       await conn.query(
         'INSERT INTO city_badges (destination_id, label) VALUES (?, ?)',
         [destId, label]
+      );
+    }
+
+    // Insert attractions/places
+    const { attractions = [] } = req.body;
+    for (const placeName of attractions) {
+      await conn.query(
+        'INSERT INTO places (destination_id, name) VALUES (?, ?)',
+        [destId, placeName]
       );
     }
 

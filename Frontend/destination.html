@@ -804,7 +804,10 @@
         <div class="right-col">
 
             <div class="action-btn">
-                <button class="fav-btn" id="fav-btn">🤍 Save to Favourites</button>
+               <button class="fav-btn" id="fav-btn">🤍 Save to Favourites</button>
+                <p id="fav-warning" style="display:none; color:#c0392b; font-size:13px; margin-top:8px;">
+                    Please <a href="login.html" style="color:#c0392b; font-weight:700;">log in</a> to save favourites.
+                </p>
             </div>
 
             <!-- Map sidebar -->
@@ -871,23 +874,22 @@
         </div>
     </div>
 
-
+<script src="common.js"></script>
     <script>
-    // ================================================================
+    
     //  CITY SLUG — from URL e.g. destination.html?city=lahore
-    // ================================================================
+    
     const citySlug = new URLSearchParams(window.location.search).get('city');
 
-    // ================================================================
+   
     //  LOAD NAVBAR
-    // ================================================================
+   
     fetch('navbar.html')
         .then(r => r.text())
         .then(html => { document.getElementById('navbar').innerHTML = html; });
 
-    // ================================================================
     //  TABS
-    // ================================================================
+    
     document.querySelectorAll('.tab-btn').forEach(btn => {
         btn.addEventListener('click', () => {
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -926,7 +928,7 @@
         const bgColors = ['#f0e6d3','#e8f0e3','#e8eef5','#fdeef3','#eef5e8','#f5f0e8','#f0f5e8','#f5e8f0'];
         const bg = bgColors[Math.abs(p.name.charCodeAt(0)) % bgColors.length];
         const imgTag = p.image
-            ? `<img src="${p.image}" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.innerHTML='<span style=font-size:28px>${emoji}</span>'">`
+            ? `<img src="${imgUrl(p.image)}" style="width:100%;height:100%;object-fit:cover; object-position:center 75%;" onerror="this.parentElement.innerHTML='<span style=font-size:28px>${emoji}</span>'">`
             : `<span style="font-size:28px">${emoji}</span>`;
         return `<div class="place-card">
             <div class="place-img" style="background:${bg}">${imgTag}</div>
@@ -1001,7 +1003,7 @@
     async function loadWeather(cityName) {
         try {
             // Step 1: geocode city name → lat/lon
-            const geoRes = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(cityName + ' Pakistan')}&count=1`);
+            const geoRes = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(cityName)}&count=1&country=PK`);
             const geoData = await geoRes.json();
             if (!geoData.results || geoData.results.length === 0) return;
             const { latitude, longitude } = geoData.results[0];
@@ -1060,9 +1062,8 @@
         document.getElementById('map-link-big').textContent = 'Open ' + cityName + ' in Google Maps →';
     }
 
-    // ================================================================
-    //  TRAVEL TIPS — static tips, shown in sidebar
-    // ================================================================
+        //  TRAVEL TIPS — static tips, shown in sidebar
+    
     function renderTips(city) {
         const season = city.best_season || 'Year round';
         document.getElementById('sidebar-tips').innerHTML = `
@@ -1074,9 +1075,9 @@
         `;
     }
 
-    // ================================================================
+    
     //  REVIEWS
-    // ================================================================
+    
     async function loadReviews() {
         if (!citySlug) return;
         try {
@@ -1136,7 +1137,7 @@
             document.getElementById('hero-title').textContent = city.name;
             document.getElementById('hero-sub').textContent = city.tagline || '';
             if (city.hero_image) {
-                document.getElementById('hero-bg').style.backgroundImage = `url(${city.hero_image})`;
+                document.getElementById('hero-bg').style.backgroundImage = `url(${imgUrl(city.hero_image)})`;
                 document.getElementById('hero-bg').style.backgroundSize = 'cover';
                 document.getElementById('hero-bg').style.backgroundPosition = 'center';
             }
@@ -1184,9 +1185,9 @@
         loadReviews();
     }
 
-    // ================================================================
+    
     //  FAVOURITES
-    // ================================================================
+   
     const favBtn = document.getElementById('fav-btn');
     let isSaved = false;
     const token = localStorage.getItem('token');
@@ -1209,8 +1210,7 @@
     favBtn.addEventListener('click', async () => {
         const tok = localStorage.getItem('token');
         if (!tok) {
-            alert('Favourites mein save karne ke liye pehle login karein!');
-            window.location.href = 'login.html';
+            document.getElementById('fav-warning').style.display = 'block';
             return;
         }
         try {

@@ -30,10 +30,10 @@
 
         <form id="signupForm">
             <div class="form-group">
-                <label for="fullName">Full Name</label>
-                <input type="text" id="fullName" placeholder="e.g., salar sikandar" required>
-                
-            </div>
+    <label for="fullName">Full Name</label>
+    <input type="text" id="fullName" placeholder="e.g., salar sikandar" required>
+    <span class="error-message" id="nameError">Please enter your name</span>
+</div>
 
             <div class="form-group">
                 <label for="email">Email</label>
@@ -46,6 +46,7 @@
                 <label for="password">Password</label>
                 <div class="password-wrapper">
                     <input type="password" id="password" placeholder="Create a secure password" required>
+                    <span class="toggle-password" onclick="togglePassword('password', this)">👁️</span>
                 <span class="error-message" id="passwordError">Password must be at least 6 characters</span>
             </div>
 

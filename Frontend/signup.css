@@ -122,6 +122,46 @@ body {
     text-decoration: underline;
 }
 
+.form-banner-error {
+    background-color: #ffe6e6;
+    color: #c0392b;
+    padding: 12px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    border-left: 4px solid #e74c3c;
+    display: none;
+}
+
+.form-banner-success {
+    background-color: #e8f8f5;
+    color: #27ae60;
+    padding: 12px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    border-left: 4px solid #2ecc71;
+    display: none;
+}
+
+.password-wrapper {
+    position: relative;
+}
+
+.password-wrapper input {
+    padding-right: 40px;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 16px;
+    user-select: none;
+}
+
 @media (max-width: 480px) {
     .signup-container {
         padding: 30px 20px;

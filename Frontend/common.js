@@ -1,3 +1,12 @@
+const API_BASE = 'http://localhost:3000';
+
+function imgUrl(path) {
+    if (!path) return '';
+    return path.startsWith('http') ? path : `${API_BASE}/${path}`;
+}
+
+
+
 document.addEventListener('DOMContentLoaded', function() {
 
   // --- load navbar ---
@@ -35,15 +44,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
       // find the "Sign Up" li in the navbar
       const signupLi = document.querySelector('.nav-links li:last-child');
+if (token && userName) {
+        // user is logged in — add a plain "My Favourites" link before the last item
+        signupLi.insertAdjacentHTML('beforebegin', '<li><a href="favourites.html">My Favourites</a></li>');
 
-      if (token && userName) {
-        // user is logged in — replace Sign Up with their name + logout
-        signupLi.innerHTML = `
-          <span style="color:#9cc05a; font-weight:700; margin-right:8px;">
-            👤 ${userName}
-          </span>
-          <a href="#" id="logout-btn" style="color:#fff;">Logout</a>
-        `;
+        // replace Sign Up button with just Logout
+        signupLi.innerHTML = `<a href="#" id="logout-btn">Logout</a>`;
 
         document.getElementById('logout-btn').addEventListener('click', function(e) {
           e.preventDefault();

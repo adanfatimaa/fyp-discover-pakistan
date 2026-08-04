@@ -29,7 +29,7 @@ app.use('/api/cities',       require('./backend/routes/searchRoutes'));
 app.use('/api',              require('./backend/routes/Foodroutes'));
 app.use('/api/reviews',      require('./backend/routes/reviewRoutes'));
 app.use('/api/favourites',   require('./backend/routes/favouriteRoutes'));  
-
+app.use('/assets', express.static(path.join(__dirname, 'assets')));
 app.get('/api/health', (_req, res) => {
   res.json({
     status:   'OK',

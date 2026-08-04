@@ -155,7 +155,7 @@
 
 
             <!-- add saved page's link here later -->
-            <a href="#" class="link-saved-destinations">
+            <a href="favourites.html" class="link-saved-destinations">
                 View My Saved Destinations →
             </a>
         </div>
@@ -178,6 +178,7 @@
     <div id="loadingSpinner" class="loading-spinner">
         <div class="spinner"></div>
         <p>Finding perfect destinations for you...</p>
+        
     </div>
 
     
@@ -241,7 +242,7 @@ function showResults(destinations, mood, budget) {
                 box-shadow:0 2px 8px rgba(0,0,0,0.06);
             ">
                 <img
-                    src="${dest.hero_image || dest.image || 'images/placeholder.jpg'}"
+                    src="${imgUrl(dest.hero_image || dest.image) || 'images/placeholder.jpg'}"
                     alt="${dest.name}"
                     onerror="this.src='images/placeholder.jpg'"
                     style="width:140px; height:120px; object-fit:cover; flex-shrink:0;"

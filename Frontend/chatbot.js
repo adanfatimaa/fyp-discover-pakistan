@@ -1,16 +1,85 @@
-// =========================================
-//  CHATBOT - Discover Pakistan
-//  Simple open/close + send messages
-// =========================================
-
-
-// --- Grab all the elements we need ---
 const chatBtn     = document.getElementById('chatbot-btn');
 const chatWindow  = document.getElementById('chatbot-window');
 const closeBtn    = document.getElementById('chatbot-close');
 const messagesDiv = document.getElementById('chatbot-messages');
 const inputBox    = document.getElementById('chatbot-input');
 const sendBtn     = document.getElementById('chatbot-send');
+const historyBtn   = document.getElementById('chatbot-history-btn');
+const historyPanel = document.getElementById('chatbot-history-panel');
+const historyList  = document.getElementById('chatbot-history-list');
+const historyBackBtn = document.getElementById('chatbot-history-back');
+
+// --- Chat history storage ---
+let allSessions = JSON.parse(localStorage.getItem('chatbotSessions') || '[]');
+let currentSession = {
+    id: Date.now(),
+    startTime: new Date().toLocaleString(),
+    messages: []
+};
+
+function saveSessions() {
+    // save/update the current session inside the full list
+    const existingIndex = allSessions.findIndex(s => s.id === currentSession.id);
+    if (existingIndex === -1) {
+        allSessions.push(currentSession);
+    } else {
+        allSessions[existingIndex] = currentSession;
+    }
+    localStorage.setItem('chatbotSessions', JSON.stringify(allSessions));
+}
+
+function renderHistoryList() {
+    historyList.innerHTML = '';
+    if (allSessions.length === 0) {
+        historyList.innerHTML = '<p style="color:#aaa; font-size:13px;">No past conversations yet.</p>';
+        return;
+    }
+    // show most recent first
+    const sorted = allSessions.slice().reverse();
+    sorted.forEach(function(session) {
+        const item = document.createElement('div');
+        item.className = 'history-item';
+        const firstUserMsg = session.messages.find(m => m.sender === 'user');
+        const preview = firstUserMsg ? firstUserMsg.text : '(no messages)';
+        item.innerHTML = `
+            <div class="history-date">${session.startTime}</div>
+            <div class="history-preview">${preview.substring(0, 60)}</div>
+        `;
+        item.addEventListener('click', function() {
+            showOldSession(session);
+        });
+        historyList.appendChild(item);
+    });
+}
+
+function showOldSession(session) {
+    messagesDiv.innerHTML = '';
+    session.messages.forEach(function(m) {
+        addMessageToDOM(m.text, m.sender);
+    });
+    historyPanel.classList.remove('open');
+    inputBox.disabled = true;
+    sendBtn.disabled = true;
+}
+
+function backToLiveChat() {
+    messagesDiv.innerHTML = '';
+    currentSession.messages.forEach(function(m) {
+        addMessageToDOM(m.text, m.sender);
+    });
+    inputBox.disabled = false;
+    sendBtn.disabled = false;
+}
+
+historyBtn.addEventListener('click', function() {
+    renderHistoryList();
+    historyPanel.classList.add('open');
+});
+
+historyBackBtn.addEventListener('click', function() {
+    historyPanel.classList.remove('open');
+    backToLiveChat();
+});
 
 
 // --- Open / close the chat window ---
@@ -36,6 +105,12 @@ closeBtn.addEventListener('click', function() {
 // --- Add a message bubble to the screen ---
 
 function addMessage(text, sender) {
+    addMessageToDOM(text, sender);
+    currentSession.messages.push({ text: text, sender: sender });
+    saveSessions();
+}
+
+function addMessageToDOM(text, sender) {
     // sender is either "bot" or "user"
 
     const messageDiv = document.createElement('div');

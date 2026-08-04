@@ -333,7 +333,7 @@ function showError() {
                 card.classList.add('card');
 
                 card.innerHTML = `
-                    <img src="${dest.hero_image}" class="card-img-top" alt="${dest.name}" onerror="this.src='images/placeholder.jpg'">
+                    <img src="${imgUrl(dest.hero_image)}" class="card-img-top" alt="${dest.name}" onerror="this.src='images/placeholder.jpg'">
                     <div class="card-body">
                         <p class="card-province">${dest.province}</p>
                         <h5 class="card-title">${dest.name}</h5>

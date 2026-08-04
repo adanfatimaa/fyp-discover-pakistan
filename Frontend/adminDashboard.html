@@ -785,24 +785,16 @@
         <p class="subtitle">Manage cities, destinations, and all website content from here.</p>
 
         <!--stat cards-->
-        <div class="stats-row">
-            <div class="stat-card">
-                <h3 id="statCities">0</h3>
-                <p>Total Cities</p>
-            </div>
-            <div class="stat-card">
-                <h3 id="statProvinces">0</h3>
-                <p>Provinces Covered</p>
-            </div>
-            <div class="stat-card">
-                <h3 id="statAttractions">0</h3>
-                <p>Total Attractions</p>
-            </div>
-            <div class="stat-card">
-                <h3>5</h3>
-                <p>Mood Categories</p>
-            </div>
-        </div>
+<div class="stats-row">
+    <div class="stat-card">
+        <h3 id="statCities">0</h3>
+        <p>Total destinations</p>
+    </div>
+    <div class="stat-card">
+        <h3>5</h3>
+        <p>Mood Categories</p>
+    </div>
+</div>
 
          
 
@@ -812,8 +804,8 @@
         <!-- table-->
         <div class="table-section">
             <div class="table-header">
-                <h2>All Cities</h2>
-                <button class="add-btn" onclick="openAddModal()">+ Add City</button>
+                <h2>All Destinations</h2>
+                <button class="add-btn" onclick="openAddModal()">+ Add Destination</button>
             </div>
 
             <!-- search inside table -->
@@ -821,7 +813,7 @@
                 type="text" 
                 class="search-bar" 
                 id="searchBar" 
-                placeholder="Search cities by name, province..." 
+                placeholder="Search destinations by name, province..." 
                 oninput="filterTable()"
             >
 
@@ -830,7 +822,7 @@
                     <tr>
                         <th>#</th>
                         <th>Image</th>
-                        <th>City Name</th>
+                        <th>Destination Name</th>
                         <th>Province</th>
                         <th>Mood Tags</th>
                         <th>Best Season</th>
@@ -838,15 +830,16 @@
                         <th>Actions</th>
                     </tr>
                 </thead>
-                <tbody id="citiesTable">
+              <tbody id="citiesTable">
                     <!-- data here will be added through JavaScript -->
                 </tbody>
             </table>
 
             <div class="no-data" id="noDataMsg" style="display:none;">
                 <span>🏙️</span>
-                No cities added yet. Click "Add City" to get started.
+                Click "Add Destination" to get started.
             </div>
+
         </div>
 
     </div>
@@ -855,7 +848,7 @@
     <!--add edit modal-->
     <div class="modal-overlay" id="modalOverlay">
         <div class="modal-box">
-            <h2 id="modalTitle">Add New City</h2>
+            <h2 id="modalTitle">Add New Destination</h2>
             <p class="modal-subtitle">Fill in the details below. Fields marked * are required.</p>
 
             
@@ -863,7 +856,7 @@
 
             <div class="form-row">
                 <div>
-                    <label>City Name *</label>
+                    <label>Destination Name *</label>
                     <input type="text" id="cityName" placeholder="e.g., Lahore">
                 </div>
                 <div>
@@ -883,7 +876,7 @@
             <label>Short Description *</label>
             <textarea id="cityDescription" placeholder="Write a short description of this city..."></textarea>
 
-            <label>Full About Section</label>
+           <label>Tagline </label>
             <textarea id="cityAbout" placeholder="Detailed information about the city's culture, history, people..."></textarea>
 
             <!-- TRAVEL INFO -->
@@ -1017,7 +1010,10 @@
 
         async function loadCities() {
     try {
-        const res  = await fetch('http://localhost:3000/api/cities');
+        const token = localStorage.getItem('token');
+        const res  = await fetch('http://localhost:3000/api/cities', {
+            headers: { 'Authorization': 'Bearer ' + token }
+        });
         const data = await res.json();
         cities = data.data || [];
         renderTable();
@@ -1059,27 +1055,8 @@
                 noDataMsg.style.display = 'none';
             }
 
-            // Update stat cards
+           // Update stat cards
             document.getElementById('statCities').textContent = cities.length;
-
-            // Count unique provinces
-            var provinces = [];
-            for (var i = 0; i < cities.length; i++) {
-                if (provinces.indexOf(cities[i].province) === -1) {
-                    provinces.push(cities[i].province);
-                }
-            }
-            document.getElementById('statProvinces').textContent = provinces.length;
-
-            // Count total attractions
-            var totalAttractions = 0;
-            for (var i = 0; i < cities.length; i++) {
-                if (cities[i].attractions) {
-                    totalAttractions += cities[i].attractions.length;
-                }
-            }
-            document.getElementById('statAttractions').textContent = totalAttractions;
-
             // Build rows
             for (var i = 0; i < filtered.length; i++) {
                 var c = filtered[i];
@@ -1096,9 +1073,9 @@
                 }
 
                 // Image thumbnail
-                var imgHTML = '';
-                if (c.image) {
-                    imgHTML = '<img class="city-img-thumb" src="' + c.image + '" alt="' + c.name + '" onerror="this.style.display=\'none\'; this.nextSibling.style.display=\'flex\'">';
+              var imgHTML = '';
+                if (c.hero_image) {
+                    imgHTML = '<img class="city-img-thumb" src="' + imgUrl(c.hero_image) + '" alt="' + c.name + '" onerror="this.style.display=\'none\'; this.nextSibling.style.display=\'flex\'">';
                     imgHTML += '<div class="no-img-thumb" style="display:none;">🌄</div>';
                 } else {
                     imgHTML = '<div class="no-img-thumb">🌄</div>';
@@ -1113,7 +1090,7 @@
                 row += '<td><strong>' + c.name + '</strong></td>';
                 row += '<td><span class="province-badge">' + c.province + '</span></td>';
                 row += '<td>' + moodHTML + '</td>';
-                row += '<td>' + (c.season || '<span style="color:#bbb">—</span>') + '</td>';
+                row += '<td>' + (c.best_season || '<span style="color:#bbb">—</span>') + '</td>';
                 row += '<td>' + attractCount + ' places</td>';
                 row += '<td>';
                 row += '<div class="action-btns">';
@@ -1196,8 +1173,8 @@
             document.getElementById('cityName').value = c.name || '';
             document.getElementById('cityProvince').value = c.province || '';
             document.getElementById('cityDescription').value = c.description || '';
-            document.getElementById('cityAbout').value = c.about || '';
-            document.getElementById('citySeason').value = c.season || '';
+            document.getElementById('cityAbout').value = c.tagline || '';
+            document.getElementById('citySeason').value = c.best_season || '';
             document.getElementById('cityBudget').value = c.budget || '';
             document.getElementById('cityLanguage').value = c.language || '';
             document.getElementById('cityFood').value = c.food || '';
@@ -1248,7 +1225,7 @@
             document.getElementById('cityLanguage').value = '';
             document.getElementById('cityFood').value = '';
             document.getElementById('citySafety').value = '';
-            document.getElementById('cityImage').value = '';
+           document.getElementById('cityImage').value = c.hero_image || '';
             document.getElementById('cityGallery').value = '';
             document.getElementById('cityMapUrl').value = '';
 
@@ -1280,19 +1257,19 @@
     document.querySelectorAll('input[name="mood"]:checked').forEach(cb => moods.push(cb.value));
     
     const cityObj = {
-        name, province, description,
-        about: document.getElementById('cityAbout').value.trim(),
-        season: document.getElementById('citySeason').value.trim(),
-        budget: document.getElementById('cityBudget').value.trim(),
-        language: document.getElementById('cityLanguage').value.trim(),
-        food: document.getElementById('cityFood').value.trim(),
-        safety: document.getElementById('citySafety').value.trim(),
-        moods,
-        attractions: getAttractions(),
-        image: document.getElementById('cityImage').value.trim(),
-        gallery: document.getElementById('cityGallery').value.trim(),
-        mapUrl: document.getElementById('cityMapUrl').value.trim()
-    };
+    name, province, description,
+    tagline: document.getElementById('cityAbout').value.trim(),
+    best_season: document.getElementById('citySeason').value.trim(),
+    budget: document.getElementById('cityBudget').value.trim(),
+    language: document.getElementById('cityLanguage').value.trim(),
+    food: document.getElementById('cityFood').value.trim(),
+    safety: document.getElementById('citySafety').value.trim(),
+    moods,
+    attractions: getAttractions(),
+    hero_image: document.getElementById('cityImage').value.trim(),
+    gallery: document.getElementById('cityGallery').value.trim(),
+    mapUrl: document.getElementById('cityMapUrl').value.trim()
+};
 
     const token = localStorage.getItem('token');
     const url    = editingIndex === -1 ? 'http://localhost:3000/api/cities' : 'http://localhost:3000/api/cities/' + cities[editingIndex].destination_id;
@@ -1358,8 +1335,8 @@
 
             // Image
             var imgArea = document.getElementById('detailImageArea');
-            if (c.image) {
-                imgArea.innerHTML = '<img class="detail-img" src="' + c.image + '" alt="' + c.name + '" onerror="this.style.display=\'none\'; this.parentElement.innerHTML=\'<div class=detail-img-placeholder>🌄</div>\'">';
+            if (c.hero_image) {
+                imgArea.innerHTML = '<img class="detail-img" src="' + imgUrl(c.hero_image) + '" alt="' + c.name + '" onerror="this.style.display=\'none\'; this.parentElement.innerHTML=\'<div class=detail-img-placeholder>🌄</div>\'">';
             } else {
                 imgArea.innerHTML = '<div class="detail-img-placeholder">🌄</div>';
             }
@@ -1367,10 +1344,10 @@
             document.getElementById('detailName').textContent = c.name;
             document.getElementById('detailLocation').textContent = c.province;
             document.getElementById('detailDesc').textContent = c.description || '—';
-            document.getElementById('detailAbout').textContent = c.about || '—';
+          document.getElementById('detailAbout').textContent = c.tagline || '—';
 
             var travelText = '';
-            if (c.season) travelText += '📅 Best Season: ' + c.season + '   ';
+            if (c.best_season) travelText += '📅 Best Season: ' + c.best_season + '   ';
             if (c.budget) travelText += '💰 Budget: ' + c.budget + ' PKR   ';
             if (c.distance) travelText += '📍 Distance: ' + c.distance + '   ';
             if (c.language) travelText += '🗣️ Language: ' + c.language;

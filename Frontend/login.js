@@ -1,3 +1,13 @@
+function togglePassword(inputId, iconEl) {
+    const input = document.getElementById(inputId);
+    if (input.type === 'password') {
+        input.type = 'text';
+        iconEl.textContent = '🙈';
+    } else {
+        input.type = 'password';
+        iconEl.textContent = '👁️';
+    }
+}
 // Login Form JavaScript
 document.addEventListener('DOMContentLoaded', function() {
     const loginForm = document.getElementById('loginForm');

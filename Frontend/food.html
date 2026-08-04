@@ -65,13 +65,13 @@
                 <h1>Browse by Categories</h1>
             </div>
             <div class="category-buttons">
-                <button class="cat-btn" data-target="veg">Vegetarian</button>
-                <button class="cat-btn" data-target="meat">Meat</button>
-                <button class="cat-btn" data-target="rice">Rice</button>
-                <button class="cat-btn" data-target="streetFood">Street</button>
-                <button class="cat-btn" data-target="drinks">Drinks</button>
-                <button class="cat-btn" data-target="sweets">Sweets</button>
-                <button class="cat-btn" data-target="breakfast">Breakfast</button>
+              <button class="cat-btn" data-target="vegetarian">Vegetarian</button>
+<button class="cat-btn" data-target="meat">Meat</button>
+<button class="cat-btn" data-target="rice">Rice</button>
+<button class="cat-btn" data-target="street-food">Street</button>
+<button class="cat-btn" data-target="drinks">Drinks</button>
+<button class="cat-btn" data-target="sweets">Sweets</button>
+<button class="cat-btn" data-target="breakfast">Breakfast</button>
             </div>
 
             <!-- Panels are injected here dynamically -->
@@ -92,7 +92,7 @@
                 const cardsHTML = category.items.map(function (item) {
                     return `
                         <div class="card" id="${item.id}">
-                            <img src="${item.image}" alt="${item.name}">
+                            <img src="${imgUrl(item.image)}" alt="${item.name}">
                             <div class="card-content">
                                 <h4><b>${item.name}</b></h4>
                                 <p>${item.description}</p>
@@ -151,7 +151,7 @@
 
         async function init() {
             try {
-                const res = await fetch('/api/food-categories');
+               const res = await fetch('http://localhost:3000/api/food-categories');
                 const data = await res.json();
                 renderFoodPanels(data);
                 attachCategoryListeners();
