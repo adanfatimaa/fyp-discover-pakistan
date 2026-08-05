@@ -238,7 +238,7 @@
     event.preventDefault(); // stop page from refreshing
     const query = document.getElementById('search-input').value.trim();
     if (query !== '') {
-      // send user to search results page with their query in the URL
+      // send user to search results page
       window.location.href = 'searchResults.html?q=' + encodeURIComponent(query);
     }
   }

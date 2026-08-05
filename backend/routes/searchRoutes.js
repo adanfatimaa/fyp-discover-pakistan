@@ -15,7 +15,7 @@ module.exports = router;
 const { getAllCities, addCity, updateCity, deleteCity } = require('../controllers/Citycontroller');
 const { protect, adminOnly } = require('../middleware/authmiddleware');
 
-router.get('/',            protect, adminOnly, getAllCities);
+router.get('/',            getAllCities);
 router.post('/',           protect, adminOnly, addCity);
 router.put('/:id',         protect, adminOnly, updateCity);
 router.delete('/:id',      protect, adminOnly, deleteCity);
